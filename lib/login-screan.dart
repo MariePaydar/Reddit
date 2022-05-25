@@ -33,7 +33,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: <Widget>[
             Container(
               height: 150,
-              child: Image.asset("assets/images/download.jpg"),
+              child: Image.asset("assets/images/icon.png"),
             ),
             Container(
                 alignment: Alignment.center,
