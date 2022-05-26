@@ -83,6 +83,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
               ),
             ),
+            Container(
+              height: 48,
+            ),
             TextButton(
               onPressed: () {
                 //forgot password screen
