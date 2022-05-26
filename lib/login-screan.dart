@@ -33,7 +33,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: ListView(
           children: <Widget>[
             SizedBox(
-              //height: 150,
+              height: 150,
               child: Image.asset("assets/images/icon.png"),
             ),
             Container(
