@@ -32,9 +32,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 150,
-              //forgot image
+              child: Image.asset("assets/images/icon.png"),
             ),
             Container(
                 alignment: Alignment.center,
@@ -105,7 +105,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               height: 5,
             ),
             Container(
-                padding: const EdgeInsets.fromLTRB(100, 15, 100, 5),
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       primary: const Color.fromARGB(255, 151, 9, 9)),
