@@ -120,7 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    //forgot sign-up page
+                    runApp(const SignUp());
                   },
                 )
               ],

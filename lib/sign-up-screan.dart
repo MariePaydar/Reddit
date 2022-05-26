@@ -131,9 +131,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    setState(() {
-                      const Login();
-                    });
+                    runApp(const Login());
                   },
                 )
               ],
