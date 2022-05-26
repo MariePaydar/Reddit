@@ -1,0 +1,145 @@
+import 'package:flutter/material.dart';
+import 'package:reddit/login-screan.dart';
+
+class SignUp extends StatelessWidget {
+  const SignUp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        body: MyStatefulWidget(),
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          children: <Widget>[
+            Container(
+              height: 150,
+              //forgot image
+            ),
+            Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Welcome to Reddit',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30),
+                )),
+            Container(
+              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600),
+                controller: nameController,
+                decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(60, 50))),
+                  labelText: 'Email address',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600),
+                controller: nameController,
+                decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(60, 50))),
+                  labelText: 'User Name',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600),
+                obscureText: true,
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(60, 50))),
+                  labelText: 'Password',
+                ),
+              ),
+            ),
+            Container(
+              height: 5,
+            ),
+            Container(
+                padding: const EdgeInsets.fromLTRB(100, 15, 100, 5),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color.fromARGB(255, 151, 9, 9)),
+                  child: const Text('Sign up'),
+                  onPressed: () {
+                    // ignore: avoid_print
+                    print(nameController.text);
+                    // ignore: avoid_print
+                    print(passwordController.text);
+                  },
+                )),
+            Row(
+              children: <Widget>[
+                const Text(
+                  'Already a member?',
+                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                ),
+                TextButton(
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      const Login();
+                    });
+                  },
+                )
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
+          ],
+        ));
+  }
+}
