@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/sign-up-screan.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: const MyStatefulWidget(),
+        body: MyStatefulWidget(),
       ),
     );
   }
@@ -31,7 +32,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 150,
               child: Image.asset("assets/images/icon.png"),
             ),
@@ -48,8 +49,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             Container(
               padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
               child: TextField(
-                cursorColor: Color.fromARGB(255, 255, 255, 255),
-                style: TextStyle(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
                 controller: nameController,
@@ -66,8 +67,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             Container(
               padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
               child: TextField(
-                cursorColor: Color.fromARGB(255, 255, 255, 255),
-                style: TextStyle(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
                 obscureText: true,
@@ -96,10 +97,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 151, 9, 9)),
+                      primary: const Color.fromARGB(255, 151, 9, 9)),
                   child: const Text('Login'),
                   onPressed: () {
+                    // ignore: avoid_print
                     print(nameController.text);
+                    // ignore: avoid_print
                     print(passwordController.text);
                   },
                 )),
