@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:passwordfield/passwordfield.dart';
 import 'package:reddit/login-screan.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  StatefulWidget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: MyStatefulWidget(),
+        body: LogInPage(),
       ),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+class LogInPage extends StatefulWidget {
+  const LogInPage({Key? key}) : super(key: key);
+  _LogInPageState createState() => _LogInPageState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  TextEditingController nameController = TextEditingController();
+class _LogInPageState extends State<LogInPage> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  String _errorMessage = '';
+  bool _passwordVisible = false;
+  String _password = "";
+  void initState() {
+    _passwordVisible = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,15 +61,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
-                controller: nameController,
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 151, 9, 9),
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'Email address',
+                  hintText: 'Email address',
                 ),
+                onChanged: (val) {
+                  validateEmail(val);
+                },
               ),
             ),
             Container(
@@ -71,41 +83,51 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
-                controller: nameController,
+                controller: usernameController,
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 151, 9, 9),
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'User Name',
+                  hintText: 'User Name',
                 ),
               ),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
-              child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-                obscureText: true,
+              child: PasswordField(
+                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
+                passwordConstraint:
+                    r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passwordController,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
-                  filled: true,
-                  border: OutlineInputBorder(
+                inputDecoration: PasswordDecoration(
+                    errorStyle: const TextStyle(
+                      color: Color.fromARGB(255, 151, 9, 9),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                    inputStyle: const TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontWeight: FontWeight.w600,
+                    ),
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontWeight: FontWeight.w400,
+                    )),
+                hintText: 'Password',
+                border: PasswordBorder(
+                  border: const OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'Password',
                 ),
+                errorMessage: 'small & capital letters, number,at least 8 c',
               ),
             ),
             Container(
               height: 5,
             ),
             Container(
-                height: 50,
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -113,11 +135,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: const Text('Sign up'),
                   onPressed: () {
                     // ignore: avoid_print
-                    print(nameController.text);
+                    print(emailController.text);
+                    // ignore: avoid_print
+                    print(usernameController.text);
                     // ignore: avoid_print
                     print(passwordController.text);
                   },
                 )),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _errorMessage,
+                style: const TextStyle(color: Colors.red),
+                textAlign: TextAlign.center,
+              ),
+            ),
             Row(
               children: <Widget>[
                 const Text(
@@ -140,5 +172,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ],
         ));
+  }
+
+  void validateEmail(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _errorMessage = "Email can not be empty";
+      });
+    } else if (!EmailValidator.validate(val, true)) {
+      setState(() {
+        _errorMessage = "Invalid Email Address";
+      });
+    } else {
+      setState(() {
+        _errorMessage = "";
+      });
+    }
   }
 }
