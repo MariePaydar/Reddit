@@ -7,10 +7,10 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: MyStatefulWidget(),
+        body: const MyStatefulWidget(),
       ),
     );
   }
@@ -50,8 +50,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             Container(
               padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
+                cursorColor: Color.fromARGB(255, 255, 255, 255),
+                style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
                 controller: nameController,
@@ -68,27 +68,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             Container(
               padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
               child: PasswordField(
-                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
+                backgroundColor: Color.fromARGB(255, 151, 9, 9),
                 passwordConstraint:
                     r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
-                    errorStyle: const TextStyle(
+                    errorStyle: TextStyle(
                       color: Color.fromARGB(255, 151, 9, 9),
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
-                    inputStyle: const TextStyle(
+                    inputStyle: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.w600,
                     ),
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                       fontWeight: FontWeight.w400,
                     )),
                 hintText: 'Password',
                 border: PasswordBorder(
-                  border: const OutlineInputBorder(
+                  border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
                 ),
@@ -109,12 +109,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
+                      primary: Color.fromARGB(255, 151, 9, 9)),
                   child: const Text('Login'),
                   onPressed: () {
-                    // ignore: avoid_print
                     print(nameController.text);
-                    // ignore: avoid_print
                     print(passwordController.text);
                   },
                 )),
