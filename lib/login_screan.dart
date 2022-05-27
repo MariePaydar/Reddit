@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/sign_up_screan.dart';
+import 'package:passwordfield/passwordfield.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: ListView(
           children: <Widget>[
             SizedBox(
-              height: 150,
+              height: 120,
               child: Image.asset("assets/images/icon.png"),
             ),
             Container(
@@ -66,25 +67,33 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
-              child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-                obscureText: true,
+              child: PasswordField(
+                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
+                passwordConstraint:
+                    r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passwordController,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
-                  filled: true,
-                  border: OutlineInputBorder(
+                inputDecoration: PasswordDecoration(
+                    errorStyle: const TextStyle(
+                      color: Color.fromARGB(255, 151, 9, 9),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                    inputStyle: const TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontWeight: FontWeight.w600,
+                    ),
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontWeight: FontWeight.w400,
+                    )),
+                hintText: 'Password',
+                border: PasswordBorder(
+                  border: const OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'Password',
                 ),
+                errorMessage: 'small & capital letters, number,at least 8 c',
               ),
-            ),
-            Container(
-              height: 48,
             ),
             TextButton(
               onPressed: () {
