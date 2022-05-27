@@ -40,12 +40,12 @@ class _MyAppState extends State<Feed> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         body: Center(
           child: Text(text),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "feed"),
             BottomNavigationBarItem(icon: Icon(Icons.store), label: "Society"),
@@ -53,11 +53,11 @@ class _MyAppState extends State<Feed> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "settings"),
           ],
-          selectedItemColor: Color.fromARGB(255, 151, 9, 9),
+          selectedItemColor: const Color.fromARGB(255, 151, 9, 9),
           iconSize: 18,
           currentIndex: index,
           onTap: onTapNavigation,
-          unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
+          unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
         ),
       ),
     );
