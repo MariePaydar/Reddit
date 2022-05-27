@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/feed_screan.dart';
 import 'package:reddit/sign_up_screan.dart';
 import 'package:passwordfield/passwordfield.dart';
 
@@ -116,6 +117,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     print(nameController.text);
                     // ignore: avoid_print
                     print(passwordController.text);
+                    runApp(const Feed());
                   },
                 )),
             Row(
