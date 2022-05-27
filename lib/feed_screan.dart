@@ -28,6 +28,8 @@ class _MyAppState extends State<Feed> {
           text = "Welcome to add";
           break;
         case 3:
+          this.index = 3;
+          text = "Welcome to add";
           setState(() {
             //runApp(const Profile());
           });
@@ -42,13 +44,17 @@ class _MyAppState extends State<Feed> {
       home: Scaffold(
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         body: Center(
-          child: Text(text),
+          child: Text(
+            text,
+            style: TextStyle(color: Colors.amber),
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "feed"),
-            BottomNavigationBarItem(icon: Icon(Icons.store), label: "Society"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.people_alt_outlined), label: "Society"),
             BottomNavigationBarItem(icon: Icon(Icons.add), label: "new post"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "settings"),
