@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:reddit/profile-screan.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -63,7 +62,44 @@ class _MyAppState extends State<Feed> {
         case 3:
           this.index = 3;
           text = "Settings";
-          C = Column();
+          C = Column(children: <Widget>[
+            ListView(
+              children: [
+                Text(
+                  'Your profile',
+                  style: TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Create a community',
+                  style: TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Saved post',
+                  style: TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'about us',
+                  style: TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            )
+          ]);
           break;
       }
     });
