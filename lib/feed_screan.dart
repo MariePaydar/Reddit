@@ -8,20 +8,53 @@ class Feed extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+class MainWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[],
+    );
+  }
+}
+
 class _MyAppState extends State<Feed> {
   String text = "Feed";
   int index = 0;
+  Column C = Column(
+    children: const [
+      Text(
+        '1',
+        style: TextStyle(color: Colors.amber),
+      ),
+      Text(
+        '2',
+        style: TextStyle(color: Colors.amber),
+      )
+    ],
+  );
 
   void onTapNavigation(index) {
     setState(() {
       switch (index) {
         case 0:
+          C = Column(
+            children: const [
+              Text(
+                '1',
+                style: TextStyle(color: Colors.amber),
+              ),
+              Text(
+                '2',
+                style: TextStyle(color: Colors.amber),
+              )
+            ],
+          );
           text = "Feed";
           this.index = 0;
           break;
         case 1:
           this.index = 1;
-          text = "Society";
+          text = "communities";
           break;
         case 2:
           this.index = 2;
@@ -30,9 +63,7 @@ class _MyAppState extends State<Feed> {
         case 3:
           this.index = 3;
           text = "Settings";
-          setState(() {
-            //runApp(const Profile());
-          });
+          C = Column();
           break;
       }
     });
@@ -53,17 +84,14 @@ class _MyAppState extends State<Feed> {
         ),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         body: Center(
-          child: Text(
-            text,
-            style: TextStyle(color: Colors.amber),
-          ),
+          child: C,
         ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "feed"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.people_alt_outlined), label: "Society"),
+                icon: Icon(Icons.people_alt_outlined), label: "communities"),
             BottomNavigationBarItem(icon: Icon(Icons.add), label: "new post"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "settings"),
