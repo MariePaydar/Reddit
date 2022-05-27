@@ -9,27 +9,27 @@ class Feed extends StatefulWidget {
 }
 
 class _MyAppState extends State<Feed> {
-  String text = "Welcome to Home";
+  String text = "Feed";
   int index = 0;
 
   void onTapNavigation(index) {
     setState(() {
       switch (index) {
         case 0:
-          text = "Welcome to Home";
+          text = "Feed";
           this.index = 0;
           break;
         case 1:
           this.index = 1;
-          text = "Welcome to Store";
+          text = "Society";
           break;
         case 2:
           this.index = 2;
-          text = "Welcome to add";
+          text = "Create post";
           break;
         case 3:
           this.index = 3;
-          text = "Welcome to add";
+          text = "Settings";
           setState(() {
             //runApp(const Profile());
           });
@@ -42,6 +42,15 @@ class _MyAppState extends State<Feed> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          title: Center(
+            child: Text(
+              text,
+              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            ),
+          ),
+        ),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         body: Center(
           child: Text(
