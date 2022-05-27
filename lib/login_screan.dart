@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/sign-up-screan.dart';
+import 'package:reddit/sign_up_screan.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
