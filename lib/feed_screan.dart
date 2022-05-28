@@ -11,7 +11,7 @@ class MainWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[],
+      children: const <Widget>[],
     );
   }
 }
@@ -19,24 +19,13 @@ class MainWidget extends StatelessWidget {
 class _MyAppState extends State<Feed> {
   String text = "Feed";
   int index = 0;
-  Column C = Column(
-    children: const [
-      Text(
-        '1',
-        style: TextStyle(color: Colors.amber),
-      ),
-      Text(
-        '2',
-        style: TextStyle(color: Colors.amber),
-      )
-    ],
-  );
+  ListView C = ListView();
 
   void onTapNavigation(index) {
     setState(() {
       switch (index) {
         case 0:
-          C = Column(
+          C = ListView(
             children: const [
               Text(
                 '1',
@@ -62,44 +51,61 @@ class _MyAppState extends State<Feed> {
         case 3:
           this.index = 3;
           text = "Settings";
-          C = Column(children: <Widget>[
-            ListView(
-              children: [
-                Text(
-                  'Your profile',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Create a community',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Saved post',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'about us',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            )
-          ]);
+          C = ListView(
+            children: [
+              Container(
+                height: 50,
+              ),
+              Divider(),
+              Container(
+                  height: 50,
+                  padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 151, 9, 9)),
+                    child: const Text('Your profile'),
+                    onPressed: () {
+                      //forgot create community page
+                    },
+                  )),
+              Divider(),
+              Container(
+                  height: 50,
+                  padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 151, 9, 9)),
+                    child: const Text('create a community'),
+                    onPressed: () {
+                      //forgot create community page
+                    },
+                  )),
+              Divider(),
+              Container(
+                  height: 50,
+                  padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 151, 9, 9)),
+                    child: const Text('Saved post'),
+                    onPressed: () {
+                      //forgot create community page
+                    },
+                  )),
+              Divider(),
+              Container(
+                  height: 50,
+                  padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 151, 9, 9)),
+                    child: const Text('about us'),
+                    onPressed: () {
+                      //forgot create community page
+                    },
+                  )),
+            ],
+          );
           break;
       }
     });
@@ -110,11 +116,11 @@ class _MyAppState extends State<Feed> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: Center(
             child: Text(
               text,
-              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+              style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             ),
           ),
         ),
