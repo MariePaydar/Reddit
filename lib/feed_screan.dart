@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:reddit/profile_screan.dart';
 
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
@@ -67,7 +70,8 @@ class _MyAppState extends State<Feed> {
                         primary: const Color.fromARGB(255, 151, 9, 9)),
                     child: const Text('Your profile'),
                     onPressed: () {
-                      //forgot create community page
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Profile()));
                     },
                   )),
               const Divider(),
