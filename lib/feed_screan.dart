@@ -56,7 +56,7 @@ class _MyAppState extends State<Feed> {
           C = ListView(
             children: [
               Container(
-                height: 50,
+                height: 100,
               ),
               const Divider(),
               Container(

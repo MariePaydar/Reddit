@@ -34,6 +34,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
+            const SizedBox(
+              height: 60,
+            ),
             SizedBox(
               height: 120,
               child: Image.asset("assets/images/icon.png"),
