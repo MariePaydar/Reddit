@@ -8,6 +8,8 @@ class Feed extends StatefulWidget {
 }
 
 class MainWidget extends StatelessWidget {
+  const MainWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,7 +58,7 @@ class _MyAppState extends State<Feed> {
               Container(
                 height: 50,
               ),
-              Divider(),
+              const Divider(),
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
@@ -68,7 +70,7 @@ class _MyAppState extends State<Feed> {
                       //forgot create community page
                     },
                   )),
-              Divider(),
+              const Divider(),
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
@@ -80,7 +82,7 @@ class _MyAppState extends State<Feed> {
                       //forgot create community page
                     },
                   )),
-              Divider(),
+              const Divider(),
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
@@ -92,7 +94,7 @@ class _MyAppState extends State<Feed> {
                       //forgot create community page
                     },
                   )),
-              Divider(),
+              const Divider(),
               Container(
                   height: 50,
                   padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
