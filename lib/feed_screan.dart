@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/profile_screan.dart';
 
 class Feed extends StatelessWidget {
@@ -85,7 +86,10 @@ class _MyAppState extends State<MyAppState> {
                         primary: const Color.fromARGB(255, 151, 9, 9)),
                     child: const Text('create a community'),
                     onPressed: () {
-                      //forgot create community page
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CreateACommunity()));
                     },
                   )),
               const Divider(),
