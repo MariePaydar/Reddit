@@ -1,27 +1,27 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:reddit/profile_screan.dart';
 
-class Feed extends StatefulWidget {
+class Feed extends StatelessWidget {
   const Feed({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class MainWidget extends StatelessWidget {
-  const MainWidget({Key? key}) : super(key: key);
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const <Widget>[],
+    return const MaterialApp(
+      home: Scaffold(
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        body: MyAppState(),
+      ),
     );
   }
 }
 
-class _MyAppState extends State<Feed> {
+class MyAppState extends StatefulWidget {
+  const MyAppState({Key? key}) : super(key: key);
+  @override
+  State<MyAppState> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyAppState> {
   String text = "Feed";
   int index = 0;
   ListView C = ListView();
@@ -70,8 +70,10 @@ class _MyAppState extends State<Feed> {
                         primary: const Color.fromARGB(255, 151, 9, 9)),
                     child: const Text('Your profile'),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Profile()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Profile()));
                     },
                   )),
               const Divider(),
@@ -119,37 +121,35 @@ class _MyAppState extends State<Feed> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          title: Center(
-            child: Text(
-              text,
-              style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        title: Center(
+          child: Text(
+            text,
+            style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
           ),
         ),
+      ),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      body: Center(
+        child: C,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        body: Center(
-          child: C,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "feed"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.people_alt_outlined), label: "communities"),
-            BottomNavigationBarItem(icon: Icon(Icons.add), label: "new post"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: "settings"),
-          ],
-          selectedItemColor: const Color.fromARGB(255, 151, 9, 9),
-          iconSize: 18,
-          currentIndex: index,
-          onTap: onTapNavigation,
-          unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
-        ),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "feed"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people_alt_outlined), label: "communities"),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: "new post"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: "settings"),
+        ],
+        selectedItemColor: const Color.fromARGB(255, 151, 9, 9),
+        iconSize: 18,
+        currentIndex: index,
+        onTap: onTapNavigation,
+        unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
       ),
     );
   }

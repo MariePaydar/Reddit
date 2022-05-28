@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-// remove main
-void main() {
-  runApp(const Profile());
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
+
+  @override
+  State<Profile> createState() => _ProfileState();
 }
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,9 +17,9 @@ class Profile extends StatelessWidget {
       title: 'Profile',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: const Center(
-            child: Text('Profile'),
+            child: Text('Profile',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),),
           ),
         ),
         body: ListView(
