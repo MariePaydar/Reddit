@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'globals.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -58,8 +59,8 @@ class _ProfileState extends State<Profile> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'Leonardo Palmeiro', //username
+                  Text(
+                    user.userName, //username
                     style: TextStyle(
                       height: 1.5,
                       fontSize: 35,
@@ -87,7 +88,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             onPressed: () {
                               // ignore: avoid_print
-                              print('edit');
+                              print(user.userName);
                             },
                           )),
                       Expanded(child: Container()),
