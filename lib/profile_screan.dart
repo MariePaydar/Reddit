@@ -98,7 +98,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Column(
-              children: const <Widget>[
+              children: <Widget>[
                 ListTile(
                   title: Text(
                     'Bio',
@@ -127,7 +127,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   subtitle: Text(
-                    'palmeiro.leonardo@gmail.com',
+                    user.email,
                     style: TextStyle(
                       fontSize: 18,
                       color: Color.fromARGB(179, 0, 0, 0),
