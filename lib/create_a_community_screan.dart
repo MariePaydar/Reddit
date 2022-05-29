@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/data.dart';
+import 'globals.dart';
 
 class CreateACommunity extends StatefulWidget {
   const CreateACommunity({Key? key}) : super(key: key);
@@ -94,7 +96,12 @@ class _CreateACommunity extends State<CreateACommunity> {
                     primary: const Color.fromARGB(255, 151, 9, 9),
                   ),
                   child: const Text('Create community'),
-                  onPressed: () {},
+                  onPressed: () {
+                    user.communitylist.add(DataOfCommunity(
+                        nameController.text, dropdownValue == 'Public'));
+                    Navigator.pop(context);
+                    print(user.communitylist.toList());
+                  },
                 )),
           ]),
         ));
