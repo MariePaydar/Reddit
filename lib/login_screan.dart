@@ -9,6 +9,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         body: MyStatefulWidget(),
@@ -34,6 +35,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
+            const SizedBox(
+              height: 60,
+            ),
             SizedBox(
               height: 120,
               child: Image.asset("assets/images/icon.png"),
@@ -57,12 +61,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     fontWeight: FontWeight.w600),
                 controller: nameController,
                 decoration: const InputDecoration(
+                  hintText: 'User Name',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
                   fillColor: Color.fromARGB(255, 151, 9, 9),
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'User Name',
                 ),
               ),
             ),
@@ -84,8 +91,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       fontWeight: FontWeight.w600,
                     ),
                     hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300,
                     )),
                 hintText: 'Password',
                 border: PasswordBorder(
@@ -117,7 +124,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     print(nameController.text);
                     // ignore: avoid_print
                     print(passwordController.text);
-                    runApp(const Feed());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Feed()));
                   },
                 )),
             Row(
@@ -134,7 +142,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    runApp(const SignUp());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUp()));
                   },
                 )
               ],

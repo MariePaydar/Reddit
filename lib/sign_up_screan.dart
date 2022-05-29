@@ -1,30 +1,34 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'package:reddit/feed_screan.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/data.dart';
+
+import 'globals.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
 
   @override
   StatefulWidget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: LogInPage(),
+        body: SignUpPage(),
       ),
     );
   }
 }
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key}) : super(key: key);
-  _LogInPageState createState() => _LogInPageState();
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -43,7 +47,10 @@ class _LogInPageState extends State<LogInPage> {
         child: ListView(
           children: <Widget>[
             SizedBox(
-              height: 150,
+              height: 60,
+            ),
+            SizedBox(
+              height: 120,
               child: Image.asset("assets/images/icon.png"),
             ),
             Container(
@@ -72,6 +79,9 @@ class _LogInPageState extends State<LogInPage> {
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
                   hintText: 'Email address',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
                 ),
                 onChanged: (val) {
                   validateEmail(val);
@@ -93,6 +103,9 @@ class _LogInPageState extends State<LogInPage> {
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
                   hintText: 'User Name',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
                 ),
               ),
             ),
@@ -104,19 +117,19 @@ class _LogInPageState extends State<LogInPage> {
                     r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
-                    errorStyle: const TextStyle(
-                      color: Color.fromARGB(255, 151, 9, 9),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                    inputStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w600,
-                    ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
-                    )),
+                  errorStyle: const TextStyle(
+                    color: Color.fromARGB(255, 151, 9, 9),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                  inputStyle: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600,
+                  ),
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
+                ),
                 hintText: 'Password',
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
@@ -136,9 +149,11 @@ class _LogInPageState extends State<LogInPage> {
                       primary: const Color.fromARGB(255, 151, 9, 9)),
                   child: const Text('Sign up'),
                   onPressed: () {
-                    print(emailController.text);
-                    print(usernameController.text);
-                    print(passwordController.text);
+                    user.userName = usernameController.text;
+                    user.email = emailController.text;
+                    user.password = passwordController.text;
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Feed()));
                   },
                 )),
             Container(
@@ -163,7 +178,8 @@ class _LogInPageState extends State<LogInPage> {
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    runApp(const Login());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
                   },
                 )
               ],
