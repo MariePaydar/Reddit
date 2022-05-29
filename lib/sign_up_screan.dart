@@ -47,7 +47,10 @@ class _SignUpPageState extends State<SignUpPage> {
         child: ListView(
           children: <Widget>[
             SizedBox(
-              height: 150,
+              height: 60,
+            ),
+            SizedBox(
+              height: 120,
               child: Image.asset("assets/images/icon.png"),
             ),
             Container(
