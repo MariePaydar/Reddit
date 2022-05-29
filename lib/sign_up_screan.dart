@@ -14,6 +14,7 @@ class SignUp extends StatelessWidget {
   @override
   StatefulWidget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         body: SignUpPage(),
