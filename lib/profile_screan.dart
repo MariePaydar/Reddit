@@ -17,9 +17,12 @@ class _ProfileState extends State<Profile> {
       title: 'Profile',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Center(
-            child: Text('Profile',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),),
+            child: Text(
+              'Profile',
+              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            ),
           ),
         ),
         body: ListView(
