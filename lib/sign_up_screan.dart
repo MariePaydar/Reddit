@@ -75,6 +75,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
                   hintText: 'Email address',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
                 ),
                 onChanged: (val) {
                   validateEmail(val);
@@ -96,6 +99,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
                   hintText: 'User Name',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
                 ),
               ),
             ),
@@ -107,19 +113,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
-                    errorStyle: const TextStyle(
-                      color: Color.fromARGB(255, 151, 9, 9),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                    inputStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w600,
-                    ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
-                    )),
+                  errorStyle: const TextStyle(
+                    color: Color.fromARGB(255, 151, 9, 9),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                  inputStyle: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600,
+                  ),
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
+                ),
                 hintText: 'Password',
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
@@ -139,6 +145,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       primary: const Color.fromARGB(255, 151, 9, 9)),
                   child: const Text('Sign up'),
                   onPressed: () {
+                    user.userName = usernameController.text;
+                    user.email = emailController.text;
+                    user.password = passwordController.text;
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => const Feed()));
                   },
