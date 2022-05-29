@@ -1,30 +1,33 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'package:reddit/feed_screan.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/data.dart';
+
+import 'globals.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
 
   @override
   StatefulWidget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: LogInPage(),
+        body: SignUpPage(),
       ),
     );
   }
 }
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key}) : super(key: key);
-  _LogInPageState createState() => _LogInPageState();
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -136,9 +139,8 @@ class _LogInPageState extends State<LogInPage> {
                       primary: const Color.fromARGB(255, 151, 9, 9)),
                   child: const Text('Sign up'),
                   onPressed: () {
-                    print(emailController.text);
-                    print(usernameController.text);
-                    print(passwordController.text);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Feed()));
                   },
                 )),
             Container(
@@ -163,7 +165,8 @@ class _LogInPageState extends State<LogInPage> {
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    runApp(const Login());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
                   },
                 )
               ],
