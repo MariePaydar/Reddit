@@ -123,7 +123,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     print(nameController.text);
                     // ignore: avoid_print
                     print(passwordController.text);
-                    runApp(const Feed());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Feed()));
                   },
                 )),
             Row(
@@ -140,7 +141,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   onPressed: () {
-                    runApp(const SignUp());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUp()));
                   },
                 )
               ],
