@@ -60,12 +60,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     fontWeight: FontWeight.w600),
                 controller: nameController,
                 decoration: const InputDecoration(
+                  hintText: 'User Name',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300),
                   fillColor: Color.fromARGB(255, 151, 9, 9),
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'User Name',
                 ),
               ),
             ),
@@ -87,8 +90,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       fontWeight: FontWeight.w600,
                     ),
                     hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
+                      color: Color.fromARGB(255, 255, 254, 254),
+                      fontWeight: FontWeight.w300,
                     )),
                 hintText: 'Password',
                 border: PasswordBorder(
