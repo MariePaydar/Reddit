@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:reddit/profile_screan.dart';
 import 'globals.dart';
 
 class EditProfile extends StatelessWidget {
@@ -80,8 +81,8 @@ class _EditProfilePage extends State<EditProfilePage> {
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.elliptical(6, 5))),
-                    labelText: 'new user name',
-                    labelStyle: TextStyle(
+                    hintText: 'new user name',
+                    hintStyle: TextStyle(
                         color: Color.fromARGB(255, 255, 254, 254),
                         fontWeight: FontWeight.w300)),
               ),
@@ -93,15 +94,15 @@ class _EditProfilePage extends State<EditProfilePage> {
                 style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
-                controller: nameController,
+                controller: bioController,
                 decoration: const InputDecoration(
                     fillColor: Color.fromARGB(255, 151, 9, 9),
                     filled: true,
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.elliptical(6, 5))),
-                    labelText: 'bio',
-                    labelStyle: TextStyle(
+                    hintText: 'bio',
+                    hintStyle: TextStyle(
                         color: Color.fromARGB(255, 255, 254, 254),
                         fontWeight: FontWeight.w300)),
               ),
@@ -120,7 +121,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
-                  hintText: 'Email address',
+                  hintText: 'new email address',
                   hintStyle: TextStyle(
                       color: Color.fromARGB(255, 255, 254, 254),
                       fontWeight: FontWeight.w300),
