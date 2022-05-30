@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/feed_screan.dart';
+import 'package:reddit/home_screan.dart';
 import 'package:reddit/sign_up_screan.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'globals.dart';
