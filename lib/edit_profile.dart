@@ -67,69 +67,102 @@ class _EditProfilePage extends State<EditProfilePage> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-              child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-                controller: nameController,
-                decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 151, 9, 9),
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(6, 5))),
-                    hintText: 'new user name',
-                    hintStyle: TextStyle(
-                        color: Color.fromARGB(255, 255, 254, 254),
-                        fontWeight: FontWeight.w300)),
-              ),
+            const Text(
+              '    user name',
+              style: TextStyle(
+                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-              child: TextField(
+              child: TextFormField(
+                initialValue: user.userName,
                 cursorColor: const Color.fromARGB(255, 255, 255, 255),
                 style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
-                controller: bioController,
                 decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 151, 9, 9),
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(6, 5))),
-                    hintText: 'bio',
-                    hintStyle: TextStyle(
-                        color: Color.fromARGB(255, 255, 254, 254),
-                        fontWeight: FontWeight.w300)),
+                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
+                ),
+                onChanged: (value) => setState(() {
+                  user.userName = value;
+                }),
               ),
+            ),
+            const Text(
+              '    bio',
+              style: TextStyle(
+                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-              child: TextField(
+              child: TextFormField(
+                initialValue: user.bio,
                 cursorColor: const Color.fromARGB(255, 255, 255, 255),
                 style: const TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
-                controller: emailController,
+                decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
+                ),
+                onChanged: (value) => setState(() {
+                  user.bio = value;
+                }),
+              ),
+            ),
+            const Text(
+              '    email address',
+              style: TextStyle(
+                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  height: 3),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+              child: TextFormField(
+                initialValue: user.email,
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600),
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   fillColor: Color.fromARGB(255, 151, 9, 9),
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
-                  hintText: 'new email address',
-                  hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 255, 254, 254),
-                      fontWeight: FontWeight.w300),
                 ),
                 onChanged: (val) {
                   validateEmail(val);
+                  if (_errorMessage == "") {
+                    user.email = val;
+                  }
                 },
               ),
+            ),
+            Text(
+              "      " + _errorMessage,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: Color.fromARGB(255, 151, 9, 9),
+                  height: 1),
+            ),
+            const Text(
+              '    password',
+              style: TextStyle(
+                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -143,6 +176,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                       color: Color.fromARGB(255, 151, 9, 9),
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
+                      height: 1,
                     ),
                     inputStyle: const TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
@@ -160,6 +194,32 @@ class _EditProfilePage extends State<EditProfilePage> {
                 errorMessage: 'small & capital letters, number,at least 8 c',
               ),
             ),
+            Container(
+              alignment: AlignmentDirectional.center,
+              padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
+                  alignment: Alignment.center,
+                  primary: Color.fromARGB(255, 255, 255, 255),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                onPressed: () => {
+                  user.password = passController.text,
+                  print(user.userName),
+                  print(user.bio),
+                  print(user.email),
+                  print(user.password),
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Profile()))
+                },
+              ),
+            )
           ],
         ),
       ),
