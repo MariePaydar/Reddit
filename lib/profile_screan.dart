@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:reddit/edit_profile.dart';
 import 'globals.dart';
 
 class Profile extends StatefulWidget {
@@ -61,7 +62,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   Text(
                     user.userName, //username
-                    style: TextStyle(
+                    style: const TextStyle(
                       height: 1.5,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
@@ -87,8 +88,11 @@ class _ProfileState extends State<Profile> {
                               ],
                             ),
                             onPressed: () {
-                              // ignore: avoid_print
-                              print(user.userName);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EditProfile()));
                             },
                           )),
                       Expanded(child: Container()),
