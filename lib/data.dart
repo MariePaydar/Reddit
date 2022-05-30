@@ -8,6 +8,7 @@ class Data {
   String userName = "";
   String email = "";
   String password = "";
+  String bio = "";
   List<DataOfCommunity> communitylist = [];
   Data(this.userName, this.email, this.password);
 }
