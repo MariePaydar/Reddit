@@ -64,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       fontSize: 30),
                 )),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
                 cursorColor: const Color.fromARGB(255, 255, 255, 255),
                 style: const TextStyle(
@@ -88,8 +88,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               ),
             ),
+            Text(
+              _errorMessage,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: Color.fromARGB(255, 151, 9, 9),
+                  height: 1),
+            ),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
                 cursorColor: const Color.fromARGB(255, 255, 255, 255),
                 style: const TextStyle(
@@ -109,8 +118,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
+            Text(
+              '',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: Color.fromARGB(255, 151, 9, 9),
+                  height: 1),
+            ),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: PasswordField(
                 backgroundColor: const Color.fromARGB(255, 151, 9, 9),
                 passwordConstraint:
@@ -140,7 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             Container(
-              height: 5,
+              height: 14,
             ),
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
@@ -156,14 +174,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         MaterialPageRoute(builder: (context) => const Feed()));
                   },
                 )),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                _errorMessage,
-                style: const TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
-              ),
-            ),
             Row(
               children: <Widget>[
                 const Text(

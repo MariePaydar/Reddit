@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/feed_screan.dart';
 import 'package:reddit/sign_up_screan.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'globals.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       fontSize: 30),
                 )),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
                 cursorColor: const Color.fromARGB(255, 255, 255, 255),
                 style: const TextStyle(
@@ -74,11 +75,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: PasswordField(
                 backgroundColor: const Color.fromARGB(255, 151, 9, 9),
-                passwordConstraint:
-                    r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
+                passwordConstraint: user.password,
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
                     errorStyle: const TextStyle(
@@ -100,7 +100,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),
                 ),
-                errorMessage: 'small & capital letters, number,at least 8 c',
+                errorMessage: '             password is incorrect',
               ),
             ),
             TextButton(
@@ -109,7 +109,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               },
               child: const Text(
                 'Forgot Password',
-                style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255), height: 1),
               ),
             ),
             Container(
