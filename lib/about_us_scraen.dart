@@ -79,36 +79,38 @@ class _AboutUsPage extends State<AboutUsPage> {
               margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
               padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
               child: RichText(
+                  softWrap: true,
+                  textAlign: TextAlign.justify,
                   text: const TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: "Dive Into Anything\n\n",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 151, 9, 9),
-                    )),
-                TextSpan(
-                    text:
-                        "Reddit is home to thousands of communities, endless conversation, and authentic human connection. Whether you're into breaking news, sports, TV fan theories, or a never-ending stream of the internet's cutest animals, there's a community on Reddit for you.\n\n",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                    )),
-                TextSpan(
-                    text: "The Reddit Brand\n\n",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 151, 9, 9),
-                    )),
-                TextSpan(
-                    text:
-                        "Our brand reflects how we want to be thought of and remembered. Consistent look and feel ensures a better awareness and connection to Reddit. Whenever using the Reddit brand, be sure to follow these key principles.\n\n",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                    ))
-              ])),
+                    TextSpan(
+                        text: "Dive Into Anything\n\n",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 151, 9, 9),
+                        )),
+                    TextSpan(
+                        text:
+                            "Reddit is home to thousands of communities, endless conversation, and authentic human connection. Whether you're into breaking news, sports, TV fan theories, or a never-ending stream of the internet's cutest animals, there's a community on Reddit for you.\n\n",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300,
+                        )),
+                    TextSpan(
+                        text: "The Reddit Brand\n\n",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 151, 9, 9),
+                        )),
+                    TextSpan(
+                        text:
+                            "Our brand reflects how we want to be thought of and remembered. Consistent look and feel ensures a better awareness and connection to Reddit. Whenever using the Reddit brand, be sure to follow these key principles.\n\n",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300,
+                        ))
+                  ])),
             ),
           ),
           Center(
