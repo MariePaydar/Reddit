@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:reddit/edit_profile.dart';
+import 'package:reddit/feed_screan.dart';
 import 'globals.dart';
 
 class Profile extends StatefulWidget {
@@ -19,12 +20,18 @@ class _ProfileState extends State<Profile> {
       title: 'Profile',
       home: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            tooltip: 'Back to home page',
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Feed()));
+            },
+          ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          title: const Center(
-            child: Text(
-              'Profile',
-              style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-            ),
+          title: Text(
+            '                Profile',
+            style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
           ),
         ),
         body: ListView(
@@ -113,7 +120,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   subtitle: Text(
-                    '...',
+                    user.bio,
                     style: TextStyle(
                       fontSize: 18,
                       color: Color.fromARGB(179, 0, 0, 0),
