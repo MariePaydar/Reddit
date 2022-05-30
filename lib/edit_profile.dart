@@ -13,7 +13,7 @@ class EditProfile extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: EditProfilePage(),
+        body: EditProfilePage(), 
       ),
     );
   }
