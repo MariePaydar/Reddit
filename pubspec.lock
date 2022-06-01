@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  easy_search_bar:
+    dependency: "direct dev"
+    description:
+      name: easy_search_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.1"
   email_validator:
     dependency: "direct dev"
     description:
@@ -186,3 +193,4 @@ packages:
     version: "2.1.1"
 sdks:
   dart: ">=2.16.2 <3.0.0"
+  flutter: ">=1.17.0"
