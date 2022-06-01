@@ -3,6 +3,8 @@ library my_prj.globals;
 import 'package:flutter/cupertino.dart';
 import 'package:reddit/data.dart';
 
+var darkModeStatus = false;
+
 Data user = Data("", "", "");
 Color LoginText = Color.fromARGB(255, 255, 255, 255);
 Color LoginBackground = Color.fromARGB(255, 0, 0, 0);
