@@ -4,6 +4,7 @@ import 'dart:js_util';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reddit/data.dart';
+import 'package:reddit/globals.dart';
 
 class Post extends StatelessWidget {
   Post({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class Post extends StatelessWidget {
         appBar:AppBar(
           toolbarHeight: 100,
          title: Title(
-           title: 'community name',
+           title: user.userName,
            color: Colors.white,
            child: Container(
              
