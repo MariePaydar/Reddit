@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:reddit/edit_profile.dart';
-import 'package:reddit/feed_screan.dart';
+import 'package:reddit/home_screan.dart';
 import 'globals.dart';
 
 class Profile extends StatefulWidget {

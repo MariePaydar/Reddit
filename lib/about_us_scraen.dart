@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/feed_screan.dart';
+import 'package:reddit/home_screan.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({Key? key}) : super(key: key);

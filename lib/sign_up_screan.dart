@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:passwordfield/passwordfield.dart';
-import 'package:reddit/feed_screan.dart';
+import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
 import 'package:reddit/data.dart';
 
