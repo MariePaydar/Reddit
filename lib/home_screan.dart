@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors, prefer_final_fields
 import 'package:flutter/material.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
@@ -28,135 +29,129 @@ class MyAppState extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyAppState> {
-  String text = "Feed";
-  int index = 0;
-  ListView C = ListView();
-  bool status = false;
+  int _selectedIndex = 0;
 
-  void onTapNavigation(index) {
+  void _onItemTapped(int index) {
     setState(() {
-      switch (index) {
-        case 0:
-          C = ListView(
-            children: const [
-              Text(
-                '1',
-                style: TextStyle(color: Colors.amber),
-              ),
-              Text(
-                '2',
-                style: TextStyle(color: Colors.amber),
-              )
-            ],
-          );
-          text = "Feed";
-          this.index = 0;
-          break;
-        case 1:
-          this.index = 1;
-          text = "communities";
-          break;
-        case 2:
-          this.index = 2;
-          text = "Create post";
-          break;
-        case 3:
-          this.index = 3;
-          text = "Settings";
-          C = ListView(children: [
-            Container(
-              height: 100,
-            ),
-            const Divider(),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('Your profile'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Profile()));
-                  },
-                )),
-            const Divider(),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('create a community'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CreateACommunity()));
-                  },
-                )),
-            const Divider(),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('Saved post'),
-                  onPressed: () {
-                    //forgot create community page
-                  },
-                )),
-            const Divider(),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('about us'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AboutUs()));
-                  },
-                )),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: LoginWidget),
-                  child: const Text('Dark mode'),
-                  onPressed: () {
-                    setState(() {
-                      LoginWidget = Colors.green;
-                    });
-                  },
-                )),
-          ]);
-          break;
-      }
+      _selectedIndex = index;
     });
+  }
+
+  getPages(BuildContext context) {
+    return <Widget>[
+      const Icon(
+        Icons.call,
+        size: 150,
+      ),
+      Icon(
+        Icons.camera,
+        size: 150,
+      ),
+      Icon(
+        Icons.chat,
+        size: 150,
+      ),
+      ListView(children: [
+        Container(
+          height: 100,
+        ),
+        const Divider(),
+        Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: const Color.fromARGB(255, 151, 9, 9)),
+              child: const Text('Your profile'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Profile()));
+              },
+            )),
+        const Divider(),
+        Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: const Color.fromARGB(255, 151, 9, 9)),
+              child: const Text('create a community'),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CreateACommunity()));
+              },
+            )),
+        const Divider(),
+        Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: const Color.fromARGB(255, 151, 9, 9)),
+              child: const Text('Saved post'),
+              onPressed: () {
+                //forgot create community page
+              },
+            )),
+        const Divider(),
+        Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: const Color.fromARGB(255, 151, 9, 9)),
+              child: const Text('about us'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AboutUs()));
+              },
+            )),
+        Container(
+          margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
+          padding: const EdgeInsets.fromLTRB(115, 5, 100, 5),
+          height: 35,
+          width: 150,
+          alignment: Alignment.center,
+          color: Color.fromARGB(255, 0, 0, 0),
+          child: Row(
+            children: [
+              Text(
+                'Dark mode ',
+                style: TextStyle(color: const Color.fromARGB(255, 151, 9, 9)),
+              ),
+              Switch(
+                value: darkModeStatus,
+                activeColor: Colors.red,
+                onChanged: (val) {
+                  setState(() {
+                    darkModeStatus = val;
+                    changeTheme(!darkModeStatus);
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+      ])
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: Center(
-          child: Text(
-            text,
-            style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-          ),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        title: const Text(
+          'Reddit',
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-      body: Center(
-        child: C,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: getPages(context),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
@@ -170,8 +165,8 @@ class _MyAppState extends State<MyAppState> {
         ],
         selectedItemColor: const Color.fromARGB(255, 151, 9, 9),
         iconSize: 18,
-        currentIndex: index,
-        onTap: onTapNavigation,
+        currentIndex: _selectedIndex, //New
+        onTap: _onItemTapped,
         unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
       ),
     );
