@@ -99,10 +99,10 @@ class _MyAppState extends State<MyAppState> {
               ])),
           body: Container(
             child: ListView.builder(
-              itemCount: tasksList.length,
+              itemCount: user.communitylist.length,
               itemBuilder: (contex, index) {
                 return taskItem(
-                  taskModel: tasksList[index],
+                  taskModel: user.communitylist[index],
                   changeIsDone: () => changeIsDone(index),
                 ); // TaskItem
               },
@@ -254,6 +254,24 @@ class _MyAppState extends State<MyAppState> {
           'Reddit',
           style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
+        actions: [
+          EasySearchBar(
+            iconTheme: IconThemeData(
+              color: Color.fromARGB(255, 0, 0, 0),
+              opacity: 30,
+              size: 40.0,
+            ),
+
+            title: const Text('Search'),
+            onSearch: (value) => setState(() => searchValue = value),
+            //suggestions: tasksList.getName,
+
+            searchCursorColor: Colors.red,
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.black,
+            suggestionBackgroundColor: Colors.red,
+          ),
+        ],
       ),
       body: IndexedStack(
         index: _selectedIndex,

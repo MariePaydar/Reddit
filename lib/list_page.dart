@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';  
-import 'package:easy_search_bar/easy_search_bar.dart';
 import 'Todo_list.dart';
 
 class MyApp extends StatelessWidget {
