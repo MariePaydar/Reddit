@@ -1,11 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
 import 'package:flutter/material.dart';
+import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
 import 'package:reddit/create_a_community_screan.dart';
+import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:reddit/taskItem.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 
 class Feed extends StatelessWidget {
   const Feed({Key? key}) : super(key: key);
@@ -30,6 +35,22 @@ class MyAppState extends StatefulWidget {
 
 class _MyAppState extends State<MyAppState> {
   int _selectedIndex = 0;
+  TextEditingController titlecontroller = TextEditingController();
+  TextEditingController textcontroller = TextEditingController();
+  List<DataOfCommunity> tasksList = user.communitylist;
+  String searchValue = '';
+  void changeIsDone(int index) {
+    bool currState = tasksList[index].isDone;
+    setState(() {
+      tasksList[index].setIsDone(!currState);
+    });
+  }
+
+  void addTask(DataOfCommunity taskModel) {
+    setState(() {
+      tasksList.add(taskModel);
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -43,14 +64,99 @@ class _MyAppState extends State<MyAppState> {
         Icons.call,
         size: 150,
       ),
-      Icon(
-        Icons.camera,
-        size: 150,
+      MaterialApp(
+        title: 'Search',
+        theme: ThemeData(primarySwatch: Colors.red),
+        home: Scaffold(
+          appBar: EasySearchBar(
+            iconTheme: IconThemeData(
+              color: Color.fromARGB(255, 0, 0, 0),
+              opacity: 30,
+              size: 40.0,
+            ),
+
+            title: const Text('Search'),
+            onSearch: (value) => setState(() => searchValue = value),
+            //suggestions: tasksList.getName,
+
+            searchCursorColor: Colors.red,
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.black,
+            suggestionBackgroundColor: Colors.red,
+          ),
+          drawer: Drawer(
+              child: ListView(
+                  padding: EdgeInsets.fromLTRB(100, 100, 100, 100),
+                  children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 151, 9, 9),
+                  ),
+                  child: Text('Drawer Header'),
+                ),
+                ListTile(onTap: () => Navigator.pop(context)),
+                ListTile(onTap: () => Navigator.pop(context))
+              ])),
+          body: Container(
+            child: ListView.builder(
+              itemCount: tasksList.length,
+              itemBuilder: (contex, index) {
+                return taskItem(
+                  taskModel: tasksList[index],
+                  changeIsDone: () => changeIsDone(index),
+                ); // TaskItem
+              },
+            ), //ListView.builder
+          ),
+        ),
       ),
-      Icon(
-        Icons.chat,
-        size: 150,
-      ),
+      Padding(
+          padding: const EdgeInsets.all(10),
+          child: ListView(children: <Widget>[
+            Container(
+              padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600),
+                controller: titlecontroller,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 0, 0, 0),
+                  filled: true,
+                  /* border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(60, 50))),*/
+                  hintText: 'Add at title',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 151, 148, 148),
+                      fontWeight: FontWeight.w300),
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
+              child: TextField(
+                cursorColor: const Color.fromARGB(255, 255, 255, 255),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w600),
+                controller: textcontroller,
+                decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 0, 0, 0),
+                  filled: true,
+                  /* border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(60, 50))),*/
+                  hintText: 'Add text body',
+                  hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 151, 148, 148),
+                      fontWeight: FontWeight.w300),
+                ),
+              ),
+            ),
+          ])),
       ListView(children: [
         Container(
           height: 100,
