@@ -43,6 +43,8 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      
+    );
   }
 }
