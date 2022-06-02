@@ -19,10 +19,17 @@ class Post extends StatelessWidget {
           toolbarHeight: 100,
           title: Title(
             title: user.userName,
-            color: Colors.white,
-            child: Container(),
+            color: Color.fromARGB(255, 113, 94, 94),
+            child: Container(
+             alignment: Alignment.bottomLeft,
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  user.communitylist[0].name,
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500, fontSize: 30),
+                )),
+            )
           ),
-        ),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         body: const PostPage(),
       ),
@@ -44,7 +51,7 @@ class _PostPageState extends State<PostPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+
     );
   }
 }
