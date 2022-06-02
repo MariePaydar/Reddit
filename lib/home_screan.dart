@@ -17,10 +17,10 @@ class Feed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: background,
         body: MyAppState(),
       ),
     );
@@ -166,9 +166,11 @@ class _MyAppState extends State<MyAppState> {
             height: 50,
             padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 151, 9, 9)),
-              child: const Text('Your profile'),
+              style: ElevatedButton.styleFrom(primary: backgroundWidget),
+              child: Text(
+                'Your profile',
+                style: TextStyle(color: text),
+              ),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const Profile()));
@@ -179,9 +181,11 @@ class _MyAppState extends State<MyAppState> {
             height: 50,
             padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 151, 9, 9)),
-              child: const Text('create a community'),
+              style: ElevatedButton.styleFrom(primary: backgroundWidget),
+              child: Text(
+                'create a community',
+                style: TextStyle(color: text),
+              ),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -194,9 +198,11 @@ class _MyAppState extends State<MyAppState> {
             height: 50,
             padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 151, 9, 9)),
-              child: const Text('Saved post'),
+              style: ElevatedButton.styleFrom(primary: backgroundWidget),
+              child: Text(
+                'Saved post',
+                style: TextStyle(color: text),
+              ),
               onPressed: () {
                 //forgot create community page
               },
@@ -206,9 +212,11 @@ class _MyAppState extends State<MyAppState> {
             height: 50,
             padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 151, 9, 9)),
-              child: const Text('about us'),
+              style: ElevatedButton.styleFrom(primary: backgroundWidget),
+              child: Text(
+                'about us',
+                style: TextStyle(color: text),
+              ),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const AboutUs()));
@@ -220,7 +228,7 @@ class _MyAppState extends State<MyAppState> {
           height: 35,
           width: 150,
           alignment: Alignment.center,
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: background,
           child: Row(
             children: [
               Text(
@@ -229,11 +237,11 @@ class _MyAppState extends State<MyAppState> {
               ),
               Switch(
                 value: darkModeStatus,
-                activeColor: Colors.red,
+                activeColor: const Color.fromARGB(255, 151, 9, 9),
                 onChanged: (val) {
                   setState(() {
                     darkModeStatus = val;
-                    changeTheme(!darkModeStatus);
+                    changeTheme(darkModeStatus);
                   });
                 },
               ),
@@ -247,7 +255,7 @@ class _MyAppState extends State<MyAppState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: background,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: const Text(

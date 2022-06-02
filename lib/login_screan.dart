@@ -9,11 +9,11 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: MyStatefulWidget(),
+        backgroundColor: background,
+        body: const MyStatefulWidget(),
       ),
     );
   }
@@ -46,52 +46,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
-                child: const Text(
+                child: Text(
                   'Welcome to Reddit',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
+                      color: text, fontWeight: FontWeight.w500, fontSize: 30),
                 )),
             Container(
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: nameController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'User Name',
-                  hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 255, 254, 254),
-                      fontWeight: FontWeight.w300),
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
+                  fillColor: backgroundWidget,
                   filled: true,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                          BorderRadius.all(const Radius.elliptical(60, 50))),
                 ),
               ),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: PasswordField(
-                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
+                backgroundColor: backgroundWidget,
                 passwordConstraint: user.password,
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
-                    errorStyle: const TextStyle(
-                      color: Color.fromARGB(255, 151, 9, 9),
+                    errorStyle: TextStyle(
+                      color: backgroundWidget,
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
-                    inputStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                    inputStyle: TextStyle(
+                      color: text,
                       fontWeight: FontWeight.w600,
                     ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 254, 254),
+                    hintStyle: TextStyle(
+                      color: text,
                       fontWeight: FontWeight.w300,
                     )),
                 hintText: 'Password',
@@ -107,19 +102,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               onPressed: () {
                 //forgot password screen
               },
-              child: const Text(
+              child: Text(
                 'Forgot Password',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255), height: 1),
+                style: TextStyle(color: text, height: 1),
               ),
             ),
             Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('Login'),
+                  style: ElevatedButton.styleFrom(primary: backgroundWidget),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(color: text),
+                  ),
                   onPressed: () {
                     // ignore: avoid_print
                     print(nameController.text);
@@ -131,16 +127,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 )),
             Row(
               children: <Widget>[
-                const Text(
+                Text(
                   'Not on Reddit yet?',
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  style: TextStyle(color: text),
                 ),
                 TextButton(
-                  child: const Text(
+                  child: Text(
                     'Sign-up',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                    style: TextStyle(fontSize: 15, color: text),
                   ),
                   onPressed: () {
                     Navigator.push(context,

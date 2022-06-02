@@ -19,7 +19,7 @@ class _CreateACommunity extends State<CreateACommunity> {
         debugShowCheckedModeBanner: false,
         title: 'Create a community',
         home: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: background,
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             title: const Center(
@@ -30,38 +30,36 @@ class _CreateACommunity extends State<CreateACommunity> {
             ),
           ),
           body: ListView(children: [
-            const Text(
-              '    community name',
+            Text(
+              '    community name:',
               style: TextStyle(
                   //backgroundColor: Color.fromARGB(255, 18, 145, 96),
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: text,
                   height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: nameController,
-                decoration: const InputDecoration(
-                    fillColor: Color.fromARGB(255, 151, 9, 9),
+                decoration: InputDecoration(
+                    fillColor: backgroundWidget,
                     filled: true,
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.elliptical(6, 5))),
                     labelText: 'r/',
                     labelStyle: TextStyle(
-                      color: Color.fromARGB(255, 255, 254, 254),
+                      color: text,
                     )),
               ),
             ),
-            const Text(
-              '    community type',
+            Text(
+              '    community type:',
               style: TextStyle(
                   //backgroundColor: Color.fromARGB(255, 18, 145, 96),
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: text,
                   height: 4),
             ),
             Center(
@@ -72,9 +70,8 @@ class _CreateACommunity extends State<CreateACommunity> {
                 size: 20,
               ),
               elevation: 0,
-              style: const TextStyle(
-                  color: Color.fromARGB(255, 151, 9, 9),
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: backgroundWidget, fontWeight: FontWeight.w600),
               onChanged: (String? newValue) {
                 setState(() {
                   dropdownValue = newValue!;
@@ -93,12 +90,13 @@ class _CreateACommunity extends State<CreateACommunity> {
                 padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 151, 9, 9),
+                    primary: backgroundWidget,
                   ),
-                  child: const Text('Create community'),
+                  child:
+                      Text('Create community', style: TextStyle(color: text)),
                   onPressed: () {
                     user.communitylist.add(DataOfCommunity(
-                        nameController.text, dropdownValue == 'Public',false));
+                        nameController.text, dropdownValue == 'Public', false));
                     Navigator.pop(context);
                     print(user.communitylist.toList());
                   },

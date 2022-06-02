@@ -6,6 +6,6 @@ import 'package:reddit/data.dart';
 var darkModeStatus = false;
 
 Data user = Data("", "", "");
-Color LoginText = Color.fromARGB(255, 255, 255, 255);
-Color LoginBackground = Color.fromARGB(255, 0, 0, 0);
-Color LoginWidget = Color.fromARGB(255, 151, 9, 9);
+Color text = const Color.fromARGB(255, 255, 255, 255);
+Color background = const Color.fromARGB(255, 0, 0, 0);
+Color backgroundWidget = const Color.fromARGB(255, 151, 9, 9);

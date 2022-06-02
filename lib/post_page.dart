@@ -1,4 +1,5 @@
 library my_prj.globals;
+
 import 'dart:js_util';
 
 import 'package:flutter/cupertino.dart';
@@ -11,24 +12,19 @@ class Post extends StatelessWidget {
 
   @override
   StatefulWidget build(BuildContext context) {
-    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      
       home: Scaffold(
-        
-        appBar:AppBar(
+        appBar: AppBar(
           toolbarHeight: 100,
-         title: Title(
-           title: user.userName,
-           color: Colors.white,
-           child: Container(
-             
-           ),
-         ),
+          title: Title(
+            title: user.userName,
+            color: Colors.white,
+            child: Container(),
+          ),
         ),
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: PostPage(),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        body: const PostPage(),
       ),
     );
   }
@@ -44,8 +40,9 @@ class _PostPageState extends State<PostPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  
 
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }

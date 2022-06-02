@@ -64,7 +64,7 @@ class _EditProfilePage extends State<EditProfilePage> {
       body: Center(
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             const Text(
@@ -151,7 +151,7 @@ class _EditProfilePage extends State<EditProfilePage> {
             ),
             Text(
               "      " + _errorMessage,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
                   color: Color.fromARGB(255, 151, 9, 9),
@@ -201,9 +201,9 @@ class _EditProfilePage extends State<EditProfilePage> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
                   alignment: Alignment.center,
-                  primary: Color.fromARGB(255, 255, 255, 255),
+                  primary: const Color.fromARGB(255, 255, 255, 255),
                 ),
-                child: Text(
+                child: const Text(
                   'Submit',
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),

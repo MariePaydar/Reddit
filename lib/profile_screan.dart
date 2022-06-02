@@ -29,20 +29,20 @@ class _ProfileState extends State<Profile> {
             },
           ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          title: Text(
+          title: const Text(
             '                Profile',
-            style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            style: const TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
           ),
         ),
         body: ListView(
           children: <Widget>[
             Container(
               height: 250,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 151, 9, 9),
-                    Color.fromARGB(255, 255, 255, 255)
+                    backgroundWidget,
+                    const Color.fromARGB(255, 255, 255, 255)
                   ],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -114,38 +114,38 @@ class _ProfileState extends State<Profile> {
                   title: Text(
                     'Bio',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 151, 9, 9),
+                      color: backgroundWidget,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
                     user.bio,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       color: Color.fromARGB(179, 0, 0, 0),
                     ),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   title: Text(
                     'Email',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 151, 9, 9),
+                      color: backgroundWidget,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
                     user.email,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
-                      color: Color.fromARGB(179, 0, 0, 0),
+                      color: const Color.fromARGB(179, 0, 0, 0),
                     ),
                   ),
                 ),
-                Divider(),
+                const Divider(),
               ],
             )
           ],

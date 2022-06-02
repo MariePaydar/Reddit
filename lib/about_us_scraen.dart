@@ -53,7 +53,7 @@ class _AboutUsPage extends State<AboutUsPage> {
                   width: 8,
                 ),
               ),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               padding: const EdgeInsets.fromLTRB(50, 20, 50, 10),
               child: RichText(
                   text: const TextSpan(children: <TextSpan>[
@@ -76,7 +76,7 @@ class _AboutUsPage extends State<AboutUsPage> {
                   width: 8,
                 ),
               ),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
               child: RichText(
                   softWrap: true,
@@ -122,7 +122,7 @@ class _AboutUsPage extends State<AboutUsPage> {
                   width: 8,
                 ),
               ),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: RichText(
                   text: const TextSpan(children: <TextSpan>[
