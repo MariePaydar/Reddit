@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
@@ -64,50 +65,30 @@ class _MyAppState extends State<MyAppState> {
         Icons.call,
         size: 150,
       ),
-      MaterialApp(
-        title: 'Search',
-        theme: ThemeData(primarySwatch: Colors.red),
-        home: Scaffold(
-          appBar: EasySearchBar(
-            iconTheme: IconThemeData(
-              color: Color.fromARGB(255, 0, 0, 0),
-              opacity: 30,
-              size: 40.0,
-            ),
-
-            title: const Text('Search'),
-            onSearch: (value) => setState(() => searchValue = value),
-            //suggestions: tasksList.getName,
-
-            searchCursorColor: Colors.red,
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.black,
-            suggestionBackgroundColor: Colors.red,
-          ),
-          drawer: Drawer(
-              child: ListView(
-                  padding: EdgeInsets.fromLTRB(100, 100, 100, 100),
-                  children: [
-                const DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 151, 9, 9),
-                  ),
-                  child: Text('Drawer Header'),
+      Scaffold(
+        drawer: Drawer(
+            child: ListView(
+                padding: EdgeInsets.fromLTRB(100, 100, 100, 100),
+                children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 151, 9, 9),
                 ),
-                ListTile(onTap: () => Navigator.pop(context)),
-                ListTile(onTap: () => Navigator.pop(context))
-              ])),
-          body: Container(
-            child: ListView.builder(
-              itemCount: user.communitylist.length,
-              itemBuilder: (contex, index) {
-                return taskItem(
-                  taskModel: user.communitylist[index],
-                  changeIsDone: () => changeIsDone(index),
-                ); // TaskItem
-              },
-            ), //ListView.builder
-          ),
+                child: Text('Drawer Header'),
+              ),
+              ListTile(onTap: () => Navigator.pop(context)),
+              ListTile(onTap: () => Navigator.pop(context))
+            ])),
+        body: Container(
+          child: ListView.builder(
+            itemCount: user.communitylist.length,
+            itemBuilder: (contex, index) {
+              return taskItem(
+                taskModel: user.communitylist[index],
+                changeIsDone: () => changeIsDone(index),
+              ); // TaskItem
+            },
+          ), //ListView.builder
         ),
       ),
       Padding(
@@ -263,22 +244,18 @@ class _MyAppState extends State<MyAppState> {
           style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
         actions: [
-          EasySearchBar(
-            iconTheme: IconThemeData(
+          IconButton(
+            icon: const Icon(
+              Icons.search,
               color: Color.fromARGB(255, 0, 0, 0),
-              opacity: 30,
-              size: 40.0,
             ),
-
-            title: const Text('Search'),
-            onSearch: (value) => setState(() => searchValue = value),
-            //suggestions: tasksList.getName,
-
-            searchCursorColor: Colors.red,
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.black,
-            suggestionBackgroundColor: Colors.red,
-          ),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: MySearchDelegate(),
+              );
+            },
+          )
         ],
       ),
       body: IndexedStack(
@@ -302,5 +279,60 @@ class _MyAppState extends State<MyAppState> {
         unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
       ),
     );
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  List<String> searchResults = ['Coronavirus', 'COVID-19'];
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = '';
+            }
+          },
+          icon: const Icon(Icons.clear))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) => IconButton(
+        onPressed: () => close(context, null),
+        icon: const Icon(Icons.arrow_back),
+      );
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Center(
+        child: Text(
+      query,
+      style: TextStyle(fontSize: 64, color: Colors.black),
+    ));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestions = searchResults.where((searchResult) {
+      final result = searchResult.toLowerCase();
+      final input = query.toLowerCase();
+      return result.contains(input);
+    }).toList();
+    return ListView.builder(
+        itemCount: suggestions.length,
+        itemBuilder: (context, index) {
+          final suggestion = suggestions[index];
+          return ListTile(
+            title: Text(suggestion),
+            onTap: () {
+              query = suggestion;
+              showResults(context);
+            },
+          );
+        });
   }
 }
