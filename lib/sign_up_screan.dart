@@ -1,12 +1,13 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit/google_sign_in.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
 import 'package:reddit/data.dart';
-import 'globals.dart';
-
 import 'globals.dart';
 
 class SignUp extends StatelessWidget {
@@ -139,6 +140,28 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Container(
               height: 14,
+            ),
+            ElevatedButton.icon(
+              
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
+                primary: backgroundWidget,
+                onPrimary: Colors.black,
+                minimumSize: Size(double.infinity, 50),
+              ),
+              icon: FaIcon(
+                FontAwesomeIcons.google,
+                color: Colors.red,
+              ),
+              label: Text('Sign Up with Google',
+                  style: TextStyle(
+                    color: text,
+                  )),
+              onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogin();
+              },
             ),
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
