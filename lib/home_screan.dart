@@ -240,7 +240,7 @@ class _MyAppState extends State<MyAppState> {
                   ),
                   Text(
                     'Reddit',
-                    style: TextStyle(fontSize: 30, color: Colors.blue),
+                    style: TextStyle(fontSize: 30, color: backgroundWidget),
                   )
                 ],
               ),
