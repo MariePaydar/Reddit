@@ -52,8 +52,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(const Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
               ),
             ),
@@ -80,8 +79,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 hintText: 'Password',
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
                 errorMessage: '             password is incorrect',
               ),

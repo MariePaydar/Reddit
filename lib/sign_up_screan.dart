@@ -62,8 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                   hintText: 'Email address',
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
@@ -92,8 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                   hintText: 'User Name',
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
@@ -132,8 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: 'Password',
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
                 errorMessage: 'small & capital letters, number,at least 8 c',
               ),
