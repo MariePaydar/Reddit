@@ -76,7 +76,23 @@ class _PostPage extends State<PostPage> {
    color: Color.fromARGB(255, 144, 24, 24), // The color to use when painting the line.
    height: 20, // The divider's height extent.
  ),
-         
+         Column(
+           children: [
+             Container(
+               child: RichText(
+                    text: const TextSpan(children: <TextSpan>[
+                  TextSpan(
+                      text: 'title \n posttext\n',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w300,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )),
+                ])),
+             )
+           ],
+         ),
         ]
      )
     ); 
