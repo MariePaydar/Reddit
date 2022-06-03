@@ -16,7 +16,7 @@ class Welcome extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: Colors.black,
-          body: const WelcomePage(),
+          body: WelcomePage(),
         ),
       ),
     );

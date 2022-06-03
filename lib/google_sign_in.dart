@@ -5,13 +5,16 @@ import 'package:google_sign_in/google_sign_in.dart';
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _aUser;
+ 
+  GoogleSignInAccount? get user => _aUser!;
 
-  GoogleSignInAccount? get user => _aUser;
   Future googleLogin() async {
     final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return;
     _aUser = googleUser;
+    
     final googleAuth = await googleUser.authentication;
+    
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,

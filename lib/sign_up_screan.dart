@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,12 +17,26 @@ class SignUp extends StatelessWidget {
   @override
   StatefulWidget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: background,
-        body: const SignUpPage(),
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            backgroundColor: background,
+            body: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Somthing Went Wrong!'),
+                    );
+                  } else if (snapshot.hasData) {
+                    return Feed();
+                  } else {
+                    return SignUpPage();
+                  }
+                })));
   }
 }
 
