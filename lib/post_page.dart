@@ -55,7 +55,34 @@ class _PostPage extends State<PostPage> {
               ])),          
         ),
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-      
-     ); 
+      body: ListView(
+        children: [
+          Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  width: 8,
+                ),
+              ),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(50, 20, 50, 10),
+              child: RichText(
+                  text: const TextSpan(children: <TextSpan>[
+                TextSpan(
+                    text: "AP final project, 1400-1401\nDr.Vahidi  \n ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w300,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    )),
+              ])),
+            ),
+          ),
+        ]
+     )
+    ); 
   }
   }
