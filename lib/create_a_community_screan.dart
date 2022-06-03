@@ -96,7 +96,7 @@ class _CreateACommunity extends State<CreateACommunity> {
                       Text('Create community', style: TextStyle(color: text)),
                   onPressed: () {
                     user.communitylist.add(DataOfCommunity(
-                        nameController.text, dropdownValue == 'Public', false));
+                        nameController.text, dropdownValue == 'Public', false,false,false));
                     Navigator.pop(context);
                     print(user.communitylist.toList());
                   },

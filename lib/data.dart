@@ -4,10 +4,18 @@ class DataOfCommunity {
   String _name = "";
   bool _isPublic = false;
   bool _isDone;
-  DataOfCommunity(this._name, this._isPublic, this._isDone);
+  bool like;
+  bool dislike;
+  DataOfCommunity(this._name, this._isPublic, this._isDone,this.like,this.dislike);
   bool get isDone => _isDone;
   void setIsDone(bool currentState) {
     _isDone = currentState;
+  }
+  void setlike(bool currentState){
+    like=currentState;
+  }
+  void setdislike(bool currentState){
+    dislike=currentState;
   }
 
   bool get isPublic => _isPublic;
