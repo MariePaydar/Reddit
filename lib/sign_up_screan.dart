@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
-                  color: backgroundWidget,
+                  color: const Color.fromARGB(255, 151, 9, 9),
                   height: 1),
             ),
             Container(
@@ -142,7 +142,6 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 14,
             ),
             ElevatedButton.icon(
-              
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
                 primary: backgroundWidget,

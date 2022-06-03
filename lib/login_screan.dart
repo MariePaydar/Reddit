@@ -65,7 +65,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
                     errorStyle: TextStyle(
-                      color: backgroundWidget,
+                      color: const Color.fromARGB(255, 151, 9, 9),
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
@@ -105,10 +105,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     style: TextStyle(color: text),
                   ),
                   onPressed: () {
-                    // ignore: avoid_print
-                    print(nameController.text);
-                    // ignore: avoid_print
-                    print(passwordController.text);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => const Feed()));
                   },

@@ -13,7 +13,7 @@ class EditProfile extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: EditProfilePage(), 
+        body: EditProfilePage(),
       ),
     );
   }
@@ -53,39 +53,34 @@ class _EditProfilePage extends State<EditProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: const Center(
+        title: Center(
           child: Text(
             'Edit Profile',
-            style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            style: TextStyle(color: text),
           ),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: background,
       body: Center(
         child: ListView(
           children: [
             const SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               '    user name',
-              style: TextStyle(
-                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  height: 3),
+              style: TextStyle(color: text, height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: TextFormField(
                 initialValue: user.userName,
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
                   filled: true,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
                 ),
                 onChanged: (value) => setState(() {
@@ -93,25 +88,20 @@ class _EditProfilePage extends State<EditProfilePage> {
                 }),
               ),
             ),
-            const Text(
+            Text(
               '    bio',
-              style: TextStyle(
-                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  height: 3),
+              style: TextStyle(color: text, height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: TextFormField(
                 initialValue: user.bio,
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
                   filled: true,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
                 ),
                 onChanged: (value) => setState(() {
@@ -119,26 +109,21 @@ class _EditProfilePage extends State<EditProfilePage> {
                 }),
               ),
             ),
-            const Text(
+            Text(
               '    email address',
-              style: TextStyle(
-                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  height: 3),
+              style: TextStyle(color: text, height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: TextFormField(
                 initialValue: user.email,
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
                   filled: true,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
                 ),
                 onChanged: (val) {
@@ -157,17 +142,14 @@ class _EditProfilePage extends State<EditProfilePage> {
                   color: Color.fromARGB(255, 151, 9, 9),
                   height: 1),
             ),
-            const Text(
+            Text(
               '    password',
-              style: TextStyle(
-                  //backgroundColor: Color.fromARGB(255, 18, 145, 96),
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  height: 3),
+              style: TextStyle(color: text, height: 3),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: PasswordField(
-                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
+                backgroundColor: backgroundWidget,
                 passwordConstraint:
                     r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passController,
@@ -178,12 +160,12 @@ class _EditProfilePage extends State<EditProfilePage> {
                       fontSize: 13,
                       height: 1,
                     ),
-                    inputStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                    inputStyle: TextStyle(
+                      color: text,
                       fontWeight: FontWeight.w600,
                     ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 254, 254),
+                    hintStyle: TextStyle(
+                      color: text,
                       fontWeight: FontWeight.w300,
                     )),
                 hintText: 'new password',
@@ -201,20 +183,14 @@ class _EditProfilePage extends State<EditProfilePage> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
                   alignment: Alignment.center,
-                  primary: const Color.fromARGB(255, 255, 255, 255),
+                  primary: backgroundWidget,
                 ),
-                child: const Text(
+                child: Text(
                   'Submit',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
+                  style: TextStyle(color: text),
                 ),
                 onPressed: () => {
                   user.password = passController.text,
-                  print(user.userName),
-                  print(user.bio),
-                  print(user.email),
-                  print(user.password),
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Profile()))
                 },
