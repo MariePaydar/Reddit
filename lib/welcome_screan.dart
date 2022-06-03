@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/google_sign_in.dart';
 import 'package:reddit/login_screan.dart';
 import 'package:reddit/sign_up_screan.dart';
 import 'globals.dart';
@@ -9,18 +8,14 @@ class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) 
-    => ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
-      child: MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: Colors.black,
           body: WelcomePage(),
         ),
-      ),
-    );
-  }
+      );
+}
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);

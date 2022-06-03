@@ -5,7 +5,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/google_sign_in.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
 import 'package:reddit/data.dart';
@@ -18,25 +17,7 @@ class SignUp extends StatelessWidget {
   StatefulWidget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            backgroundColor: background,
-            body: StreamBuilder(
-                stream: FirebaseAuth.instance.authStateChanges(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Somthing Went Wrong!'),
-                    );
-                  } else if (snapshot.hasData) {
-                    return Feed();
-                  } else {
-                    return SignUpPage();
-                  }
-                })));
+        home: Scaffold(backgroundColor: background, body: SignUpPage()));
   }
 }
 
@@ -49,13 +30,18 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String _errorMessage = '';
+  String _emailErrorMessage = '';
+  String _userErrorMessage = '';
   bool _passwordVisible = false;
   String _password = "";
   void initState() {
     _passwordVisible = false;
     super.initState();
   }
+
+  bool emailIsChecked = false;
+  bool usernameIsChecked = false;
+  bool passwordIsChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             Text(
-              _errorMessage,
+              _emailErrorMessage,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -111,15 +97,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
+                onChanged: (val) {
+                  validateUsername(val);
+                },
               ),
             ),
             Text(
-              '',
+              _userErrorMessage,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
-                  color: backgroundWidget,
+                  color: const Color.fromARGB(255, 151, 9, 9),
                   height: 1),
             ),
             Container(
@@ -153,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               height: 14,
             ),
-            ElevatedButton.icon(
+            /*ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
                 primary: backgroundWidget,
@@ -173,7 +162,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.googleLogin();
               },
-            ),
+            ),*/
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
@@ -183,11 +172,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(color: text),
                   ),
                   onPressed: () {
-                    user.userName = usernameController.text;
-                    user.email = emailController.text;
-                    user.password = passwordController.text;
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Feed()));
+                    if (usernameIsChecked && emailIsChecked) {
+                      user.userName = usernameController.text;
+                      user.email = emailController.text;
+                      user.password = passwordController.text;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Feed()));
+                    }
                   },
                 )),
             Row(
@@ -216,15 +209,32 @@ class _SignUpPageState extends State<SignUpPage> {
   void validateEmail(String val) {
     if (val.isEmpty) {
       setState(() {
-        _errorMessage = "Email can not be empty";
+        _emailErrorMessage = "Email can not be empty";
+        emailIsChecked = false;
       });
     } else if (!EmailValidator.validate(val, true)) {
       setState(() {
-        _errorMessage = "Invalid Email Address";
+        _emailErrorMessage = "Invalid Email Address";
+        emailIsChecked = false;
       });
     } else {
       setState(() {
-        _errorMessage = "";
+        _emailErrorMessage = "";
+        emailIsChecked = true;
+      });
+    }
+  }
+
+  void validateUsername(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _userErrorMessage = "username can not be empty";
+        usernameIsChecked = false;
+      });
+    } else {
+      setState(() {
+        _userErrorMessage = "";
+        usernameIsChecked = true;
       });
     }
   }
