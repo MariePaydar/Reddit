@@ -34,53 +34,49 @@ class _PostPage extends State<PostPage> {
     return Scaffold(
       appBar: AppBar(
        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           tooltip: 'Back to setting page',
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => const Feed()));
           },
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title:RichText(
-           text:  TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: user.userName+"\n"+'salam'+'\n',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w300,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )),
-              ])),          
-        ),
+        backgroundColor: Colors.black,
+      ),
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: ListView(
         children: [
-          Center(
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                border: Border.all(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  width: 8,
-                ),
+          Row(
+              children: 
+              [
+              Icon(
+                Icons.circle,
+                size: 30,
+                color: Color.fromARGB(255, 144, 24, 24),
+              ) , 
+                Container(
+                child: RichText(
+                    text: const TextSpan(children: <TextSpan>[
+                  TextSpan(
+                      text: "community name\n username\n ",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w300,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )),
+                ])),
               ),
-              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              padding: const EdgeInsets.fromLTRB(50, 20, 50, 10),
-              child: RichText(
-                  text: const TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: "AP final project, 1400-1401\nDr.Vahidi  \n ",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w300,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )),
-              ])),
+            ],
             ),
-          ),
+            Divider(
+   thickness: 5, // thickness of the line
+   indent: 20, // empty space to the leading edge of divider.
+   endIndent: 20, // empty space to the trailing edge of the divider.
+   color: Color.fromARGB(255, 144, 24, 24), // The color to use when painting the line.
+   height: 20, // The divider's height extent.
+ ),
+         
         ]
      )
     ); 
