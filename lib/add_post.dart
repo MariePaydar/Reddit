@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/data.dart';
+import 'package:reddit/post_page.dart';
+
+import 'globals.dart';
 
 class Add extends StatelessWidget {
   const Add({Key? key}) : super(key: key);
 
   @override
   StatefulWidget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+       
+        backgroundColor: Colors.black,
+      ),
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         body: AddPage(),
       ),
@@ -41,9 +49,6 @@ class _AddPageState extends State<AddPage> {
               decoration: const InputDecoration(
                 fillColor: Color.fromARGB(255, 0, 0, 0),
                 filled: true,
-                /* border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),*/
                 hintText: 'Add at title',
                 hintStyle: TextStyle(
                     color: Color.fromARGB(255, 151, 148, 148),
@@ -72,6 +77,30 @@ class _AddPageState extends State<AddPage> {
               ),
             ),
           ),
+
+          Container(
+                height: 30,
+                padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: backgroundWidget,
+                    fixedSize: Size(10, 10)
+                  ),
+                  child:
+                      Text(
+                        'Next', 
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: text)),
+                  onPressed: () {
+                    if(textcontroller!=null && titlecontroller!=null)
+                    {
+                    user_posts.posts.add(TextPost(titlecontroller.text, textcontroller.text));
+                     Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Post()));
+                    print(user_posts.posts.toList());}
+  
+                  },
+                )),
         ]));
   }
 }
