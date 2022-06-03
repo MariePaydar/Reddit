@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/data.dart';
+import 'package:reddit/home_screan.dart';
 import 'globals.dart';
 
 class CreateACommunity extends StatefulWidget {
@@ -21,11 +22,21 @@ class _CreateACommunity extends State<CreateACommunity> {
         home: Scaffold(
           backgroundColor: background,
           appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              tooltip: 'Back to home page',
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Feed()));
+              },
+            ),
             backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             title: const Center(
               child: Text(
                 'Create a community',
-                style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
               ),
             ),
           ),
