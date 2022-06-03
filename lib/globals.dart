@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:reddit/data.dart';
 
 var darkModeStatus = false;
+String join = "Join";
 
 Data user = Data("", "", "");
 Color text = Color.fromARGB(255, 0, 0, 0);

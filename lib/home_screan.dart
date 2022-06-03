@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
+import 'package:reddit/community_screan.dart';
 import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
@@ -173,7 +174,8 @@ class _MyAppState extends State<MyAppState> {
                 style: TextStyle(color: text),
               ),
               onPressed: () {
-                //forgot create community page
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Community()));
               },
             )),
         const Divider(),

@@ -1,0 +1,227 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:reddit/Todo_list.dart';
+import 'package:reddit/about_us_scraen.dart';
+import 'package:reddit/change_theme.dart';
+import 'package:reddit/create_a_community_screan.dart';
+import 'package:reddit/data.dart';
+import 'package:reddit/globals.dart';
+import 'package:reddit/home_screan.dart';
+import 'package:reddit/login_screan.dart';
+import 'package:reddit/profile_screan.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:reddit/taskItem.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
+
+class Community extends StatelessWidget {
+  const Community({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: background,
+        body: CommunityState(),
+      ),
+    );
+  }
+}
+
+class CommunityState extends StatefulWidget {
+  const CommunityState({Key? key}) : super(key: key);
+  @override
+  State<CommunityState> createState() => _CommunityState();
+}
+
+class _CommunityState extends State<CommunityState> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: background,
+          drawer: Drawer(
+              backgroundColor: backgroundWidget,
+              child: ListView(
+                  padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  children: [
+                    DrawerHeader(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 40.0,
+                            backgroundImage:
+                                AssetImage('assets/images/icon.png'),
+                          ),
+                          Text(
+                            'Reddit',
+                            style: TextStyle(
+                                fontSize: 30, color: backgroundWidget),
+                          )
+                        ],
+                      ),
+                    ),
+                    ListTile(
+                        title: const Text('Profile'),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Profile()))),
+                    ListTile(
+                        title: const Text('Create a communities'),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const CreateACommunity()))),
+                    ListTile(
+                        title: const Text('Saved post'),
+                        onTap: () => Navigator.pop(context)),
+                    ListTile(
+                        title: const Text('About us'),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AboutUs()))),
+                    ListTile(
+                        title: const Text('Log out'),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Login()))),
+                  ])),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(300.0), // here the desired height
+            child: AppBar(
+              bottom: TabBar(
+                labelColor: text,
+                indicatorColor: backgroundWidget,
+                tabs: [
+                  Tab(
+                    text: 'Posts',
+                  ),
+                  Tab(
+                    text: 'About',
+                  ),
+                ],
+              ),
+              flexibleSpace: Column(
+                //mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Image(
+                    image: AssetImage('assets/images/communityImage.jpg'),
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Row(
+                    children: [
+                      Spacer(flex: 5),
+                      RichText(
+                          text: const TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: "Community name\n",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            )),
+                        TextSpan(
+                            text: "1 members  1 online",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w300,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            )),
+                      ])),
+                      Spacer(flex: 30),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          alignment: Alignment.center,
+                          primary: backgroundWidget,
+                          shadowColor: text,
+                        ),
+                        child: Text(
+                          join,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (join == "Join")
+                              join = "Joined";
+                            else
+                              join = "Join";
+                          });
+                        },
+                      ),
+                      Spacer(flex: 5),
+                    ],
+                  ),
+                ],
+              ),
+              iconTheme: IconThemeData(
+                color: backgroundWidget,
+                shadows: const [
+                  Shadow(
+                    offset: Offset(2.0, 2.0),
+                    blurRadius: 1.0,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ],
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: backgroundWidget,
+                    shadows: const [
+                      Shadow(
+                        offset: Offset(2.0, 1.0),
+                        blurRadius: 1.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    showSearch(
+                      context: context,
+                      delegate: MySearchDelegate(),
+                    );
+                  },
+                )
+              ],
+              backgroundColor: Colors.transparent,
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              Icon(Icons.abc),
+              Column(children: <Widget>[
+                const Divider(),
+                ListTile(
+                  title: Text(
+                    'Moderators',
+                    style: TextStyle(
+                      color: backgroundWidget,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '    u/' + user.userName,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(179, 0, 0, 0),
+                    ),
+                  ),
+                )
+              ])
+            ],
+          ),
+        ));
+  }
+}
