@@ -35,3 +35,12 @@ class Data {
   bool isDarkMode = false;
   Data(this.userName, this.email, this.password);
 }
+class TextPost{
+String title="";
+String text="";
+TextPost(this.title,this.text);
+}
+
+class Data2{
+  List<TextPost> posts=[];
+}
