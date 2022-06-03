@@ -37,20 +37,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: ListView(
           children: <Widget>[
             const SizedBox(
-              height: 60,
+              height: 160,
             ),
-            SizedBox(
-              height: 120,
-              child: Image.asset("assets/images/icon.png"),
-            ),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  'Welcome to Reddit',
-                  style: TextStyle(
-                      color: text, fontWeight: FontWeight.w500, fontSize: 30),
-                )),
             Container(
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
