@@ -30,7 +30,7 @@ class _WelcomePageState extends State<WelcomePage> {
         padding: const EdgeInsets.all(10),
         child: ListView(children: <Widget>[
           const SizedBox(
-            height: 120,
+            height: 170,
           ),
           SizedBox(
             height: 120,
@@ -39,19 +39,26 @@ class _WelcomePageState extends State<WelcomePage> {
           Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: Text(
+              child: const Text(
                 'Welcome to Reddit',
                 style: TextStyle(
                     color: Color.fromARGB(255, 135, 206, 235),
                     fontWeight: FontWeight.w500,
-                    fontSize: 30),
+                    fontSize: 30,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 3.0,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                    ]),
               )),
           SizedBox(
-            height: 50,
+            height: 25,
           ),
           Container(
               height: 50,
-              padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+              padding: const EdgeInsets.fromLTRB(90, 5, 90, 5),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: backgroundWidget),
                 child: Text(
@@ -68,7 +75,7 @@ class _WelcomePageState extends State<WelcomePage> {
           ),
           Container(
               height: 50,
-              padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
+              padding: const EdgeInsets.fromLTRB(90, 5, 90, 5),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: backgroundWidget),
                 child: Text(
