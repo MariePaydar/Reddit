@@ -9,7 +9,7 @@ class DataOfCommunity {
   List<TextPost> posts = [
     TextPost(
       "\nWelcome to our community\n\n",
-      "...\n ",
+      "...\n ",false
     )
   ];
   DataOfCommunity(
@@ -57,14 +57,16 @@ class Data {
 class TextPost {
   String title = "";
   String text = "";
-  TextPost(this.title, this.text);
+  bool isSaved=false;
+  TextPost(this.title, this.text,this.isSaved);
 }
 
 class Data2 {
   List<TextPost> posts = [
     TextPost(
       "\nWelcome to Reddit\n\n",
-      "This is our AP project in shahid beheshti university\n",
+      "This is our AP project in shahid beheshti university\n",false
     )
   ];
+  List<TextPost> savePost=[];
 }
