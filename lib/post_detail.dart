@@ -309,6 +309,7 @@ class _DetailPostState extends State<DetailPostState> {
                         onPressed: () {
                           setState(() {
                             if (isMarked) {
+                              user_posts.savePost.remove(index);
                               isMarked = !isMarked;
                               bookMark = Icon(
                                 Icons.bookmark_border_outlined,
