@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
+import 'package:reddit/add_post.dart';
 import 'package:reddit/change_theme.dart';
 import 'package:reddit/community_screan.dart';
 import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/post_detail.dart';
+import 'package:reddit/post_page.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
@@ -86,46 +89,55 @@ class _MyAppState extends State<MyAppState> {
             Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: titlecontroller,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 0, 0, 0),
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
                   filled: true,
-                  /* border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),*/
                   hintText: 'Add at title',
-                  hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 151, 148, 148),
-                      fontWeight: FontWeight.w300),
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
               ),
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: textcontroller,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 0, 0, 0),
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
                   filled: true,
                   /* border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.elliptical(60, 50))),*/
                   hintText: 'Add text body',
-                  hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 151, 148, 148),
-                      fontWeight: FontWeight.w300),
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
               ),
             ),
+            Container(
+                padding: const EdgeInsets.fromLTRB(100, 10, 100, 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: backgroundWidget, fixedSize: Size(10, 10)),
+                  child: Text('Next',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: text)),
+                  onPressed: () {
+                    if (textcontroller != null && titlecontroller != null) {
+                      user_posts.posts.add(
+                          TextPost(titlecontroller.text, textcontroller.text));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Post()));
+                      print(user_posts.posts.toList());
+                    }
+                  },
+                )),
           ])),
       ListView(children: [
         Container(
@@ -174,8 +186,10 @@ class _MyAppState extends State<MyAppState> {
                 style: TextStyle(color: text),
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Community()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DetailPost()));
               },
             )),
         const Divider(),

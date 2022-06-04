@@ -15,7 +15,10 @@ import 'package:reddit/taskItem.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 
 class Community extends StatelessWidget {
-  const Community({Key? key}) : super(key: key);
+  final String name;
+
+  final String moderator;
+  const Community(this.name, this.moderator, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +26,24 @@ class Community extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: background,
-        body: CommunityState(),
+        body: CommunityState(name, moderator),
       ),
     );
   }
 }
 
 class CommunityState extends StatefulWidget {
-  const CommunityState({Key? key}) : super(key: key);
+  String name;
+
+  String moderator;
+
+  CommunityState(this.name, this.moderator, {Key? key}) : super(key: key);
   @override
   State<CommunityState> createState() => _CommunityState();
 }
 
 class _CommunityState extends State<CommunityState> {
+  _CommunityState();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -121,9 +129,9 @@ class _CommunityState extends State<CommunityState> {
                     children: [
                       Spacer(flex: 5),
                       RichText(
-                          text: const TextSpan(children: <TextSpan>[
+                          text: TextSpan(children: <TextSpan>[
                         TextSpan(
-                            text: "Community name\n",
+                            text: widget.name + "\n",
                             style: TextStyle(
                               fontSize: 18,
                               fontStyle: FontStyle.italic,
@@ -212,7 +220,7 @@ class _CommunityState extends State<CommunityState> {
                     ),
                   ),
                   subtitle: Text(
-                    '    u/' + user.userName,
+                    '    u/' + widget.moderator,
                     style: const TextStyle(
                       fontSize: 18,
                       color: Color.fromARGB(179, 0, 0, 0),
