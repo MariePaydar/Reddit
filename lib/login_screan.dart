@@ -32,25 +32,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    String _errorMessage = "";
     return Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
             const SizedBox(
-              height: 60,
+              height: 160,
             ),
-            SizedBox(
-              height: 120,
-              child: Image.asset("assets/images/icon.png"),
-            ),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  'Welcome to Reddit',
-                  style: TextStyle(
-                      color: text, fontWeight: FontWeight.w500, fontSize: 30),
-                )),
             Container(
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
@@ -64,8 +53,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(const Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
               ),
             ),
@@ -73,11 +61,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: PasswordField(
                 backgroundColor: backgroundWidget,
-                passwordConstraint: user.password,
                 controller: passwordController,
+                passwordConstraint: user.password,
                 inputDecoration: PasswordDecoration(
-                    errorStyle: TextStyle(
-                      color: backgroundWidget,
+                    errorStyle: const TextStyle(
+                      color: Color.fromARGB(255, 151, 9, 9),
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
@@ -90,22 +78,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       fontWeight: FontWeight.w300,
                     )),
                 hintText: 'Password',
+                errorMessage: _errorMessage,
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
-                errorMessage: '             password is incorrect',
               ),
             ),
             TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
               child: Text(
                 'Forgot Password',
                 style: TextStyle(color: text, height: 1),
               ),
+              onPressed: () {
+                //forgot password screen
+              },
             ),
             Container(
                 height: 50,
@@ -117,12 +104,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     style: TextStyle(color: text),
                   ),
                   onPressed: () {
-                    // ignore: avoid_print
-                    print(nameController.text);
-                    // ignore: avoid_print
-                    print(passwordController.text);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Feed()));
+                    setState(() {
+                      if (passwordController.text == user.password) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Feed()));
+                      } else {
+                        _errorMessage = '             password is incorrect';
+                      }
+                    });
                   },
                 )),
             Row(

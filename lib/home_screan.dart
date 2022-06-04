@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
+import 'package:reddit/community_screan.dart';
 import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
+import 'package:reddit/login_screan.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
@@ -66,19 +68,6 @@ class _MyAppState extends State<MyAppState> {
         size: 150,
       ),
       Scaffold(
-        drawer: Drawer(
-            child: ListView(
-                padding: EdgeInsets.fromLTRB(100, 100, 100, 100),
-                children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 151, 9, 9),
-                ),
-                child: Text('Drawer Header'),
-              ),
-              ListTile(onTap: () => Navigator.pop(context)),
-              ListTile(onTap: () => Navigator.pop(context))
-            ])),
         body: Container(
           child: ListView.builder(
             itemCount: user.communitylist.length,
@@ -185,7 +174,8 @@ class _MyAppState extends State<MyAppState> {
                 style: TextStyle(color: text),
               ),
               onPressed: () {
-                //forgot create community page
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Community()));
               },
             )),
         const Divider(),
@@ -237,7 +227,50 @@ class _MyAppState extends State<MyAppState> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
+      drawer: Drawer(
+          backgroundColor: backgroundWidget,
+          child: ListView(padding: EdgeInsets.fromLTRB(0, 30, 0, 0), children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+              child: Column(
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 40.0,
+                    backgroundImage: AssetImage('assets/images/icon.png'),
+                  ),
+                  Text(
+                    'Reddit',
+                    style: TextStyle(fontSize: 30, color: backgroundWidget),
+                  )
+                ],
+              ),
+            ),
+            ListTile(
+                title: const Text('Profile'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Profile()))),
+            ListTile(
+                title: const Text('Create a communities'),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CreateACommunity()))),
+            ListTile(
+                title: const Text('Saved post'),
+                onTap: () => Navigator.pop(context)),
+            ListTile(
+                title: const Text('About us'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AboutUs()))),
+            ListTile(
+                title: const Text('Log out'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Login()))),
+          ])),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           'Reddit',
