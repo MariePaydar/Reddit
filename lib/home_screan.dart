@@ -159,11 +159,11 @@ class _MyAppState extends State<MyAppState> {
                       for (int i = 0; i < user.communitylist.length; i++) {
                         if (user.communitylist[i].getName == dropdownValue) {
                           user.communitylist[i].posts.add(TextPost(
-                              titlecontroller.text, textcontroller.text));
+                              titlecontroller.text, textcontroller.text,false));
                         }
                       }
                       user_posts.posts.add(
-                          TextPost(titlecontroller.text, textcontroller.text));
+                          TextPost(titlecontroller.text, textcontroller.text,false));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
