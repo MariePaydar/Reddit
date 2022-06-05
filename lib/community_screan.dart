@@ -8,6 +8,7 @@ import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/post_widget.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,10 +16,10 @@ import 'package:reddit/taskItem.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 
 class Community extends StatelessWidget {
-  final String name;
+  final DataOfCommunity com;
 
   final String moderator;
-  const Community(this.name, this.moderator, {Key? key}) : super(key: key);
+  const Community(this.com, this.moderator, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +27,18 @@ class Community extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: background,
-        body: CommunityState(name, moderator),
+        body: CommunityState(com, moderator),
       ),
     );
   }
 }
 
 class CommunityState extends StatefulWidget {
-  String name;
+  DataOfCommunity com;
 
   String moderator;
 
-  CommunityState(this.name, this.moderator, {Key? key}) : super(key: key);
+  CommunityState(this.com, this.moderator, {Key? key}) : super(key: key);
   @override
   State<CommunityState> createState() => _CommunityState();
 }
@@ -131,7 +132,7 @@ class _CommunityState extends State<CommunityState> {
                       RichText(
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(
-                            text: widget.name + "\n",
+                            text: widget.com.getName + "\n",
                             style: TextStyle(
                               fontSize: 18,
                               fontStyle: FontStyle.italic,
@@ -207,7 +208,16 @@ class _CommunityState extends State<CommunityState> {
           ),
           body: TabBarView(
             children: [
-              Icon(Icons.abc),
+              Scaffold(
+                body: Container(
+                  child: ListView.builder(
+                    itemCount: user.communitylist.length,
+                    itemBuilder: (contex, index) {
+                      return PostWidget(widget.com.posts[index]); // TaskItem
+                    },
+                  ), //ListView.builder
+                ),
+              ),
               Column(children: <Widget>[
                 const Divider(),
                 ListTile(

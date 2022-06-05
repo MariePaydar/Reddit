@@ -24,7 +24,7 @@ class taskItem extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        Community(taskModel.name, user.userName)));
+                        Community(taskModel, user.userName)));
           },
           child: Text(
             taskModel.name,

@@ -5,13 +5,11 @@ import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/add_post.dart';
 import 'package:reddit/change_theme.dart';
-import 'package:reddit/community_screan.dart';
 import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/login_screan.dart';
 import 'package:reddit/post_detail.dart';
-import 'package:reddit/post_page.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,6 +38,8 @@ class MyAppState extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyAppState> {
+  String dropdownValue = 'choose a community';
+
   int _selectedIndex = 0;
   TextEditingController titlecontroller = TextEditingController();
   TextEditingController textcontroller = TextEditingController();
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyAppState> {
           padding: const EdgeInsets.all(10),
           child: ListView(children: <Widget>[
             Container(
-              padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
+              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
               child: TextField(
                 cursorColor: text,
                 style: TextStyle(color: text, fontWeight: FontWeight.w600),
@@ -103,7 +103,7 @@ class _MyAppState extends State<MyAppState> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(0, 10, 30, 0),
+              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
               child: TextField(
                 cursorColor: text,
                 style: TextStyle(color: text, fontWeight: FontWeight.w600),
@@ -111,15 +111,34 @@ class _MyAppState extends State<MyAppState> {
                 decoration: InputDecoration(
                   fillColor: backgroundWidget,
                   filled: true,
-                  /* border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),*/
                   hintText: 'Add text body',
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
               ),
             ),
+            Center(
+                child: DropdownButton<String>(
+              value: dropdownValue,
+              icon: const Icon(
+                Icons.arrow_downward,
+                size: 20,
+              ),
+              elevation: 0,
+              style: TextStyle(
+                  color: backgroundWidget, fontWeight: FontWeight.w600),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValue = newValue!;
+                });
+              },
+              items: user.nameOfCommunity.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            )),
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 10, 100, 10),
                 child: ElevatedButton(
@@ -129,12 +148,19 @@ class _MyAppState extends State<MyAppState> {
                       textAlign: TextAlign.center,
                       style: TextStyle(color: text)),
                   onPressed: () {
-                    if (textcontroller != null && titlecontroller != null) {
+                    if (textcontroller != "" && titlecontroller != "") {
+                      for (int i = 0; i < user.communitylist.length; i++) {
+                        if (user.communitylist[i].getName == dropdownValue) {
+                          user.communitylist[i].posts.add(TextPost(
+                              titlecontroller.text, textcontroller.text));
+                        }
+                      }
                       user_posts.posts.add(
                           TextPost(titlecontroller.text, textcontroller.text));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Post()));
-                      print(user_posts.posts.toList());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Feed()));
                     }
                   },
                 )),

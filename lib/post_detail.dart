@@ -11,8 +11,6 @@ import 'package:reddit/login_screan.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:reddit/task.dart';
-import 'package:reddit/task2.dart';
 import 'package:reddit/taskItem.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 
@@ -49,9 +47,14 @@ class _DetailPostState extends State<DetailPostState> {
     Icons.thumb_down_alt_outlined,
     color: text,
   );
+  Icon bookMark = Icon(
+    Icons.bookmark_border_outlined,
+    color: text,
+  );
 
   bool isLiked = false;
   bool isDisLiked = false;
+  bool isMarked = false;
 
   bool showComment = false;
 
@@ -175,7 +178,6 @@ class _DetailPostState extends State<DetailPostState> {
         body: ListView(
           children: [
             Container(
-                height: 465,
                 decoration: BoxDecoration(
                   color: background,
                   border: Border.all(
@@ -300,137 +302,27 @@ class _DetailPostState extends State<DetailPostState> {
                           color: text,
                         ),
                         onPressed: () {},
-                      )
-                    ],
-                  ),
-                  showComment ? comment : Column(),
-                ])),
-            Container(
-                height: 465,
-                decoration: BoxDecoration(
-                  color: background,
-                  border: Border.all(
-                    color: text,
-                    width: 4,
-                  ),
-                ),
-                margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        size: 60,
-                        color: backgroundWidget,
                       ),
-                      RichText(
-                          text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: " r/music\n u/coleman57",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w300,
-                              color: text,
-                            )),
-                      ])),
-                    ],
-                  ),
-                  RichText(
-                      text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                        text:
-                            "\nWhat's that Johnny Cash song about a troublemaker who turns out to be Jesus?\n\n",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.bold,
-                          color: text,
-                        )),
-                    TextSpan(
-                        text:
-                            "Sorry for the spoiler, but anyway--I've heard it a dozen times, but can't find it in a google search. I keep getting pointed to unrelated songs. This one has to be from between 1968 and '72, and it talks about this long-haired guy who's walkin' around in sandals talking against war and materialism and hangin' out with thieves and prostitutes and getting the young folks all riled up. And then the authorities finally round him up and nail him to a cross.\n ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w300,
-                          color: text,
-                        )),
-                  ])),
-                  SizedBox(
-                    height: 1,
-                    child: Container(color: text),
-                  ),
-                  Row(
-                    children: [
+                      Spacer(),
                       IconButton(
-                        icon: liked,
+                        icon: bookMark,
                         onPressed: () {
                           setState(() {
-                            if (isLiked) {
-                              isLiked = !isLiked;
-                              liked = Icon(
-                                Icons.thumb_up_alt_outlined,
+                            if (isMarked) {
+                              isMarked = !isMarked;
+                              bookMark = Icon(
+                                Icons.bookmark_border_outlined,
                                 color: text,
                               );
                             } else {
-                              isLiked = !isLiked;
-                              liked = Icon(
-                                Icons.thumb_up_alt_rounded,
+                              isMarked = !isMarked;
+                              bookMark = Icon(
+                                Icons.bookmark,
                                 color: text,
                               );
                             }
                           });
                         },
-                      ),
-                      Text(
-                        isLiked ? "1" : "0",
-                        style: TextStyle(color: text),
-                      ),
-                      IconButton(
-                        icon: disLiked,
-                        onPressed: () {
-                          setState(() {
-                            if (isDisLiked) {
-                              isDisLiked = !isDisLiked;
-                              disLiked = Icon(
-                                Icons.thumb_down_alt_outlined,
-                                color: text,
-                              );
-                            } else {
-                              isDisLiked = !isDisLiked;
-                              disLiked = Icon(
-                                Icons.thumb_down_alt_rounded,
-                                color: text,
-                              );
-                            }
-                          });
-                        },
-                      ),
-                      Text(
-                        isDisLiked ? "1" : "0",
-                        style: TextStyle(color: text),
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(
-                          Icons.comment,
-                          color: text,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            showComment = !showComment;
-                          });
-                        },
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(
-                          Icons.share,
-                          color: text,
-                        ),
-                        onPressed: () {},
                       )
                     ],
                   ),
