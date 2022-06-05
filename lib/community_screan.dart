@@ -58,13 +58,13 @@ class _CommunityState extends State<CommunityState> {
                 icon: Icon(
                   Icons.arrow_back,
                   color: backgroundWidget,
-                  /*shadows: const [
+                  shadows: const [
                     Shadow(
                       offset: Offset(2.0, 2.0),
                       blurRadius: 1.0,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
-                  ],*/
+                  ],
                 ),
                 tooltip: 'Back to home page',
                 onPressed: () {
@@ -139,26 +139,26 @@ class _CommunityState extends State<CommunityState> {
               ),
               iconTheme: IconThemeData(
                 color: backgroundWidget,
-                /*shadows: const [
+                shadows: const [
                   Shadow(
                     offset: Offset(2.0, 2.0),
                     blurRadius: 1.0,
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
-                ],*/
+                ],
               ),
               actions: [
                 IconButton(
                   icon: Icon(
                     Icons.search,
                     color: backgroundWidget,
-                    /*shadows: const [
+                    shadows: const [
                       Shadow(
                         offset: Offset(2.0, 1.0),
                         blurRadius: 1.0,
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
-                    ],*/
+                    ],
                   ),
                   onPressed: () {
                     showSearch(
