@@ -185,7 +185,7 @@ class _CommunityState extends State<CommunityState> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min, //agar kharab shod in ro comment kon
                 children: <Widget>[
                 const Divider(),
                 ListTile(
