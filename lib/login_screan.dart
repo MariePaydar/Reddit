@@ -29,7 +29,10 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool usernameIsChecked = false;
+  bool passwordIsChecked = false;
+  String _passwordErrorMessage = '';
+  String _userErrorMessage = '';
   @override
   Widget build(BuildContext context) {
     String _errorMessage = "";
@@ -105,13 +108,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   onPressed: () {
                     setState(() {
-                      if (passwordController.text == user.password) {
+                      if(usernameIsChecked){
+                      if (nameController.text == user.userName ) {
+                        if(passwordIsChecked){
+                          if(passwordController.text==user.password){
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Feed()));
+                                builder: (context) => const Feed()));}
+                                else{
+                                  _errorMessage = '             password is incorrect';
+                                }
+                                }
+                                else{
+                                  _errorMessage= '             password is empty';
+                                }
                       } else {
-                        _errorMessage = '             password is incorrect';
+                        _errorMessage = '             username is incorrect';
+                      }}
+                      else{
+                        _errorMessage= '             username is empty';
                       }
                     });
                   },
@@ -138,4 +154,31 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ],
         ));
   }
+   void validateUsername(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _userErrorMessage = "username can not be empty";
+        usernameIsChecked = false;
+      });
+    } else {
+      setState(() {
+        _userErrorMessage = "";
+        usernameIsChecked = true;
+      });
+    }
+  }
+  void validatePassword(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _passwordErrorMessage = "password can not be empty";
+        passwordIsChecked = false;
+      });
+    } else {
+      setState(() {
+        _passwordErrorMessage = "";
+        passwordIsChecked= true;
+      });
+    }
+  }
+
 }
