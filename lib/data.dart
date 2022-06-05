@@ -8,8 +8,8 @@ class DataOfCommunity {
   bool dislike;
   List<TextPost> posts = [
     TextPost(
-      "\nWhat's that Johnny Cash song about a troublemaker who turns out to be Jesus?\n\n",
-      "Sorry for the spoiler, but anyway--I've heard it a dozen times, but can't find it in a google search. I keep getting pointed to unrelated songs. This one has to be from between 1968 and '72, and it talks about this long-haired guy who's walkin' around in sandals talking against war and materialism and hangin' out with thieves and prostitutes and getting the young folks all riled up. And then the authorities finally round him up and nail him to a cross.\n ",
+      "\nWelcome to our community\n\n",
+      "...\n ",
     )
   ];
   DataOfCommunity(

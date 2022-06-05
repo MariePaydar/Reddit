@@ -94,7 +94,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               RichText(
                   text: TextSpan(children: <TextSpan>[
                 TextSpan(
-                    text: " anjoman" "\n" + user.userName,
+                    text: " Reddit" "\n" + user.userName,
                     style: TextStyle(
                       fontSize: 16,
                       fontStyle: FontStyle.italic,
