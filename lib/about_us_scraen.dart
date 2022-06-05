@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/globals.dart';
 import 'package:reddit/home_screan.dart';
 
 class AboutUs extends StatelessWidget {
@@ -71,6 +72,7 @@ class _AboutUsPage extends State<AboutUsPage> {
           Center(
             child: Container(
               decoration: BoxDecoration(
+                color: backgroundWidget,
                 border: Border.all(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   width: 8,
@@ -81,13 +83,13 @@ class _AboutUsPage extends State<AboutUsPage> {
               child: RichText(
                   softWrap: true,
                   textAlign: TextAlign.justify,
-                  text: const TextSpan(children: <TextSpan>[
+                  text: TextSpan(children: <TextSpan>[
                     TextSpan(
                         text: "Dive Into Anything\n\n",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 151, 9, 9),
+                          color: Color.fromARGB(255, 0, 0, 0),
                         )),
                     TextSpan(
                         text:
@@ -101,7 +103,7 @@ class _AboutUsPage extends State<AboutUsPage> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 151, 9, 9),
+                          color: Color.fromARGB(255, 0, 0, 0),
                         )),
                     TextSpan(
                         text:
@@ -125,13 +127,13 @@ class _AboutUsPage extends State<AboutUsPage> {
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: RichText(
-                  text: const TextSpan(children: <TextSpan>[
+                  text: TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: "Contact us\n\n",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 151, 9, 9),
+                      color: Color.fromARGB(255, 0, 0, 0),
                     )),
                 TextSpan(
                     text: "Mahdis Sepahvand: \n ",
@@ -144,11 +146,10 @@ class _AboutUsPage extends State<AboutUsPage> {
                 TextSpan(
                     text: "    mahdissep18@gmail.com\n\n",
                     style: TextStyle(
-                      fontSize: 18,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w300,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )),
+                        fontSize: 18,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w300,
+                        color: Color.fromARGB(255, 0, 0, 0))),
                 TextSpan(
                     text: "Maryam Paydar: \n ",
                     style: TextStyle(
@@ -160,11 +161,10 @@ class _AboutUsPage extends State<AboutUsPage> {
                 TextSpan(
                     text: "    maryampaydar812@gmail.com\n\n",
                     style: TextStyle(
-                      fontSize: 18,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w300,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    )),
+                        fontSize: 18,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w300,
+                        color: Color.fromARGB(255, 0, 0, 0))),
               ])),
             ),
           ),
