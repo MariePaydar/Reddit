@@ -214,15 +214,15 @@ int savedPostCounter=0;
                 onPressed: () {
                   setState(() {
                     if (isMarked) {
-                      user_posts.savePost.remove(index);
+                     // user_posts.savePost.remove(index);
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark_border_outlined,
                         color: text,
                       );
                     } else {
-                      user_posts.savePost[savedPostCounter]=user_posts.posts[index];
-                      savedPostCounter++;
+                     // user_posts.savePost[savedPostCounter]=user_posts.posts[index];
+                     // savedPostCounter++;
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark,
