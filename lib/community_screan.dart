@@ -51,62 +51,27 @@ class _CommunityState extends State<CommunityState> {
         length: 2,
         child: Scaffold(
           backgroundColor: background,
-          drawer: Drawer(
-              backgroundColor: backgroundWidget,
-              child: ListView(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                  children: [
-                    DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                            radius: 40.0,
-                            backgroundImage:
-                                AssetImage('assets/images/icon.png'),
-                          ),
-                          Text(
-                            'Reddit',
-                            style: TextStyle(
-                                fontSize: 30, color: backgroundWidget),
-                          )
-                        ],
-                      ),
-                    ),
-                    ListTile(
-                        title: const Text('Profile'),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Profile()))),
-                    ListTile(
-                        title: const Text('Create a communities'),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const CreateACommunity()))),
-                    ListTile(
-                        title: const Text('Saved post'),
-                        onTap: () => Navigator.pop(context)),
-                    ListTile(
-                        title: const Text('About us'),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AboutUs()))),
-                    ListTile(
-                        title: const Text('Log out'),
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Login()))),
-                  ])),
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(300.0), // here the desired height
             child: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: backgroundWidget,
+                  shadows: const [
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 1.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ],
+                ),
+                tooltip: 'Back to home page',
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Feed()));
+                },
+              ),
               bottom: TabBar(
                 labelColor: text,
                 indicatorColor: backgroundWidget,
@@ -211,7 +176,7 @@ class _CommunityState extends State<CommunityState> {
               Scaffold(
                 body: Container(
                   child: ListView.builder(
-                    itemCount: user.communitylist.length,
+                    itemCount: widget.com.posts.length,
                     itemBuilder: (contex, index) {
                       return PostWidget(widget.com.posts[index]); // TaskItem
                     },

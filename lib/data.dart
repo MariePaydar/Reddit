@@ -61,5 +61,10 @@ class TextPost {
 }
 
 class Data2 {
-  List<TextPost> posts = [];
+  List<TextPost> posts = [
+    TextPost(
+      "\nWelcome to Reddit\n\n",
+      "This is our AP project in shahid beheshti university\n",
+    )
+  ];
 }

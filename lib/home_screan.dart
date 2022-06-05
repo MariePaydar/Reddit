@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
-import 'package:reddit/add_post.dart';
 import 'package:reddit/change_theme.dart';
 import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/login_screan.dart';
 import 'package:reddit/post_detail.dart';
+import 'package:reddit/post_widget.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
@@ -66,9 +66,15 @@ class _MyAppState extends State<MyAppState> {
 
   getPages(BuildContext context) {
     return <Widget>[
-      const Icon(
-        Icons.call,
-        size: 150,
+      Scaffold(
+        body: Container(
+          child: ListView.builder(
+            itemCount: user_posts.posts.length,
+            itemBuilder: (contex, index) {
+              return PostWidget(user_posts.posts[index]); // TaskItem
+            },
+          ), //ListView.builder
+        ),
       ),
       Scaffold(
         body: Container(
