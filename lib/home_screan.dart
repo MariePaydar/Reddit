@@ -154,7 +154,8 @@ class _MyAppState extends State<MyAppState> {
                       textAlign: TextAlign.center,
                       style: TextStyle(color: text)),
                   onPressed: () {
-                    if (textcontroller != "" && titlecontroller != "") {
+                    if (textcontroller.text != "" &&
+                        titlecontroller.text != "") {
                       for (int i = 0; i < user.communitylist.length; i++) {
                         if (user.communitylist[i].getName == dropdownValue) {
                           user.communitylist[i].posts.add(TextPost(
