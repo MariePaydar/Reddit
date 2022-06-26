@@ -1,34 +1,37 @@
 // ignore_for_file: avoid_print
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/data.dart';
+import 'globals.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
 
   @override
   StatefulWidget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: LogInPage(),
-      ),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(backgroundColor: background, body: SignUpPage()));
   }
 }
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key}) : super(key: key);
-  _LogInPageState createState() => _LogInPageState();
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String _errorMessage = '';
+  String _emailErrorMessage = '';
+  String _userErrorMessage = '';
   bool _passwordVisible = false;
   String _password = "";
   void initState() {
@@ -36,134 +39,164 @@ class _LogInPageState extends State<LogInPage> {
     super.initState();
   }
 
+  bool emailIsChecked = false;
+  bool usernameIsChecked = false;
+  bool passwordIsChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
-            SizedBox(
-              height: 150,
-              child: Image.asset("assets/images/icon.png"),
+            const SizedBox(
+              height: 160,
             ),
             Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Welcome to Reddit',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-            Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
                   filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                   hintText: 'Email address',
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
                 onChanged: (val) {
                   validateEmail(val);
                 },
               ),
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
-              child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-                controller: usernameController,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
-                  hintText: 'User Name',
-                ),
-              ),
+            Text(
+              _emailErrorMessage,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: const Color.fromARGB(255, 151, 9, 9),
+                  height: 1),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+              child: TextField(
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
+                controller: usernameController,
+                decoration: InputDecoration(
+                  fillColor: backgroundWidget,
+                  filled: true,
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
+                  hintText: 'User Name',
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
+                ),
+                onChanged: (val) {
+                  validateUsername(val);
+                },
+              ),
+            ),
+            Text(
+              _userErrorMessage,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: const Color.fromARGB(255, 151, 9, 9),
+                  height: 1),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: PasswordField(
-                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
+                backgroundColor: backgroundWidget,
                 passwordConstraint:
                     r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
                 controller: passwordController,
                 inputDecoration: PasswordDecoration(
-                    errorStyle: const TextStyle(
-                      color: Color.fromARGB(255, 151, 9, 9),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                    inputStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w600,
-                    ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
-                    )),
+                  errorStyle: const TextStyle(
+                    color: Color.fromARGB(255, 151, 9, 9),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                  inputStyle: TextStyle(
+                    color: text,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
+                ),
                 hintText: 'Password',
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
                 errorMessage: 'small & capital letters, number,at least 8 c',
               ),
             ),
             Container(
-              height: 5,
+              height: 14,
             ),
+            /*ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
+                primary: backgroundWidget,
+                onPrimary: Colors.black,
+                minimumSize: Size(double.infinity, 50),
+              ),
+              icon: FaIcon(
+                FontAwesomeIcons.google,
+                color: Colors.red,
+              ),
+              label: Text('Sign Up with Google',
+                  style: TextStyle(
+                    color: text,
+                  )),
+              onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogin();
+              },
+            ),*/
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('Sign up'),
-                  onPressed: () {
-                    print(emailController.text);
-                    print(usernameController.text);
-                    print(passwordController.text);
-                  },
-                )),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                _errorMessage,
-                style: const TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Row(
-              children: <Widget>[
-                const Text(
-                  'Already a member?',
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                ),
-                TextButton(
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                  style: ElevatedButton.styleFrom(primary: backgroundWidget),
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(color: text),
                   ),
                   onPressed: () {
-                    runApp(const Login());
+                    if (usernameIsChecked && emailIsChecked) {
+                      user.userName = usernameController.text;
+                      user.email = emailController.text;
+                      user.password = passwordController.text;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Feed()));
+                    }
+                  },
+                )),
+            Row(
+              children: <Widget>[
+                Text(
+                  'Already a member?',
+                  style: TextStyle(color: text),
+                ),
+                TextButton(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 15, color: text),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
                   },
                 )
               ],
@@ -176,15 +209,32 @@ class _LogInPageState extends State<LogInPage> {
   void validateEmail(String val) {
     if (val.isEmpty) {
       setState(() {
-        _errorMessage = "Email can not be empty";
+        _emailErrorMessage = "Email can not be empty";
+        emailIsChecked = false;
       });
     } else if (!EmailValidator.validate(val, true)) {
       setState(() {
-        _errorMessage = "Invalid Email Address";
+        _emailErrorMessage = "Invalid Email Address";
+        emailIsChecked = false;
       });
     } else {
       setState(() {
-        _errorMessage = "";
+        _emailErrorMessage = "";
+        emailIsChecked = true;
+      });
+    }
+  }
+
+  void validateUsername(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _userErrorMessage = "username can not be empty";
+        usernameIsChecked = false;
+      });
+    } else {
+      setState(() {
+        _userErrorMessage = "";
+        usernameIsChecked = true;
       });
     }
   }

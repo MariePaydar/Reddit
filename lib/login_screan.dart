@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/home_screan.dart';
 import 'package:reddit/sign_up_screan.dart';
 import 'package:passwordfield/passwordfield.dart';
+import 'globals.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        body: MyStatefulWidget(),
+        backgroundColor: background,
+        body: const MyStatefulWidget(),
       ),
     );
   }
@@ -26,113 +29,123 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool usernameIsChecked = false;
+  bool passwordIsChecked = false;
+  String _passwordErrorMessage = '';
+  String _userErrorMessage = '';
   @override
   Widget build(BuildContext context) {
+    String _errorMessage = "";
     return Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
-            SizedBox(
-              height: 120,
-              child: Image.asset("assets/images/icon.png"),
+            const SizedBox(
+              height: 160,
             ),
             Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Welcome to Reddit',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-            Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 10),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextField(
-                cursorColor: const Color.fromARGB(255, 255, 255, 255),
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
+                cursorColor: text,
+                style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: nameController,
-                decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 151, 9, 9),
+                decoration: InputDecoration(
+                  hintText: 'User Name',
+                  hintStyle:
+                      TextStyle(color: text, fontWeight: FontWeight.w300),
+                  fillColor: backgroundWidget,
                   filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
-                  labelText: 'User Name',
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(70, 10, 70, 0),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
               child: PasswordField(
-                backgroundColor: const Color.fromARGB(255, 151, 9, 9),
-                passwordConstraint:
-                    r'(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9]).{8,}$',
+                backgroundColor: backgroundWidget,
                 controller: passwordController,
+                passwordConstraint: user.password,
                 inputDecoration: PasswordDecoration(
                     errorStyle: const TextStyle(
                       color: Color.fromARGB(255, 151, 9, 9),
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
-                    inputStyle: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                    inputStyle: TextStyle(
+                      color: text,
                       fontWeight: FontWeight.w600,
                     ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w400,
+                    hintStyle: TextStyle(
+                      color: text,
+                      fontWeight: FontWeight.w300,
                     )),
                 hintText: 'Password',
+                errorMessage: _errorMessage,
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(60, 50))),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
-                errorMessage: 'small & capital letters, number,at least 8 c',
               ),
             ),
             TextButton(
+              child: Text(
+                'Forgot Password',
+                style: TextStyle(color: text, height: 1),
+              ),
               onPressed: () {
                 //forgot password screen
               },
-              child: const Text(
-                'Forgot Password',
-                style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-              ),
             ),
             Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 151, 9, 9)),
-                  child: const Text('Login'),
+                  style: ElevatedButton.styleFrom(primary: backgroundWidget),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(color: text),
+                  ),
                   onPressed: () {
-                    // ignore: avoid_print
-                    print(nameController.text);
-                    // ignore: avoid_print
-                    print(passwordController.text);
+                    setState(() {
+                      if(usernameIsChecked){
+                      if (nameController.text == user.userName ) {
+                        if(passwordIsChecked){
+                          if(passwordController.text==user.password){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Feed()));}
+                                else{
+                                  _errorMessage = '             password is incorrect';
+                                }
+                                }
+                                else{
+                                  _errorMessage= '             password is empty';
+                                }
+                      } else {
+                        _errorMessage = '             username is incorrect';
+                      }}
+                      else{
+                        _errorMessage= '             username is empty';
+                      }
+                    });
                   },
                 )),
             Row(
               children: <Widget>[
-                const Text(
+                Text(
                   'Not on Reddit yet?',
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  style: TextStyle(color: text),
                 ),
                 TextButton(
-                  child: const Text(
+                  child: Text(
                     'Sign-up',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                    style: TextStyle(fontSize: 15, color: text),
                   ),
                   onPressed: () {
-                    runApp(const SignUp());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUp()));
                   },
                 )
               ],
@@ -141,4 +154,31 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ],
         ));
   }
+   void validateUsername(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _userErrorMessage = "username can not be empty";
+        usernameIsChecked = false;
+      });
+    } else {
+      setState(() {
+        _userErrorMessage = "";
+        usernameIsChecked = true;
+      });
+    }
+  }
+  void validatePassword(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _passwordErrorMessage = "password can not be empty";
+        passwordIsChecked = false;
+      });
+    } else {
+      setState(() {
+        _passwordErrorMessage = "";
+        passwordIsChecked= true;
+      });
+    }
+  }
+
 }

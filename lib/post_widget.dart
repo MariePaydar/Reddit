@@ -1,0 +1,240 @@
+library my_prj.globals;
+
+import 'package:flutter/material.dart';
+import 'package:reddit/community_screan.dart';
+import 'package:reddit/data.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:reddit/globals.dart';
+
+class PostWidget extends StatefulWidget {
+  TextPost taskModel;
+  PostWidget(this.taskModel);
+
+  @override
+  State<StatefulWidget> createState() => _MyPostWidgetState(this.taskModel);
+}
+
+class _MyPostWidgetState extends State<StatefulWidget> {
+  TextPost taskModel;
+
+  _MyPostWidgetState(this.taskModel);
+
+  int likeCounter = 0;
+  int dislikeCounter = 0;
+  Icon liked = Icon(
+    Icons.thumb_up_alt_outlined,
+    color: text,
+  );
+  Icon disLiked = Icon(
+    Icons.thumb_down_alt_outlined,
+    color: text,
+  );
+  Icon bookMark = Icon(
+    Icons.bookmark_border_outlined,
+    color: text,
+  );
+
+  bool isLiked = false;
+  bool isDisLiked = false;
+  bool isMarked = false;
+
+  bool showComment = false;
+
+  Column comment = Column(
+    children: [
+      SizedBox(
+        height: 1,
+        child: Container(color: text),
+      ),
+      Row(
+        children: [
+          Icon(
+            Icons.circle,
+            size: 30,
+            color: backgroundWidget,
+          ),
+          RichText(
+              text: TextSpan(children: <TextSpan>[
+            TextSpan(
+                text:
+                    "\n u/mahdi\n....................................................\n",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.normal,
+                  color: text,
+                )),
+          ]))
+        ],
+      ),
+    ],
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          color: background,
+          border: Border.all(
+            color: text,
+            width: 2,
+          ),
+        ),
+        margin: const EdgeInsets.fromLTRB(10, 3, 10, 0),
+        padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
+        child: Column(children: [
+          Row(
+            children: [
+              Icon(
+                Icons.circle,
+                size: 60,
+                color: backgroundWidget,
+              ),
+              RichText(
+                  text: TextSpan(children: <TextSpan>[
+                TextSpan(
+                    text: " Reddit" "\n" + user.userName,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w300,
+                      color: text,
+                    )),
+              ])),
+            ],
+          ),
+          RichText(
+              textAlign: TextAlign.left,
+              text: TextSpan(children: <TextSpan>[
+                TextSpan(
+                    text: "\n" + taskModel.title + "\n",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                      color: text,
+                    )),
+                TextSpan(
+                    text: taskModel.text + "\n ",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w300,
+                      color: text,
+                    )),
+              ])),
+          SizedBox(
+            height: 1,
+            child: Container(color: text),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: liked,
+                onPressed: () {
+                  setState(() {
+                    if (isLiked) {
+                      isLiked = !isLiked;
+                      liked = Icon(
+                        Icons.thumb_up_alt_outlined,
+                        color: text,
+                      );
+                    } else {
+                      isDisLiked = false;
+                      isLiked = !isLiked;
+                      disLiked = Icon(
+                        Icons.thumb_down_alt_outlined,
+                        color: text,
+                      );
+                      liked = Icon(
+                        Icons.thumb_up_alt_rounded,
+                        color: text,
+                      );
+                    }
+                  });
+                },
+              ),
+              Text(
+                isLiked ? "1" : "0",
+                style: TextStyle(color: text),
+              ),
+              IconButton(
+                icon: disLiked,
+                onPressed: () {
+                  setState(() {
+                    if (isDisLiked) {
+                      isDisLiked = !isDisLiked;
+                      disLiked = Icon(
+                        Icons.thumb_down_alt_outlined,
+                        color: text,
+                      );
+                    } else {
+                      isDisLiked = !isDisLiked;
+                      isLiked = false;
+                      liked = Icon(
+                        Icons.thumb_up_alt_outlined,
+                        color: text,
+                      );
+                      disLiked = Icon(
+                        Icons.thumb_down_alt_rounded,
+                        color: text,
+                      );
+                    }
+                  });
+                },
+              ),
+              Text(
+                isDisLiked ? "1" : "0",
+                style: TextStyle(color: text),
+              ),
+              Spacer(),
+              IconButton(
+                icon: Icon(
+                  Icons.comment,
+                  color: text,
+                ),
+                onPressed: () {
+                  setState(() {
+                    showComment = !showComment;
+                  });
+                },
+              ),
+              Spacer(),
+              IconButton(
+                icon: Icon(
+                  Icons.share,
+                  color: text,
+                ),
+                onPressed: () {},
+              ),
+              Spacer(),
+              IconButton(
+                icon: bookMark,
+                onPressed: () {
+                  setState(() {
+                    if (isMarked) {
+                      userPosts.savedPost.remove(
+                          TextPost(taskModel.title, taskModel.text, true));
+                      isMarked = !isMarked;
+                      bookMark = Icon(
+                        Icons.bookmark_border_outlined,
+                        color: text,
+                      );
+                    } else {
+                      userPosts.savedPost.add(
+                          TextPost(taskModel.title, taskModel.text, true));
+                      isMarked = !isMarked;
+                      bookMark = Icon(
+                        Icons.bookmark,
+                        color: text,
+                      );
+                    }
+                  });
+                },
+              )
+            ],
+          ),
+          showComment ? comment : Column(),
+        ]));
+  }
+}

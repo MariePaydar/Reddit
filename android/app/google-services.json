@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "660493624692",
+    "project_id": "signin-7a54b",
+    "storage_bucket": "signin-7a54b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660493624692:android:546b7392a2adf3b02e3821",
+        "android_client_info": {
+          "package_name": "com.example.reddit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660493624692-h9f208umhpn9s970uqskvp58091v14qv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXdKwB8XCbm9mSyolJxagMRG-0LnaAHSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660493624692-h9f208umhpn9s970uqskvp58091v14qv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
