@@ -69,9 +69,9 @@ class _MyAppState extends State<MyAppState> {
       Scaffold(
         body: Container(
           child: ListView.builder(
-            itemCount: user_posts.posts.length,
+            itemCount: userPosts.posts.length,
             itemBuilder: (contex, index) {
-              return PostWidget(user_posts.posts[index]); // TaskItem
+              return PostWidget(userPosts.posts[index]); // TaskItem
             },
           ), //ListView.builder
         ),
@@ -159,11 +159,13 @@ class _MyAppState extends State<MyAppState> {
                       for (int i = 0; i < user.communitylist.length; i++) {
                         if (user.communitylist[i].getName == dropdownValue) {
                           user.communitylist[i].posts.add(TextPost(
-                              titlecontroller.text, textcontroller.text,false));
+                              titlecontroller.text,
+                              textcontroller.text,
+                              false));
                         }
                       }
-                      user_posts.posts.add(
-                          TextPost(titlecontroller.text, textcontroller.text,false));
+                      userPosts.posts.add(TextPost(
+                          titlecontroller.text, textcontroller.text, false));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -222,7 +224,7 @@ class _MyAppState extends State<MyAppState> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const DetailPost()));
+                        builder: (context) => DetailPost(userPosts)));
               },
             )),
         const Divider(),

@@ -68,5 +68,5 @@ class Data2 {
       "This is our AP project in shahid beheshti university\n",false
     )
   ];
-  List<TextPost> savePost=[];
-}
+   List<TextPost> savedPost=[];
+ }

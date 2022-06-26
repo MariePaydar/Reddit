@@ -8,6 +8,7 @@ import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/post_widget.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +16,8 @@ import 'package:reddit/taskItem.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 
 class DetailPost extends StatelessWidget {
-  const DetailPost({Key? key}) : super(key: key);
+  final Data2 post;
+  const DetailPost(this.post,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,16 @@ class DetailPost extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: background,
-        body: DetailPostState(),
+        body: DetailPostState(post),
       ),
     );
   }
 }
 
 class DetailPostState extends StatefulWidget {
-  const DetailPostState({Key? key}) : super(key: key);
+  final Data2 post;
+
+  const DetailPostState(this.post,{Key? key}) : super(key: key);
   @override
   State<DetailPostState> createState() => _DetailPostState();
 }
@@ -38,7 +42,7 @@ class DetailPostState extends StatefulWidget {
 class _DetailPostState extends State<DetailPostState> {
   int likeCounter = 0;
   int dislikeCounter = 0;
-  int savedPostCounter=0;
+  int savedPostCounter = 0;
   Icon liked = Icon(
     Icons.thumb_up_alt_outlined,
     color: text,
@@ -105,233 +109,81 @@ class _DetailPostState extends State<DetailPostState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: background,
-        drawer: Drawer(
-            backgroundColor: backgroundWidget,
-            child:
-                ListView(padding: EdgeInsets.fromLTRB(0, 30, 0, 0), children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: background,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 40.0,
-                      backgroundImage: AssetImage('assets/images/icon.png'),
-                    ),
-                    Text(
-                      'Reddit',
-                      style: TextStyle(fontSize: 30, color: backgroundWidget),
-                    )
-                  ],
-                ),
+      backgroundColor: background,
+      drawer: Drawer(
+          backgroundColor: backgroundWidget,
+          child: ListView(padding: EdgeInsets.fromLTRB(0, 30, 0, 0), children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: background,
               ),
-              ListTile(
-                  title: const Text('Profile'),
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Profile()))),
-              ListTile(
-                  title: const Text('Create a communities'),
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CreateACommunity()))),
-              ListTile(
-                  title: const Text('Saved post'),
-                  onTap: () => Navigator.pop(context)),
-              ListTile(
-                  title: const Text('About us'),
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AboutUs()))),
-              ListTile(
-                  title: const Text('Log out'),
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Login()))),
-            ])),
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          title: const Text(
-            'Post',
-            style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.search,
-                color: Color.fromARGB(255, 0, 0, 0),
+              child: Column(
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 40.0,
+                    backgroundImage: AssetImage('assets/images/icon.png'),
+                  ),
+                  Text(
+                    'Reddit',
+                    style: TextStyle(fontSize: 30, color: backgroundWidget),
+                  )
+                ],
               ),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: MySearchDelegate(),
-                );
-              },
-            )
-          ],
+            ),
+            ListTile(
+                title: const Text('Profile'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Profile()))),
+            ListTile(
+                title: const Text('Create a communities'),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CreateACommunity()))),
+            ListTile(
+                title: const Text('Saved post'),
+                onTap: () => Navigator.pop(context)),
+            ListTile(
+                title: const Text('About us'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AboutUs()))),
+            ListTile(
+                title: const Text('Log out'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Login()))),
+          ])),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        title: const Text(
+          'SavedPost',
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
-        body: ListView(
-          children: [
-            Container(
-                decoration: BoxDecoration(
-                  color: background,
-                  border: Border.all(
-                    color: text,
-                    width: 4,
-                  ),
-                ),
-                margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        size: 60,
-                        color: backgroundWidget,
-                      ),
-                      RichText(
-                          text: TextSpan(children: <TextSpan>[
-                        TextSpan(
-                            text: " r/music\n u/coleman57",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w300,
-                              color: text,
-                            )),
-                      ])),
-                    ],
-                  ),
-                  RichText(
-                      text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                        text:
-                            "\nWhat's that Johnny Cash song about a troublemaker who turns out to be Jesus?\n\n",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.bold,
-                          color: text,
-                        )),
-                    TextSpan(
-                        text:
-                            "Sorry for the spoiler, but anyway--I've heard it a dozen times, but can't find it in a google search. I keep getting pointed to unrelated songs. This one has to be from between 1968 and '72, and it talks about this long-haired guy who's walkin' around in sandals talking against war and materialism and hangin' out with thieves and prostitutes and getting the young folks all riled up. And then the authorities finally round him up and nail him to a cross.\n ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w300,
-                          color: text,
-                        )),
-                  ])),
-                  SizedBox(
-                    height: 1,
-                    child: Container(color: text),
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: liked,
-                        onPressed: () {
-                          setState(() {
-                            if (isLiked) {
-                              isLiked = !isLiked;
-                              liked = Icon(
-                                Icons.thumb_up_alt_outlined,
-                                color: text,
-                              );
-                            } else {
-                              isLiked = !isLiked;
-                              liked = Icon(
-                                Icons.thumb_up_alt_rounded,
-                                color: text,
-                              );
-                            }
-                          });
-                        },
-                      ),
-                      Text(
-                        isLiked ? "1" : "0",
-                        style: TextStyle(color: text),
-                      ),
-                      IconButton(
-                        icon: disLiked,
-                        onPressed: () {
-                          setState(() {
-                            if (isDisLiked) {
-                              isDisLiked = !isDisLiked;
-                              disLiked = Icon(
-                                Icons.thumb_down_alt_outlined,
-                                color: text,
-                              );
-                            } else {
-                              isDisLiked = !isDisLiked;
-                              disLiked = Icon(
-                                Icons.thumb_down_alt_rounded,
-                                color: text,
-                              );
-                            }
-                          });
-                        },
-                      ),
-                      Text(
-                        isDisLiked ? "1" : "0",
-                        style: TextStyle(color: text),
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(
-                          Icons.comment,
-                          color: text,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            showComment = !showComment;
-                          });
-                        },
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(
-                          Icons.share,
-                          color: text,
-                        ),
-                        onPressed: () {},
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: bookMark,
-                        onPressed: () {
-                          setState(() {
-                            if (isMarked) {
-                              //user_posts.savePost.remove(index);
-                              isMarked = !isMarked;
-                              bookMark = Icon(
-                                Icons.bookmark_border_outlined,
-                                color: text,
-                              );
-                            } else {
-                              //user_posts.savePost[savedPostCounter]=user_posts.posts[index];
-                             // savedPostCounter++;
-                              isMarked = !isMarked;
-                              bookMark = Icon(
-                                Icons.bookmark,
-                                color: text,
-                              );
-                            }
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                  showComment ? comment : Column(),
-                ])),
-          ],
-        ));
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: MySearchDelegate(),
+              );
+            },
+          )
+        ],
+      ),
+      body: Scaffold(
+        body: Container(
+          child: ListView.builder(
+            itemCount: widget.post.savedPost.length,
+            itemBuilder: (contex, index) {
+              return PostWidget(widget.post.savedPost[index]); // TaskItem
+            },
+          ), //ListView.builder
+        ),
+      ),
+    );
   }
 }

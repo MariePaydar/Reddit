@@ -21,7 +21,6 @@ class _MyPostWidgetState extends State<StatefulWidget> {
 
   int likeCounter = 0;
   int dislikeCounter = 0;
-int savedPostCounter=0;
   Icon liked = Icon(
     Icons.thumb_up_alt_outlined,
     color: text,
@@ -214,15 +213,16 @@ int savedPostCounter=0;
                 onPressed: () {
                   setState(() {
                     if (isMarked) {
-                     // user_posts.savePost.remove(index);
+                      userPosts.savedPost.remove(
+                          TextPost(taskModel.title, taskModel.text, true));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark_border_outlined,
                         color: text,
                       );
                     } else {
-                     // user_posts.savePost[savedPostCounter]=user_posts.posts[index];
-                     // savedPostCounter++;
+                      userPosts.savedPost.add(
+                          TextPost(taskModel.title, taskModel.text, true));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark,
