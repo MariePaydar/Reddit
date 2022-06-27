@@ -15,7 +15,7 @@ public class Table {
     }
     public void insert(HashMap<String,String> row) throws Exception {
         FileWriter fileWriter=new FileWriter(path,true);
-        fileWriter.write(Convertor.mapToString(row)+"\n");
+        fileWriter.write("\n"+Convertor.mapToString(row));
         fileWriter.close();
     }
     public ArrayList<HashMap<String,String>> get(){

@@ -231,7 +231,13 @@ class _SignUpPageState extends State<SignUpPage> {
           user.email = email;
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Feed()));
-        } else if (response.toString() == "oops, something get wrong") {
+        } else if (String.fromCharCodes(response) ==
+            "this username is already taken") {
+          print("not accepted chon user");
+        } else if (String.fromCharCodes(response) ==
+            "this email is already have an account") {
+          print("not accepted chon email");
+        } else {
           print("not accepted");
         }
       });

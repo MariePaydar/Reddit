@@ -23,7 +23,7 @@ public class Convertor {
         StringBuilder str=new StringBuilder();
         for(Map.Entry<String,String>entry : map.entrySet())
         {
-             str.append(String.format("%s:%s,,",entry,entry.getKey(),entry.getValue()));
+             str.append(String.format("%s:%s,,",entry.getKey(),entry.getValue()));
 
         }
         str.delete(str.length()-2,str.length());

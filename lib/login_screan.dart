@@ -153,7 +153,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           user.userName = username;
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Feed()));
-        } else if (response.toString() ==
+        } else if (String.fromCharCodes(response) ==
             "The username or password is incorrect!") {
           print("not accepted");
           _errorMessage = "The username or password is incorrect!";
