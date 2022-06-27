@@ -144,17 +144,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   Future<void> loginRequest(String username, String password) async {
     String request = "login\nusername:$username,,password:$password\u0000";
-
     await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
       clientSocket.write(request);
       clientSocket.flush();
       clientSocket.listen((response) {
-        if (response.toString() == "accepted") {
+        if (String.fromCharCodes(response) == "accepted") {
+          print("not accepted");
           user.userName = username;
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Feed()));
         } else if (response.toString() ==
             "The username or password is incorrect!") {
+          print("not accepted");
           _errorMessage = "The username or password is incorrect!";
         }
       });
