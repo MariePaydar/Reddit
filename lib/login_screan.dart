@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/sign_up_screan.dart';
@@ -29,13 +31,9 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool usernameIsChecked = false;
-  bool passwordIsChecked = false;
-  String _passwordErrorMessage = '';
-  String _userErrorMessage = '';
+  String _errorMessage = "";
   @override
   Widget build(BuildContext context) {
-    String _errorMessage = "";
     return Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
@@ -65,7 +63,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: PasswordField(
                 backgroundColor: backgroundWidget,
                 controller: passwordController,
-                passwordConstraint: user.password,
+                passwordConstraint: r'[0-9a-zA-Z]',
                 inputDecoration: PasswordDecoration(
                     errorStyle: const TextStyle(
                       color: Color.fromARGB(255, 151, 9, 9),
@@ -81,11 +79,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       fontWeight: FontWeight.w300,
                     )),
                 hintText: 'Password',
-                errorMessage: _errorMessage,
+                errorMessage: "",
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50))),
                 ),
+              ),
+            ),
+            Text(
+              "\n                 " + _errorMessage,
+              style: const TextStyle(
+                color: Color.fromARGB(255, 151, 9, 9),
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
               ),
             ),
             TextButton(
@@ -108,27 +114,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   onPressed: () {
                     setState(() {
-                      if(usernameIsChecked){
-                      if (nameController.text == user.userName ) {
-                        if(passwordIsChecked){
-                          if(passwordController.text==user.password){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Feed()));}
-                                else{
-                                  _errorMessage = '             password is incorrect';
-                                }
-                                }
-                                else{
-                                  _errorMessage= '             password is empty';
-                                }
-                      } else {
-                        _errorMessage = '             username is incorrect';
-                      }}
-                      else{
-                        _errorMessage= '             username is empty';
-                      }
+                      loginRequest(
+                          nameController.text, passwordController.text);
                     });
                   },
                 )),
@@ -154,31 +141,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ],
         ));
   }
-   void validateUsername(String val) {
-    if (val.isEmpty) {
-      setState(() {
-        _userErrorMessage = "username can not be empty";
-        usernameIsChecked = false;
-      });
-    } else {
-      setState(() {
-        _userErrorMessage = "";
-        usernameIsChecked = true;
-      });
-    }
-  }
-  void validatePassword(String val) {
-    if (val.isEmpty) {
-      setState(() {
-        _passwordErrorMessage = "password can not be empty";
-        passwordIsChecked = false;
-      });
-    } else {
-      setState(() {
-        _passwordErrorMessage = "";
-        passwordIsChecked= true;
-      });
-    }
-  }
 
+  Future<void> loginRequest(String username, String password) async {
+    String request = "login\nusername:$username,,password:$password\u0000";
+
+    await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
+      clientSocket.write(request);
+      clientSocket.flush();
+      clientSocket.listen((response) {
+        if (response.toString() == "accepted") {
+          user.userName = username;
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Feed()));
+        } else if (response.toString() ==
+            "The username or password is incorrect!") {
+          _errorMessage = "The username or password is incorrect!";
+        }
+      });
+    });
+  }
 }
