@@ -17,18 +17,18 @@ class Comment extends StatelessWidget{
   }
 }
 class MyHomePage extends StatelessWidget{
-  final String comment;
+  final String title;
   
-  const MyHomePage({Key? key,required this.comment}):super(key:key);
+  const MyHomePage({Key? key,required this.title}):super(key:key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.comment),
+        title: Text(this.title),
       ),
-      body:colomn(
+      body:Column(
         children:const <Widget>[
-          SendComment(),
+          SendCommnet(),
           ShowComment(),
         ],
       ),
