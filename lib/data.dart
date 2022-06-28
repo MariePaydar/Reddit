@@ -58,6 +58,9 @@ class TextPost {
   String title = "";
   String text = "";
   bool isSaved=false;
+  int commentNumbers=0;
+  int like=0;
+  int dislike=0;
   TextPost(this.title, this.text,this.isSaved);
 }
 
