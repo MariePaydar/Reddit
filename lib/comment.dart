@@ -1,6 +1,8 @@
 import 'dart:html';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'globals.dart';
+import 'package:reddit/data.dart';
 
 class Comment extends StatelessWidget{
   const Comment({Key? key}) : super(key:key);
@@ -18,7 +20,6 @@ class Comment extends StatelessWidget{
 }
 class MyHomePage extends StatelessWidget{
   final String title;
-  
   const MyHomePage({Key? key,required this.title}):super(key:key);
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class MyHomePage extends StatelessWidget{
   }
 }
 class SendCommnet extends StatefulWidget{
+
   const SendCommnet({Key? key}):super(key: key);
 
   State<SendCommnet> createState()=> _SendCommentState();
@@ -62,7 +64,7 @@ class _SendCommentState extends State<SendCommnet>{
                   color: Colors.red,
                 ),
             onPressed: (() {
-              send(_controller.text);
+              send(_controller.text,user.userName);
             }
             ),
           ),
@@ -71,8 +73,8 @@ class _SendCommentState extends State<SendCommnet>{
       )
     );
   }
-  send(String message) async{
-    String request="send\nmessage:$message,,me:ali\u0000";
+  send(String message,String name) async{
+    String request="send\nmessage:$message,,me:$name\u0000";
 
     await Socket.connect("192.168.1.3", 8000).then((serverSocket){
       serverSocket.write(request);
