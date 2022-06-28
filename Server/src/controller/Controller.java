@@ -14,7 +14,7 @@ public class Controller {
         ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("users").get();
         for (HashMap<String, String> sSH : list) {
             if (Objects.equals(sSH.get("username"), data.get("username"))) {
-                return "this username is taken";
+                return "accepted";
             }
         }
         return "The username or password is incorrect!";
