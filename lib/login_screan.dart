@@ -115,7 +115,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   onPressed: () {
                     setState(() {
                       loginRequest(
-                          nameController.text, passwordController.text); 
+                          nameController.text, passwordController.text);
                     });
                   },
                 )),
@@ -149,7 +149,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       clientSocket.flush();
       clientSocket.listen((response) {
         if (String.fromCharCodes(response) == "accepted") {
-          print("not accepted");
+          print("accepted");
           user.userName = username;
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Feed()));
