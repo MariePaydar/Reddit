@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
@@ -33,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String _emailErrorMessage = '';
   String _userErrorMessage = '';
   bool _passwordVisible = false;
-  String _password = "";
+  @override
   void initState() {
     _passwordVisible = false;
     super.initState();
@@ -76,10 +78,10 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               _emailErrorMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
-                  color: const Color.fromARGB(255, 151, 9, 9),
+                  color: Color.fromARGB(255, 151, 9, 9),
                   height: 1),
             ),
             Container(
@@ -105,10 +107,10 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               _userErrorMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
-                  color: const Color.fromARGB(255, 151, 9, 9),
+                  color: Color.fromARGB(255, 151, 9, 9),
                   height: 1),
             ),
             Container(
@@ -142,27 +144,6 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               height: 14,
             ),
-            /*ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.fromLTRB(50, 5, 50, 5),
-                primary: backgroundWidget,
-                onPrimary: Colors.black,
-                minimumSize: Size(double.infinity, 50),
-              ),
-              icon: FaIcon(
-                FontAwesomeIcons.google,
-                color: Colors.red,
-              ),
-              label: Text('Sign Up with Google',
-                  style: TextStyle(
-                    color: text,
-                  )),
-              onPressed: () {
-                final provider =
-                    Provider.of<GoogleSignInProvider>(context, listen: false);
-                provider.googleLogin();
-              },
-            ),*/
             Container(
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 5),
                 child: ElevatedButton(
@@ -172,15 +153,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(color: text),
                   ),
                   onPressed: () {
-                    if (usernameIsChecked && emailIsChecked) {
-                      user.userName = usernameController.text;
-                      user.email = emailController.text;
-                      user.password = passwordController.text;
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Feed()));
-                    }
+                    setState(() {
+                      if (emailIsChecked && usernameIsChecked) {
+                        signUpRequest(emailController.text,
+                            usernameController.text, passwordController.text);
+                      }
+                    });
                   },
                 )),
             Row(
@@ -237,5 +215,33 @@ class _SignUpPageState extends State<SignUpPage> {
         usernameIsChecked = true;
       });
     }
+  }
+
+  Future<void> signUpRequest(
+      String email, String username, String password) async {
+    String request =
+        "signup\nemail:$email,,username:$username,,password:$password,,bio: \u0000";
+    await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
+      clientSocket.write(request);
+      clientSocket.flush();
+      clientSocket.listen((response) {
+        if (String.fromCharCodes(response).startsWith("accepted")) {
+          print("accepted");
+          user.number = String.fromCharCodes(response).substring(9);
+          user.userName = username;
+          user.email = email;
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Feed()));
+        } else if (String.fromCharCodes(response) ==
+            "this username is already taken") {
+          print("not accepted chon user");
+        } else if (String.fromCharCodes(response) ==
+            "this email is already have an account") {
+          print("not accepted chon email");
+        } else {
+          print("not accepted");
+        }
+      });
+    });
   }
 }

@@ -9,7 +9,8 @@ public class Database {
 
     private Database(){
         tables=new HashMap<>();
-        tables.put("massages",new Table("src/data/messages.txt"));
+        tables.put("users",new Table("src/data/users.txt"));
+
     }
     public static Database getInstance(){
         if(instance==null){

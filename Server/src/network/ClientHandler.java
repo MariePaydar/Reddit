@@ -30,9 +30,11 @@ public class ClientHandler extends Thread {
 
             Scanner sc=new Scanner(request.toString());
             String command=sc.nextLine();
+            System.out.println("command: "+command);
             String data=sc.nextLine();
+            System.out.println("data: "+data);
             String response=new Controller().run(command,data);
-
+            System.out.println("response: "+response);
             dos.writeBytes(response);
             dos.flush();
 

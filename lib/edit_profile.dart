@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:email_validator/email_validator.dart';
@@ -26,24 +28,44 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePage extends State<EditProfilePage> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  TextEditingController bioController = TextEditingController();
+  String _emailErrorMessage = '';
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  String _errorMessage = '';
+  bool emailIsChecked = false;
+  bool usernameIsChecked = false;
+  bool passwordIsChecked = false;
+
   void validateEmail(String val) {
     if (val.isEmpty) {
       setState(() {
-        _errorMessage = "Email can not be empty";
+        _emailErrorMessage = "Email can not be empty";
+        emailIsChecked = false;
       });
     } else if (!EmailValidator.validate(val, true)) {
       setState(() {
-        _errorMessage = "Invalid Email Address";
+        _emailErrorMessage = "Invalid Email Address";
+        emailIsChecked = false;
       });
     } else {
       setState(() {
-        _errorMessage = "";
+        _emailErrorMessage = "";
+        emailIsChecked = true;
+      });
+    }
+  }
+
+  void validateUsername(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        usernameIsChecked = false;
+      });
+    } else {
+      setState(() {
+        usernameIsChecked = true;
       });
     }
   }
@@ -74,19 +96,21 @@ class _EditProfilePage extends State<EditProfilePage> {
             Container(
               padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
               child: TextFormField(
-                initialValue: user.userName,
-                cursorColor: text,
-                style: TextStyle(color: text, fontWeight: FontWeight.w600),
-                decoration: InputDecoration(
-                  fillColor: backgroundWidget,
-                  filled: true,
-                  border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
-                ),
-                onChanged: (value) => setState(() {
-                  user.userName = value;
-                }),
-              ),
+                  initialValue: user.userName,
+                  cursorColor: text,
+                  style: TextStyle(color: text, fontWeight: FontWeight.w600),
+                  decoration: InputDecoration(
+                    fillColor: backgroundWidget,
+                    filled: true,
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      user.userName = value;
+                      validateUsername(value);
+                    });
+                  }),
             ),
             Text(
               '    bio',
@@ -102,7 +126,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
                 onChanged: (value) => setState(() {
                   user.bio = value;
@@ -124,18 +148,18 @@ class _EditProfilePage extends State<EditProfilePage> {
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
                 onChanged: (val) {
-                  validateEmail(val);
-                  if (_errorMessage == "") {
+                  setState(() {
                     user.email = val;
-                  }
+                    validateEmail(val);
+                  });
                 },
               ),
             ),
             Text(
-              "      " + _errorMessage,
+              "      " + _emailErrorMessage,
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
@@ -171,7 +195,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                 hintText: 'new password',
                 border: PasswordBorder(
                   border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.elliptical(6, 5))),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
                 errorMessage: 'small & capital letters, number,at least 8 c',
               ),
@@ -189,10 +213,17 @@ class _EditProfilePage extends State<EditProfilePage> {
                   'Submit',
                   style: TextStyle(color: text),
                 ),
-                onPressed: () => {
-                  user.password = passController.text,
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Profile()))
+                onPressed: () {
+                  setState(() {
+                    print("object");
+                    print(emailIsChecked);
+                    print(_emailErrorMessage);
+                    print(usernameIsChecked);
+                    if (emailIsChecked && usernameIsChecked) {
+                      editProfileRequest(
+                          user.email, user.userName, user.password, user.bio);
+                    }
+                  });
                 },
               ),
             )
@@ -200,5 +231,35 @@ class _EditProfilePage extends State<EditProfilePage> {
         ),
       ),
     );
+  }
+
+  Future<void> editProfileRequest(
+      String email, String userName, String password, String bio) async {
+    String number = user.number;
+    String request =
+        "editProfile\nemail:$email,,username:$userName,,password:$password,,bio: ,,number:1\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
+      clientSocket.write(request);
+      print("request sended");
+      clientSocket.flush();
+      clientSocket.listen((response) {
+        print("response received");
+        if (String.fromCharCodes(response) == "accepted") {
+          print("accepted");
+          user.userName = userName;
+          user.email = email;
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Profile()));
+        } else if (String.fromCharCodes(response) ==
+            "this username is already taken") {
+          print("not accepted chon user");
+        } else if (String.fromCharCodes(response) ==
+            "this email is already have an account") {
+          print("not accepted chon email");
+        } else {
+          print("not accepted");
+        }
+      });
+    });
   }
 }
