@@ -64,6 +64,7 @@ class _SendCommentState extends State<SendCommnet>{
                   color: Colors.red,
                 ),
             onPressed: (() {
+              userPosts.posts[0].commentCounters++;
               send(_controller.text,user.userName);
             }
             ),
@@ -103,7 +104,7 @@ class _ShowCommentState extends State< ShowComment>{
       child: Column(children: [
         ElevatedButton(
           onPressed: (){
-            get(5);
+            get(userPosts.posts[0].commentCounters);
           },
           child: const Text("show comments"),
         ),
