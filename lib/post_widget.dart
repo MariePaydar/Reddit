@@ -1,6 +1,7 @@
 library my_prj.globals;
 
 import 'package:flutter/material.dart';
+import 'package:reddit/comment.dart';
 import 'package:reddit/community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:flutter/cupertino.dart';
@@ -195,7 +196,11 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                 ),
                 onPressed: () {
                   setState(() {
-                    showComment = !showComment;
+                   Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Comment()));
+                    //showComment = !showComment;
                   });
                 },
               ),
@@ -214,7 +219,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                   setState(() {
                     if (isMarked) {
                       userPosts.savedPost.remove(
-                          TextPost(taskModel.title, taskModel.text, true));
+                          TextPost(taskModel.title, taskModel.text, true,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark_border_outlined,
@@ -222,7 +227,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                       );
                     } else {
                       userPosts.savedPost.add(
-                          TextPost(taskModel.title, taskModel.text, true));
+                          TextPost(taskModel.title, taskModel.text, true,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark,
