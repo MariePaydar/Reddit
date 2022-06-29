@@ -3,24 +3,25 @@ import 'package:flutter/material.dart';
 import 'globals.dart';
 import 'package:reddit/data.dart';
 
-class Comment extends StatelessWidget {
-  const Comment({Key? key}) : super(key: key);
+// class Comment extends StatelessWidget {
+//   const Comment({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Comments',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Comments'),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Comments',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: const MyHomePage(title: 'Comments'),
+//     );
+//   }
+// }
 
-class MyHomePage extends StatelessWidget {
+class MyCommentPage extends StatelessWidget {
   final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final TextPost textPost;
+  const MyCommentPage({Key? key, required this.title,required this.textPost}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

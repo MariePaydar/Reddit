@@ -203,7 +203,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Comment()));
+                            builder: (context) => MyCommentPage(title: '',textPost: taskModel,)));
                     //showComment = !showComment;
                   });
                 },
