@@ -9,7 +9,7 @@ class DataOfCommunity {
   List<TextPost> posts = [
     TextPost(
       "\nWelcome to our community\n\n",
-      "...\n ",false
+      "...\n ",false,0,0,0
     )
   ];
   DataOfCommunity(
@@ -58,17 +58,17 @@ class TextPost {
   String title = "";
   String text = "";
   bool isSaved=false;
-  int commentNumbers=0;
+  int commentCounters=0;
   int like=0;
   int dislike=0;
-  TextPost(this.title, this.text,this.isSaved);
+  TextPost(this.title, this.text,this.isSaved,this.commentCounters,this.like,this.dislike);
 }
 
 class Data2 {
   List<TextPost> posts = [
     TextPost(
       "\nWelcome to Reddit\n\n",
-      "This is our AP project in shahid beheshti university\n",false
+      "This is our AP project in shahid beheshti university\n",false,0,0,0
     )
   ];
    List<TextPost> savedPost=[];
