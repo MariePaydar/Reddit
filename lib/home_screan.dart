@@ -161,11 +161,11 @@ class _MyAppState extends State<MyAppState> {
                           user.communitylist[i].posts.add(TextPost(
                               titlecontroller.text,
                               textcontroller.text,
-                              false));
+                              false,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
                         }
                       }
                       userPosts.posts.add(TextPost(
-                          titlecontroller.text, textcontroller.text, false));
+                          titlecontroller.text, textcontroller.text, false,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
