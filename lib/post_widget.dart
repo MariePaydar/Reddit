@@ -22,17 +22,17 @@ class _MyPostWidgetState extends State<StatefulWidget> {
 
   int likeCounter = 0;
   int dislikeCounter = 0;
-  Icon liked = Icon(
+  Icon liked = const Icon(
     Icons.thumb_up_alt_outlined,
-    color: text,
+    color: Color.fromARGB(255, 0, 0, 0),
   );
-  Icon disLiked = Icon(
+  Icon disLiked = const Icon(
     Icons.thumb_down_alt_outlined,
-    color: text,
+    color: Color.fromARGB(255, 0, 0, 0),
   );
-  Icon bookMark = Icon(
+  Icon bookMark = const Icon(
     Icons.bookmark_border_outlined,
-    color: text,
+    color: Color.fromARGB(255, 0, 0, 0),
   );
 
   bool isLiked = false;
@@ -75,9 +75,9 @@ class _MyPostWidgetState extends State<StatefulWidget> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: background,
+          color: backgroundWidget,
           border: Border.all(
-            color: text,
+            color: const Color.fromARGB(255, 0, 0, 0),
             width: 2,
           ),
         ),
@@ -89,7 +89,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               Icon(
                 Icons.circle,
                 size: 60,
-                color: backgroundWidget,
+                color: background,
               ),
               RichText(
                   text: TextSpan(children: <TextSpan>[
@@ -126,7 +126,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               ])),
           SizedBox(
             height: 1,
-            child: Container(color: text),
+            child: Container(color: const Color.fromARGB(255, 0, 0, 0)),
           ),
           Row(
             children: [
@@ -138,18 +138,18 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                       isLiked = !isLiked;
                       liked = Icon(
                         Icons.thumb_up_alt_outlined,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                     } else {
                       isDisLiked = false;
                       isLiked = !isLiked;
                       disLiked = Icon(
                         Icons.thumb_down_alt_outlined,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                       liked = Icon(
                         Icons.thumb_up_alt_rounded,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                     }
                   });
@@ -157,7 +157,9 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               ),
               Text(
                 isLiked ? "1" : "0",
-                style: TextStyle(color: text),
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
               ),
               IconButton(
                 icon: disLiked,
@@ -167,18 +169,18 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                       isDisLiked = !isDisLiked;
                       disLiked = Icon(
                         Icons.thumb_down_alt_outlined,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                     } else {
                       isDisLiked = !isDisLiked;
                       isLiked = false;
                       liked = Icon(
                         Icons.thumb_up_alt_outlined,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                       disLiked = Icon(
                         Icons.thumb_down_alt_rounded,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                     }
                   });
@@ -186,20 +188,22 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               ),
               Text(
                 isDisLiked ? "1" : "0",
-                style: TextStyle(color: text),
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 icon: Icon(
                   Icons.comment,
-                  color: text,
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
                 onPressed: () {
                   setState(() {
-                   Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Comment()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Comment()));
                     //showComment = !showComment;
                   });
                 },
@@ -208,7 +212,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               IconButton(
                 icon: Icon(
                   Icons.share,
-                  color: text,
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
                 onPressed: () {},
               ),
@@ -218,20 +222,30 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                 onPressed: () {
                   setState(() {
                     if (isMarked) {
-                      userPosts.savedPost.remove(
-                          TextPost(taskModel.title, taskModel.text, true,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
+                      userPosts.savedPost.remove(TextPost(
+                          taskModel.title,
+                          taskModel.text,
+                          true,
+                          userPosts.posts[0].commentCounters,
+                          userPosts.posts[0].like,
+                          userPosts.posts[0].dislike));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark_border_outlined,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                     } else {
-                      userPosts.savedPost.add(
-                          TextPost(taskModel.title, taskModel.text, true,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
+                      userPosts.savedPost.add(TextPost(
+                          taskModel.title,
+                          taskModel.text,
+                          true,
+                          userPosts.posts[0].commentCounters,
+                          userPosts.posts[0].like,
+                          userPosts.posts[0].dislike));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark,
-                        color: text,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       );
                     }
                   });

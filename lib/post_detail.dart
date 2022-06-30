@@ -17,7 +17,7 @@ import 'package:easy_search_bar/easy_search_bar.dart';
 
 class DetailPost extends StatelessWidget {
   final Data2 post;
-  const DetailPost(this.post,{Key? key}) : super(key: key);
+  const DetailPost(this.post, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class DetailPost extends StatelessWidget {
 class DetailPostState extends StatefulWidget {
   final Data2 post;
 
-  const DetailPostState(this.post,{Key? key}) : super(key: key);
+  const DetailPostState(this.post, {Key? key}) : super(key: key);
   @override
   State<DetailPostState> createState() => _DetailPostState();
 }
@@ -110,50 +110,16 @@ class _DetailPostState extends State<DetailPostState> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
-      drawer: Drawer(
-          backgroundColor: backgroundWidget,
-          child: ListView(padding: EdgeInsets.fromLTRB(0, 30, 0, 0), children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: background,
-              ),
-              child: Column(
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 40.0,
-                    backgroundImage: AssetImage('assets/images/icon.png'),
-                  ),
-                  Text(
-                    'Reddit',
-                    style: TextStyle(fontSize: 30, color: backgroundWidget),
-                  )
-                ],
-              ),
-            ),
-            ListTile(
-                title: const Text('Profile'),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Profile()))),
-            ListTile(
-                title: const Text('Create a communities'),
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CreateACommunity()))),
-            ListTile(
-                title: const Text('Saved post'),
-                onTap: () => Navigator.pop(context)),
-            ListTile(
-                title: const Text('About us'),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const AboutUs()))),
-            ListTile(
-                title: const Text('Log out'),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Login()))),
-          ])),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          tooltip: 'Back to home page',
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => const Feed()));
+          },
+        ),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           'SavedPost',
@@ -175,6 +141,7 @@ class _DetailPostState extends State<DetailPostState> {
         ],
       ),
       body: Scaffold(
+        backgroundColor: background,
         body: Container(
           child: ListView.builder(
             itemCount: widget.post.savedPost.length,

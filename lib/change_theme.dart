@@ -9,6 +9,6 @@ void changeTheme(bool isDark) {
   } else {
     background = const Color.fromARGB(255, 255, 255, 255);
     text = const Color.fromARGB(255, 0, 0, 0);
-    backgroundWidget = Color.fromARGB(255, 135, 206, 235);
+    backgroundWidget = const Color.fromARGB(255, 135, 206, 235);
   }
 }

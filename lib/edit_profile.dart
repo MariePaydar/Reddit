@@ -74,6 +74,14 @@ class _EditProfilePage extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          tooltip: 'Back to home page',
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Profile()));
+          },
+        ),
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Center(
           child: Text(

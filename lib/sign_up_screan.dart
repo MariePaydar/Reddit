@@ -153,8 +153,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(color: text),
                   ),
                   onPressed: () {
+                    print(emailIsChecked);
+                    print(usernameIsChecked);
                     setState(() {
                       if (emailIsChecked && usernameIsChecked) {
+                        print("sending request..");
                         signUpRequest(emailController.text,
                             usernameController.text, passwordController.text);
                       }
@@ -225,6 +228,7 @@ class _SignUpPageState extends State<SignUpPage> {
       clientSocket.write(request);
       clientSocket.flush();
       clientSocket.listen((response) {
+        print(String.fromCharCodes(response));
         if (String.fromCharCodes(response).startsWith("accepted")) {
           print("accepted");
           user.number = String.fromCharCodes(response).substring(9);

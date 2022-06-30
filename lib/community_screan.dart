@@ -52,7 +52,7 @@ class _CommunityState extends State<CommunityState> {
         child: Scaffold(
           backgroundColor: background,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(300.0), // here the desired height
+            preferredSize: Size.fromHeight(320.0), // here the desired height
             child: AppBar(
               leading: IconButton(
                 icon: Icon(
@@ -102,7 +102,7 @@ class _CommunityState extends State<CommunityState> {
                               fontSize: 18,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 0, 0, 0),
+                              color: text,
                             )),
                         TextSpan(
                             text: "1 members  1 online",
@@ -110,7 +110,7 @@ class _CommunityState extends State<CommunityState> {
                               fontSize: 14,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.w300,
-                              color: Color.fromARGB(255, 0, 0, 0),
+                              color: text,
                             )),
                       ])),
                       Spacer(flex: 30),
@@ -174,6 +174,7 @@ class _CommunityState extends State<CommunityState> {
           body: TabBarView(
             children: [
               Scaffold(
+                backgroundColor: background,
                 body: Container(
                   child: ListView.builder(
                     itemCount: widget.com.posts.length,
@@ -184,28 +185,29 @@ class _CommunityState extends State<CommunityState> {
                 ),
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min, //agar kharab shod in ro comment kon
-                children: <Widget>[
-                const Divider(),
-                ListTile(
-                  title: Text(
-                    'Moderators',
-                    style: TextStyle(
-                      color: backgroundWidget,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    '    u/' + widget.moderator,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(179, 0, 0, 0),
-                    ),
-                  ),
-                )
-              ])
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize:
+                      MainAxisSize.min, //agar kharab shod in ro comment kon
+                  children: <Widget>[
+                    const Divider(),
+                    ListTile(
+                      title: Text(
+                        'Moderators',
+                        style: TextStyle(
+                          color: backgroundWidget,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '    u/' + widget.moderator,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: text,
+                        ),
+                      ),
+                    )
+                  ])
             ],
           ),
         ));

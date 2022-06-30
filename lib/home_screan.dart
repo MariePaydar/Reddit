@@ -67,6 +67,7 @@ class _MyAppState extends State<MyAppState> {
   getPages(BuildContext context) {
     return <Widget>[
       Scaffold(
+        backgroundColor: background,
         body: Container(
           child: ListView.builder(
             itemCount: userPosts.posts.length,
@@ -77,6 +78,7 @@ class _MyAppState extends State<MyAppState> {
         ),
       ),
       Scaffold(
+        backgroundColor: background,
         body: Container(
           child: ListView.builder(
             itemCount: user.communitylist.length,
@@ -161,11 +163,19 @@ class _MyAppState extends State<MyAppState> {
                           user.communitylist[i].posts.add(TextPost(
                               titlecontroller.text,
                               textcontroller.text,
-                              false,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
+                              false,
+                              userPosts.posts[0].commentCounters,
+                              userPosts.posts[0].like,
+                              userPosts.posts[0].dislike));
                         }
                       }
                       userPosts.posts.add(TextPost(
-                          titlecontroller.text, textcontroller.text, false,userPosts.posts[0].commentCounters,userPosts.posts[0].like,userPosts.posts[0].dislike));
+                          titlecontroller.text,
+                          textcontroller.text,
+                          false,
+                          userPosts.posts[0].commentCounters,
+                          userPosts.posts[0].like,
+                          userPosts.posts[0].dislike));
                       Navigator.push(
                           context,
                           MaterialPageRoute(
