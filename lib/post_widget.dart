@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/comment.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class PostWidget extends StatefulWidget {
   TextPost taskModel;
@@ -102,26 +103,31 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               ])),
             ],
           ),
-          RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: "\n" + taskModel.title + "\n",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.bold,
-                      color: text,
-                    )),
-                TextSpan(
-                    text: taskModel.text + "\n ",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w300,
-                      color: text,
-                    )),
-              ])),
+          Row(
+            children: [
+              const SizedBox(width: 20),
+              RichText(
+                  textAlign: TextAlign.left,
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "\n" + taskModel.title + "\n\n",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          color: text,
+                        )),
+                    TextSpan(
+                        text: taskModel.text + "\n ",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w500,
+                          color: text,
+                        )),
+                  ])),
+            ],
+          ),
           SizedBox(
             height: 1,
             child: Container(color: const Color.fromARGB(255, 0, 0, 0)),
@@ -223,6 +229,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                       userPosts.savedPost.remove(TextPost(
                           taskModel.title,
                           taskModel.text,
+                          taskModel.dateTime,
                           true,
                           userPosts.posts[0].commentCounters,
                           userPosts.posts[0].like,
@@ -236,6 +243,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                       userPosts.savedPost.add(TextPost(
                           taskModel.title,
                           taskModel.text,
+                          taskModel.dateTime,
                           true,
                           userPosts.posts[0].commentCounters,
                           userPosts.posts[0].like,

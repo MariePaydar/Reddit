@@ -1,15 +1,10 @@
 // ignore_for_file: avoid_print
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:passwordfield/passwordfield.dart';
-import 'package:provider/provider.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/login_screan.dart';
-import 'package:reddit/data.dart';
 import 'globals.dart';
 
 class SignUp extends StatelessWidget {

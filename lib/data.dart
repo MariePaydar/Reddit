@@ -7,10 +7,7 @@ class DataOfCommunity {
   bool like;
   bool dislike;
   List<TextPost> posts = [
-    TextPost(
-      "\nWelcome to our community\n\n",
-      "...\n ",false,0,0,0
-    )
+    TextPost("\nWelcome to our community\n\n", "...\n ",DateTime.now(), false, 0, 0, 0)
   ];
   DataOfCommunity(
       this._name, this._isPublic, this._isDone, this.like, this.dislike);
@@ -59,21 +56,26 @@ class TextPost {
   String title = "";
   String text = "";
 
-  bool isSaved=false;
-  int commentCounters=0;
-  int like=0;
-  int dislike=0;
-  TextPost(this.title, this.text,this.isSaved,this.commentCounters,this.like,this.dislike);
+  bool isSaved = false;
+  int commentCounters = 0;
+  int like = 0;
+  int dislike = 0;
+
+  DateTime dateTime;
+  TextPost(this.title, this.text, this.dateTime, this.isSaved, this.commentCounters, this.like,
+      this.dislike);
 }
 
 class Data2 {
   List<TextPost> posts = [
-
     TextPost(
-      "\nWelcome to Reddit\n\n",
-      "This is our AP project in shahid beheshti university\n",false,0,0,0
-    )
-
+        "Welcome to Reddit",
+        "This is our AP project in shahid beheshti university\n",
+        DateTime.now(),
+        false,
+        0,
+        0,
+        0)
   ];
   List<TextPost> savedPost = [];
 }

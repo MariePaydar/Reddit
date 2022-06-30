@@ -4,6 +4,7 @@ import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/home_screan.dart';
 import 'package:reddit/post_widget.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class PostDetail extends StatelessWidget {
   final TextPost post;
@@ -52,7 +53,7 @@ class _DetailPostState extends State<DetailPostState> {
   bool isDisLiked = false;
   bool isMarked = false;
 
-  bool showComment = false;
+  bool showComment = true;
 
   void changeLike(int index) {
     bool currState = user.communitylist[index].like;
@@ -70,16 +71,12 @@ class _DetailPostState extends State<DetailPostState> {
 
   Column comment = Column(
     children: [
-      SizedBox(
-        height: 1,
-        child: Container(color: text),
-      ),
       Row(
         children: [
           Icon(
             Icons.circle,
             size: 30,
-            color: backgroundWidget,
+            color: background,
           ),
           RichText(
               text: TextSpan(children: <TextSpan>[
@@ -97,7 +94,7 @@ class _DetailPostState extends State<DetailPostState> {
       ),
     ],
   );
-
+  TextEditingController textcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +109,7 @@ class _DetailPostState extends State<DetailPostState> {
           },
         ),
         iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           'Post Detail',
           style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
@@ -133,18 +130,10 @@ class _DetailPostState extends State<DetailPostState> {
         ],
       ),
       body: Scaffold(
-          backgroundColor: background,
-          body: Container(
-              decoration: BoxDecoration(
-                color: backgroundWidget,
-                border: Border.all(
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  width: 2,
-                ),
-              ),
-              margin: const EdgeInsets.fromLTRB(10, 3, 10, 0),
-              padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
-              child: Column(children: [
+          backgroundColor: backgroundWidget,
+          body: ListView(
+              padding: const EdgeInsets.fromLTRB(15, 8, 15, 2),
+              children: [
                 Row(
                   children: [
                     Icon(
@@ -165,26 +154,63 @@ class _DetailPostState extends State<DetailPostState> {
                     ])),
                   ],
                 ),
-                RichText(
-                    textAlign: TextAlign.left,
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: "\n" + taskModel.title + "\n",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.bold,
-                            color: text,
-                          )),
-                      TextSpan(
-                          text: taskModel.text + "\n ",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w300,
-                            color: text,
-                          )),
-                    ])),
+                Row(
+                  children: [
+                    const SizedBox(width: 20),
+                    RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: "\n" + taskModel.title + "\n\n",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.bold,
+                                color: text,
+                              )),
+                          TextSpan(
+                              text: taskModel.text + "\n ",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                color: text,
+                              )),
+                        ])),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Spacer(),
+                    RichText(
+                        textAlign: TextAlign.right,
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: " * " +
+                                  Jalali.fromDateTime(taskModel.dateTime)
+                                      .year
+                                      .toString() +
+                                  " - " +
+                                  Jalali.fromDateTime(taskModel.dateTime)
+                                      .month
+                                      .toString() +
+                                  " - " +
+                                  Jalali.fromDateTime(taskModel.dateTime)
+                                      .day
+                                      .toString() +
+                                  " * \n",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                                color: text,
+                              )),
+                        ])),
+                    SizedBox(
+                      width: 10,
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 1,
                   child: Container(color: const Color.fromARGB(255, 0, 0, 0)),
@@ -197,18 +223,18 @@ class _DetailPostState extends State<DetailPostState> {
                         setState(() {
                           if (isLiked) {
                             isLiked = !isLiked;
-                            liked = Icon(
+                            liked = const Icon(
                               Icons.thumb_up_alt_outlined,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
                           } else {
                             isDisLiked = false;
                             isLiked = !isLiked;
-                            disLiked = Icon(
+                            disLiked = const Icon(
                               Icons.thumb_down_alt_outlined,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
-                            liked = Icon(
+                            liked = const Icon(
                               Icons.thumb_up_alt_rounded,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
@@ -218,7 +244,7 @@ class _DetailPostState extends State<DetailPostState> {
                     ),
                     Text(
                       isLiked ? "1" : "0",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
@@ -228,18 +254,18 @@ class _DetailPostState extends State<DetailPostState> {
                         setState(() {
                           if (isDisLiked) {
                             isDisLiked = !isDisLiked;
-                            disLiked = Icon(
+                            disLiked = const Icon(
                               Icons.thumb_down_alt_outlined,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
                           } else {
                             isDisLiked = !isDisLiked;
                             isLiked = false;
-                            liked = Icon(
+                            liked = const Icon(
                               Icons.thumb_up_alt_outlined,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
-                            disLiked = Icon(
+                            disLiked = const Icon(
                               Icons.thumb_down_alt_rounded,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
@@ -249,35 +275,36 @@ class _DetailPostState extends State<DetailPostState> {
                     ),
                     Text(
                       isDisLiked ? "1" : "0",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
                     const Spacer(),
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.comment,
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
                       onPressed: () {
                         setState(() {
-                          Navigator.push(
+                          showComment = !showComment;
+                          /*Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const Comment()));
-                          //showComment = !showComment;
+                          //showComment = !showComment;*/
                         });
                       },
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.share,
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
                       onPressed: () {},
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                       icon: bookMark,
                       onPressed: () {
@@ -286,12 +313,13 @@ class _DetailPostState extends State<DetailPostState> {
                             userPosts.savedPost.remove(TextPost(
                                 taskModel.title,
                                 taskModel.text,
+                                taskModel.dateTime,
                                 true,
                                 userPosts.posts[0].commentCounters,
                                 userPosts.posts[0].like,
                                 userPosts.posts[0].dislike));
                             isMarked = !isMarked;
-                            bookMark = Icon(
+                            bookMark = const Icon(
                               Icons.bookmark_border_outlined,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
@@ -299,12 +327,13 @@ class _DetailPostState extends State<DetailPostState> {
                             userPosts.savedPost.add(TextPost(
                                 taskModel.title,
                                 taskModel.text,
+                                taskModel.dateTime,
                                 true,
                                 userPosts.posts[0].commentCounters,
                                 userPosts.posts[0].like,
                                 userPosts.posts[0].dislike));
                             isMarked = !isMarked;
-                            bookMark = Icon(
+                            bookMark = const Icon(
                               Icons.bookmark,
                               color: Color.fromARGB(255, 0, 0, 0),
                             );
@@ -314,8 +343,29 @@ class _DetailPostState extends State<DetailPostState> {
                     )
                   ],
                 ),
+                TextField(
+                  onSubmitted: (value) {
+                    print(value); //add comment in files
+                  },
+                  cursorColor: text,
+                  style: TextStyle(color: text, fontWeight: FontWeight.w600),
+                  controller: textcontroller,
+                  decoration: InputDecoration(
+                    hintText: 'comment',
+                    hintStyle:
+                        TextStyle(color: text, fontWeight: FontWeight.w300),
+                    fillColor: backgroundWidget,
+                    filled: true,
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                  child: Container(color: backgroundWidget),
+                ),
                 showComment ? comment : Column(),
-              ]))),
+              ])),
     );
   }
 }

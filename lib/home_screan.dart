@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:reddit/Todo_list.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
 import 'package:reddit/create_a_community_screan.dart';
@@ -12,10 +10,9 @@ import 'package:reddit/post_datail.dart';
 import 'package:reddit/saved_post.dart';
 import 'package:reddit/post_widget.dart';
 import 'package:reddit/profile_screan.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:reddit/taskItem.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
+import 'package:shamsi_date/shamsi_date.dart';
+import 'package:intl/intl.dart';
 
 class Feed extends StatelessWidget {
   const Feed({Key? key}) : super(key: key);
@@ -111,7 +108,7 @@ class _MyAppState extends State<MyAppState> {
                 decoration: InputDecoration(
                   fillColor: backgroundWidget,
                   filled: true,
-                  hintText: 'Add at title',
+                  hintText: 'title',
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
@@ -126,7 +123,7 @@ class _MyAppState extends State<MyAppState> {
                 decoration: InputDecoration(
                   fillColor: backgroundWidget,
                   filled: true,
-                  hintText: 'Add text body',
+                  hintText: 'text body',
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
                 ),
@@ -170,15 +167,18 @@ class _MyAppState extends State<MyAppState> {
                           user.communitylist[i].posts.add(TextPost(
                               titlecontroller.text,
                               textcontroller.text,
+                              DateTime.now(),
                               false,
                               userPosts.posts[0].commentCounters,
                               userPosts.posts[0].like,
                               userPosts.posts[0].dislike));
                         }
                       }
+              
                       userPosts.posts.add(TextPost(
                           titlecontroller.text,
                           textcontroller.text,
+                          DateTime.now(),
                           false,
                           userPosts.posts[0].commentCounters,
                           userPosts.posts[0].like,
