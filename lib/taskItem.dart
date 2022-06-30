@@ -6,8 +6,8 @@ import 'package:reddit/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reddit/globals.dart';
 
-class taskItem extends StatelessWidget {
-  taskItem({required this.taskModel, required this.changeIsDone});
+class taskItemOfCommunity extends StatelessWidget {
+  taskItemOfCommunity({required this.taskModel, required this.changeIsDone});
 
   final DataOfCommunity taskModel;
   final Function changeIsDone;
@@ -23,8 +23,7 @@ class taskItem extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        Community(taskModel, user.userName)));
+                    builder: (context) => Community(taskModel, user.userName)));
           },
           child: Text(
             taskModel.name,

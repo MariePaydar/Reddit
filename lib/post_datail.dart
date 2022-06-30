@@ -5,9 +5,9 @@ import 'package:reddit/comment.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 
-class PostWidget extends StatefulWidget {
+class Postdetail extends StatefulWidget {
   TextPost taskModel;
-  PostWidget(this.taskModel);
+  Postdetail(this.taskModel);
 
   @override
   State<StatefulWidget> createState() => _MyPostWidgetState(this.taskModel);
@@ -134,18 +134,18 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                   setState(() {
                     if (isLiked) {
                       isLiked = !isLiked;
-                      liked = Icon(
+                      liked = const Icon(
                         Icons.thumb_up_alt_outlined,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
                     } else {
                       isDisLiked = false;
                       isLiked = !isLiked;
-                      disLiked = Icon(
+                      disLiked = const Icon(
                         Icons.thumb_down_alt_outlined,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
-                      liked = Icon(
+                      liked = const Icon(
                         Icons.thumb_up_alt_rounded,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
@@ -155,7 +155,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               ),
               Text(
                 isLiked ? "1" : "0",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
@@ -165,18 +165,18 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                   setState(() {
                     if (isDisLiked) {
                       isDisLiked = !isDisLiked;
-                      disLiked = Icon(
+                      disLiked = const Icon(
                         Icons.thumb_down_alt_outlined,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
                     } else {
                       isDisLiked = !isDisLiked;
                       isLiked = false;
-                      liked = Icon(
+                      liked = const Icon(
                         Icons.thumb_up_alt_outlined,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
-                      disLiked = Icon(
+                      disLiked = const Icon(
                         Icons.thumb_down_alt_rounded,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
@@ -186,13 +186,13 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               ),
               Text(
                 isDisLiked ? "1" : "0",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
               const Spacer(),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.comment,
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
@@ -206,15 +206,15 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                   });
                 },
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.share,
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
                 onPressed: () {},
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 icon: bookMark,
                 onPressed: () {
@@ -228,7 +228,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                           userPosts.posts[0].like,
                           userPosts.posts[0].dislike));
                       isMarked = !isMarked;
-                      bookMark = Icon(
+                      bookMark = const Icon(
                         Icons.bookmark_border_outlined,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
@@ -241,7 +241,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                           userPosts.posts[0].like,
                           userPosts.posts[0].dislike));
                       isMarked = !isMarked;
-                      bookMark = Icon(
+                      bookMark = const Icon(
                         Icons.bookmark,
                         color: Color.fromARGB(255, 0, 0, 0),
                       );
@@ -251,7 +251,7 @@ class _MyPostWidgetState extends State<StatefulWidget> {
               )
             ],
           ),
-          showComment ? comment : Column(),
+          Column(),
         ]));
   }
 }

@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:reddit/Todo_list.dart';
-import 'package:reddit/about_us_scraen.dart';
-import 'package:reddit/change_theme.dart';
-import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/home_screan.dart';
-import 'package:reddit/login_screan.dart';
 import 'package:reddit/post_widget.dart';
-import 'package:reddit/profile_screan.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:reddit/taskItem.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
 
-class DetailPost extends StatelessWidget {
+class SavedPost extends StatelessWidget {
   final Data2 post;
-  const DetailPost(this.post, {Key? key}) : super(key: key);
+  const SavedPost(this.post, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,36 +50,6 @@ class _DetailPostState extends State<DetailPostState> {
   bool isMarked = false;
 
   bool showComment = false;
-
-  Column comment = Column(
-    children: [
-      SizedBox(
-        height: 1,
-        child: Container(color: text),
-      ),
-      Row(
-        children: [
-          Icon(
-            Icons.circle,
-            size: 30,
-            color: backgroundWidget,
-          ),
-          RichText(
-              text: TextSpan(children: <TextSpan>[
-            TextSpan(
-                text:
-                    "\n u/mahdi\n....................................................\n",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.normal,
-                  color: text,
-                )),
-          ]))
-        ],
-      ),
-    ],
-  );
 
   void changeLike(int index) {
     bool currState = user.communitylist[index].like;

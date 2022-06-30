@@ -69,7 +69,7 @@ class _ToDoListState extends State<ToDoList> {
           child: ListView.builder(
             itemCount: user.communitylist.length,
             itemBuilder: (contex, index) {
-              return taskItem(
+              return taskItemOfCommunity(
                 taskModel: user.communitylist[index],
                 changeIsDone: () => changeIsDone(index),
               ); // TaskItem

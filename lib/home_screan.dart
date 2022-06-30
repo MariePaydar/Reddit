@@ -8,7 +8,7 @@ import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/login_screan.dart';
-import 'package:reddit/post_detail.dart';
+import 'package:reddit/saved_post.dart';
 import 'package:reddit/post_widget.dart';
 import 'package:reddit/profile_screan.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -68,27 +68,24 @@ class _MyAppState extends State<MyAppState> {
     return <Widget>[
       Scaffold(
         backgroundColor: background,
-        body: Container(
-          child: ListView.builder(
-            itemCount: userPosts.posts.length,
-            itemBuilder: (contex, index) {
-              return PostWidget(userPosts.posts[index]); // TaskItem
-            },
-          ), //ListView.builder
+        body: ListView.builder(
+          itemCount: userPosts.posts.length,
+          itemBuilder: (contex, index) {
+            return PostWidget(userPosts.posts[index]); // TaskItem
+          },
+          reverse: true,
         ),
       ),
       Scaffold(
         backgroundColor: background,
-        body: Container(
-          child: ListView.builder(
-            itemCount: user.communitylist.length,
-            itemBuilder: (contex, index) {
-              return taskItem(
-                taskModel: user.communitylist[index],
-                changeIsDone: () => changeIsDone(index),
-              ); // TaskItem
-            },
-          ), //ListView.builder
+        body: ListView.builder(
+          itemCount: user.communitylist.length,
+          itemBuilder: (contex, index) {
+            return taskItemOfCommunity(
+              taskModel: user.communitylist[index],
+              changeIsDone: () => changeIsDone(index),
+            ); // TaskItem
+          },
         ),
       ),
       Padding(
@@ -234,7 +231,7 @@ class _MyAppState extends State<MyAppState> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DetailPost(userPosts)));
+                        builder: (context) => SavedPost(userPosts)));
               },
             )),
         const Divider(),
