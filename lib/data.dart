@@ -4,25 +4,16 @@ class DataOfCommunity {
   String _name = "";
   bool _isPublic = false;
   bool _isDone;
-  bool like;
-  bool dislike;
+  String admin = "";
+  String index = "0";
   List<TextPost> posts = [
     TextPost("\nWelcome to our community\n\n", "...\n ", DateTime.now(), false,
-        0, 0, 0,0)
+        0, 0, 0, 0)
   ];
-  DataOfCommunity(
-      this._name, this._isPublic, this._isDone, this.like, this.dislike);
+  DataOfCommunity(this._name, this.admin,this.index, this._isPublic, this._isDone);
   bool get isDone => _isDone;
   void setIsDone(bool currentState) {
     _isDone = currentState;
-  }
-
-  void setlike(bool currentState) {
-    like = currentState;
-  }
-
-  void setdislike(bool currentState) {
-    dislike = currentState;
   }
 
   bool get isPublic => _isPublic;

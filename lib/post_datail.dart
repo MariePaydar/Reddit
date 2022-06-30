@@ -57,20 +57,6 @@ class _DetailPostState extends State<DetailPostState> {
 
   bool showComment = true;
 
-  void changeLike(int index) {
-    bool currState = user.communitylist[index].like;
-    setState(() {
-      user.communitylist[index].setlike(!currState);
-    });
-  }
-
-  void changeDislike(int index) {
-    bool currState = user.communitylist[index].dislike;
-    setState(() {
-      user.communitylist[index].setdislike(!currState);
-    });
-  }
-
   String output = "";
   TextEditingController textcontroller = TextEditingController();
   @override
@@ -328,12 +314,6 @@ class _DetailPostState extends State<DetailPostState> {
                 ],
               ),
               TextField(
-                onSubmitted: (value) {
-                  textcontroller.text = "";
-                  print(textcontroller.text);
-
-                  addCommentRequest(user.userName, value, index.toString());
-                },
                 cursorColor: text,
                 style: TextStyle(color: text, fontWeight: FontWeight.w600),
                 controller: textcontroller,
@@ -341,6 +321,18 @@ class _DetailPostState extends State<DetailPostState> {
                   hintText: 'comment',
                   hintStyle:
                       TextStyle(color: text, fontWeight: FontWeight.w300),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      Icons.send_outlined,
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                    onPressed: () {
+                      print(textcontroller.text);
+                      addCommentRequest(
+                          user.userName, textcontroller.text, index.toString());
+                      textcontroller.text = "";
+                    },
+                  ),
                   fillColor: backgroundWidget,
                   filled: true,
                   border: const OutlineInputBorder(

@@ -148,9 +148,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       clientSocket.write(request);
       clientSocket.flush();
       clientSocket.listen((response) {
-        if (String.fromCharCodes(response) == "accepted") {
+        if (String.fromCharCodes(response).startsWith("accepted")) {
           print("accepted");
           user.userName = username;
+          user.number = String.fromCharCodes(response).substring(8);
+          print(user.number);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Feed()));
         } else if (String.fromCharCodes(response) ==

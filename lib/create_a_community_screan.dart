@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/home_screan.dart';
@@ -106,17 +108,36 @@ class _CreateACommunity extends State<CreateACommunity> {
                   child:
                       Text('Create community', style: TextStyle(color: text)),
                   onPressed: () {
-                    user.nameOfCommunity.add('r/' + nameController.text);
-                    user.communitylist.add(DataOfCommunity(
+                    createCommunityRequest(
+                        user.userName,
                         'r/' + nameController.text,
                         dropdownValue == 'Public',
-                        false,
-                        false,
-                        false));
-                    Navigator.pop(context);
+                        false);
                   },
                 )),
           ]),
         ));
+  }
+
+  Future<void> createCommunityRequest(
+    String username,
+    String name,
+    bool _isPublic,
+    bool _isDone,
+  ) async {
+    String request =
+        "createcommunity\nadmin:$username,,name:$name,,isPublic:$_isPublic,,isDone:$_isDone\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
+      clientSocket.write(request);
+      clientSocket.flush();
+      clientSocket.listen((response) {
+        if (String.fromCharCodes(response).startsWith("accepted")) {
+          print("accepted");
+          Navigator.pop(context);
+        } else {
+          print("not accepted");
+        }
+      });
+    });
   }
 }

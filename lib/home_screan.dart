@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reddit/about_us_scraen.dart';
 import 'package:reddit/change_theme.dart';
@@ -292,6 +294,7 @@ class _MyAppState extends State<MyAppState> {
 
   @override
   Widget build(BuildContext context) {
+    showCommunitiesRequest();
     return Scaffold(
       backgroundColor: background,
       drawer: Drawer(
@@ -320,10 +323,12 @@ class _MyAppState extends State<MyAppState> {
                     MaterialPageRoute(builder: (context) => const Profile()))),
             ListTile(
                 title: const Text('Create a communities'),
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CreateACommunity()))),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CreateACommunity()));
+                }),
             ListTile(
                 title: const Text('Saved post'),
                 onTap: () => Navigator.pop(context)),
@@ -379,6 +384,25 @@ class _MyAppState extends State<MyAppState> {
         unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
       ),
     );
+  }
+
+  Future<void> showCommunitiesRequest() async {
+    String request = "showcommunities\ndata:empty,,data2:empty\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
+      clientSocket.write(request);
+      print("request sended");
+      clientSocket.flush();
+      clientSocket.listen((response) {
+        if (String.fromCharCodes(response).startsWith("accepted")) {
+          print("accepted");
+          String data = String.fromCharCodes(response).substring(9);
+          print(data);
+          dataToArray(data);
+        } else {
+          print("not accepted");
+        }
+      });
+    });
   }
 }
 

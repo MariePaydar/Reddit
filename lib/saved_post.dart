@@ -51,20 +51,6 @@ class _DetailPostState extends State<DetailPostState> {
 
   bool showComment = false;
 
-  void changeLike(int index) {
-    bool currState = user.communitylist[index].like;
-    setState(() {
-      user.communitylist[index].setlike(!currState);
-    });
-  }
-
-  void changeDislike(int index) {
-    bool currState = user.communitylist[index].dislike;
-    setState(() {
-      user.communitylist[index].setdislike(!currState);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
