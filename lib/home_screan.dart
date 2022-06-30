@@ -8,6 +8,7 @@ import 'package:reddit/create_a_community_screan.dart';
 import 'package:reddit/data.dart';
 import 'package:reddit/globals.dart';
 import 'package:reddit/login_screan.dart';
+import 'package:reddit/post_datail.dart';
 import 'package:reddit/saved_post.dart';
 import 'package:reddit/post_widget.dart';
 import 'package:reddit/profile_screan.dart';
@@ -71,7 +72,16 @@ class _MyAppState extends State<MyAppState> {
         body: ListView.builder(
           itemCount: userPosts.posts.length,
           itemBuilder: (contex, index) {
-            return PostWidget(userPosts.posts[index]); // TaskItem
+            return GestureDetector(
+              child: PostWidget(userPosts.posts[index]),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PostDetail(userPosts.posts[index])));
+              },
+            ); // TaskItem
           },
           reverse: true,
         ),
