@@ -71,9 +71,11 @@ class _DetailPostState extends State<DetailPostState> {
     });
   }
 
+  String output = "";
   TextEditingController textcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    int index = taskModel.index;
     return Scaffold(
         backgroundColor: backgroundWidget,
         appBar: AppBar(
@@ -270,11 +272,9 @@ class _DetailPostState extends State<DetailPostState> {
                     onPressed: () {
                       setState(() {
                         showComment = !showComment;
-                        /*Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Comment()));
-                          //showComment = !showComment;*/
+                        if (showComment) {
+                          showCommentRequest(index.toString());
+                        }
                       });
                     },
                   ),
@@ -299,7 +299,8 @@ class _DetailPostState extends State<DetailPostState> {
                               true,
                               userPosts.posts[0].commentCounters,
                               userPosts.posts[0].like,
-                              userPosts.posts[0].dislike));
+                              userPosts.posts[0].dislike,
+                              userPosts.posts[0].index));
                           isMarked = !isMarked;
                           bookMark = const Icon(
                             Icons.bookmark_border_outlined,
@@ -313,7 +314,8 @@ class _DetailPostState extends State<DetailPostState> {
                               true,
                               userPosts.posts[0].commentCounters,
                               userPosts.posts[0].like,
-                              userPosts.posts[0].dislike));
+                              userPosts.posts[0].dislike,
+                              userPosts.posts[0].index));
                           isMarked = !isMarked;
                           bookMark = const Icon(
                             Icons.bookmark,
@@ -327,9 +329,10 @@ class _DetailPostState extends State<DetailPostState> {
               ),
               TextField(
                 onSubmitted: (value) {
-                  print(value);
-                  addCommentRequest(
-                      user.userName, value, "1"); //add comment in files
+                  textcontroller.text = "";
+                  print(textcontroller.text);
+
+                  addCommentRequest(user.userName, value, index.toString());
                 },
                 cursorColor: text,
                 style: TextStyle(color: text, fontWeight: FontWeight.w600),
@@ -348,8 +351,37 @@ class _DetailPostState extends State<DetailPostState> {
                 height: 5,
                 child: Container(),
               ),
-              //commentWidget
+              Row(
+                children: [
+                  SizedBox(
+                    width: 13,
+                  ),
+                  Text(
+                    output,
+                    style: TextStyle(
+                        color: text, fontSize: 18, fontWeight: FontWeight.w700),
+                  )
+                ],
+              )
             ]));
+  }
+
+  Future<void> showCommentRequest(String post) async {
+    String request = "showcomment\npost:$post\u0000";
+    await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
+      clientSocket.write(request);
+      clientSocket.flush();
+      clientSocket.listen((response) {
+        print(String.fromCharCodes(response));
+        if (String.fromCharCodes(response).startsWith("accepted")) {
+          print("accepted");
+          output = String.fromCharCodes(response).substring(8);
+          print(output);
+        } else {
+          print("not accepted");
+        }
+      });
+    });
   }
 
   Future<void> addCommentRequest(

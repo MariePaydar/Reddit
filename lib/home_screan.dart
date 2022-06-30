@@ -72,11 +72,10 @@ class _MyAppState extends State<MyAppState> {
             return GestureDetector(
               child: PostWidget(userPosts.posts[index]),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            PostDetail(userPosts.posts[index])));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  userPosts.posts[index].index = index;
+                  return PostDetail(userPosts.posts[index]);
+                }));
               },
             ); // TaskItem
           },
@@ -171,10 +170,11 @@ class _MyAppState extends State<MyAppState> {
                               false,
                               userPosts.posts[0].commentCounters,
                               userPosts.posts[0].like,
-                              userPosts.posts[0].dislike));
+                              userPosts.posts[0].dislike,
+                              userPosts.posts[0].index));
                         }
                       }
-              
+
                       userPosts.posts.add(TextPost(
                           titlecontroller.text,
                           textcontroller.text,
@@ -182,7 +182,8 @@ class _MyAppState extends State<MyAppState> {
                           false,
                           userPosts.posts[0].commentCounters,
                           userPosts.posts[0].like,
-                          userPosts.posts[0].dislike));
+                          userPosts.posts[0].dislike,
+                          userPosts.posts[0].index));
                       Navigator.push(
                           context,
                           MaterialPageRoute(

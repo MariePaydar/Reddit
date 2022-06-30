@@ -233,7 +233,8 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                           true,
                           userPosts.posts[0].commentCounters,
                           userPosts.posts[0].like,
-                          userPosts.posts[0].dislike));
+                          userPosts.posts[0].dislike,
+                          userPosts.posts[0].index));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark_border_outlined,
@@ -247,7 +248,8 @@ class _MyPostWidgetState extends State<StatefulWidget> {
                           true,
                           userPosts.posts[0].commentCounters,
                           userPosts.posts[0].like,
-                          userPosts.posts[0].dislike));
+                          userPosts.posts[0].dislike,
+                          userPosts.posts[0].index));
                       isMarked = !isMarked;
                       bookMark = Icon(
                         Icons.bookmark,
