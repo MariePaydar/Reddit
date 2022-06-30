@@ -7,7 +7,8 @@ class DataOfCommunity {
   bool like;
   bool dislike;
   List<TextPost> posts = [
-    TextPost("\nWelcome to our community\n\n", "...\n ",DateTime.now(), false, 0, 0, 0)
+    TextPost("\nWelcome to our community\n\n", "...\n ", DateTime.now(), false,
+        0, 0, 0)
   ];
   DataOfCommunity(
       this._name, this._isPublic, this._isDone, this.like, this.dislike);
@@ -62,8 +63,14 @@ class TextPost {
   int dislike = 0;
 
   DateTime dateTime;
-  TextPost(this.title, this.text, this.dateTime, this.isSaved, this.commentCounters, this.like,
-      this.dislike);
+  TextPost(this.title, this.text, this.dateTime, this.isSaved,
+      this.commentCounters, this.like, this.dislike);
+}
+
+class Textcomment {
+  String username = "";
+  String text = "";
+  Textcomment(this.username, this.text);
 }
 
 class Data2 {
