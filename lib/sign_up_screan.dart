@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:io';
-
+import 'package:video_player/video_player.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
@@ -29,6 +29,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  late VideoPlayerController _controller;
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -39,6 +40,14 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     _passwordVisible = false;
     super.initState();
+    _controller=VideoPlayerController.network('https://www.pexels.com/video/scenic-footage-of-countryside-during-dawn-4652096/');
+    initialize().then((_){
+      _controller.play();
+      _controller.setLooping(true);
+      setState(() {
+        
+      });
+    });
   }
 
   bool emailIsChecked = false;
