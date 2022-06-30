@@ -76,10 +76,37 @@ public class Controller {
         }
     }
 
+    private String get(HashMap<String ,String> data)
+    {
+        int count=Integer.valueOf(data.get("count"));
+        ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("mwssages").get();
+        ArrayList<HashMap<String,String>> finalList=new ArrayList<>();
+        for(int i= list.size()-1;i>=Math.max(0, list.size())-count;i--){
+            finalList.add(list.get(i));
+        }
+        return  Convertor.arrMapToString(finalList);
+    }
+    private String getBy()
+    {
+        return  "";
+    }
+    private String send(HashMap<String,String> data)
+    {
+        try {
+            Database.getInstance().getTable("massages").insert(data);
+            return "massage successfully saved";
+        }catch (Exception e){
+            return "something goes wrong";
+        }
+    }
+
     public String run(String command, String data)
     {
         HashMap<String,String> dataMap= Convertor.stringToMap(data);
         return switch (command) {
+            case "get" -> get(dataMap);
+            case "getBy" -> getBy();
+            case  "send" -> send(dataMap);
             case "login" -> login(dataMap);
             case "signup" -> signup(dataMap);
             case "editProfile" -> editProfile(dataMap);
