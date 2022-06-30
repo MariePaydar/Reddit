@@ -7,10 +7,7 @@ class DataOfCommunity {
   bool like;
   bool dislike;
   List<TextPost> posts = [
-    TextPost(
-      "\nWelcome to our community\n\n",
-      "...\n ",false
-    )
+    TextPost("\nWelcome to our community\n\n", "...\n ", false)
   ];
   DataOfCommunity(
       this._name, this._isPublic, this._isDone, this.like, this.dislike);
@@ -48,6 +45,7 @@ class Data {
   String email = "";
   String password = "";
   String bio = "";
+  String number = "";
   List<DataOfCommunity> communitylist = [];
   List<String> nameOfCommunity = ['choose a community'];
   bool isDarkMode = false;
@@ -57,16 +55,14 @@ class Data {
 class TextPost {
   String title = "";
   String text = "";
-  bool isSaved=false;
-  TextPost(this.title, this.text,this.isSaved);
+  bool isSaved = false;
+  TextPost(this.title, this.text, this.isSaved);
 }
 
 class Data2 {
   List<TextPost> posts = [
-    TextPost(
-      "\nWelcome to Reddit\n\n",
-      "This is our AP project in shahid beheshti university\n",false
-    )
+    TextPost("\nWelcome to Reddit\n\n",
+        "This is our AP project in shahid beheshti university\n", false)
   ];
-   List<TextPost> savedPost=[];
- }
+  List<TextPost> savedPost = [];
+}

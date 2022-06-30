@@ -220,13 +220,14 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<void> signUpRequest(
       String email, String username, String password) async {
     String request =
-        "signup\nemail:$email,,username:$username,,password:$password\u0000";
+        "signup\nemail:$email,,username:$username,,password:$password,,bio: \u0000";
     await Socket.connect("10.0.2.2", 8000).then((clientSocket) {
       clientSocket.write(request);
       clientSocket.flush();
       clientSocket.listen((response) {
-        if (String.fromCharCodes(response) == "accepted") {
+        if (String.fromCharCodes(response).startsWith("accepted")) {
           print("accepted");
+          user.number = String.fromCharCodes(response).substring(9);
           user.userName = username;
           user.email = email;
           Navigator.push(
