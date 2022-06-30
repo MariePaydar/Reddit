@@ -70,11 +70,15 @@ class _DetailPostState extends State<DetailPostState> {
       ),
       Row(
         children: [
-          Icon(
-            Icons.circle,
-            size: 30,
-            color: backgroundWidget,
-          ),
+          // Icon(
+          //   Icons.circle,
+          //   size: 30,
+          //   color: backgroundWidget,
+          // ),
+          CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/userimage.png'),
+                  radius: 10,
+                    ), 
           RichText(
               text: TextSpan(children: <TextSpan>[
             TextSpan(
