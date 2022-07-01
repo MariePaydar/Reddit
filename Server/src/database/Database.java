@@ -10,7 +10,10 @@ public class Database {
     private Database(){
         tables=new HashMap<>();
         tables.put("users",new Table("src/data/users.txt"));
-        tables.put("massages",new Table("src/data/messages.txt"));
+        tables.put("comments",new Table("src/data/comments.txt"));
+        tables.put("posts",new Table("src/data/posts.txt"));
+        tables.put("communities",new Table("src/data/communities.txt"));
+        tables.put("membership",new Table("src/data/membership.txt"));
 
     }
     public static Database getInstance(){

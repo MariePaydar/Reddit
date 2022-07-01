@@ -2,21 +2,20 @@ package controller;
 
 import database.Database;
 import utils.Convertor;
-
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class Controller {
     static int numberOfUser = 0;
+    static int numberOfCommunities = 0;
+    static int numberOfPost;
     private String login(HashMap<String ,String> data)
     {
         ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("users").get();
         for (HashMap<String, String> sSH : list) {
             if (Objects.equals(sSH.get("username"), data.get("username"))) {
-                return "accepted";
+                return "accepted"+ sSH.get("number");
             }
         }
         return "The username or password is incorrect!";
@@ -76,27 +75,37 @@ public class Controller {
         }
     }
 
-    private String get(HashMap<String ,String> data)
+    private String showComment(HashMap<String ,String> data)
     {
-        int count=Integer.valueOf(data.get("count"));
-        ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("mwssages").get();
-        ArrayList<HashMap<String,String>> finalList=new ArrayList<>();
-        for(int i= list.size()-1;i>=Math.max(0, list.size())-count;i--){
-            finalList.add(list.get(i));
+        ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("comments").get();
+        StringBuilder output = new StringBuilder();
+        int commentCounter=0;
+        for (HashMap<String, String> stringStringHashMap : list) {
+            if (Objects.equals(stringStringHashMap.get("post"), data.get("post"))) {
+                commentCounter++;
+                output.append(stringStringHashMap.get("username")).append(": ").append(stringStringHashMap.get("comment")).append("\n");
+            }
         }
-        return  Convertor.arrMapToString(finalList);
+        return  "accepted"+commentCounter+"\n"+ output;
     }
-    private String getBy()
-    {
-        return  "";
-    }
-    private String send(HashMap<String,String> data)
+    private String addComment(HashMap<String ,String> data)
     {
         try {
-            Database.getInstance().getTable("massages").insert(data);
-            return "massage successfully saved";
-        }catch (Exception e){
-            return "something goes wrong";
+            Database.getInstance().getTable("comments").insert(data);
+            return "accepted";
+        } catch (Exception e) {
+            return "not accepted";
+        }
+    }
+
+    private String createCommunity(HashMap<String, String> data) {
+        try {
+            data.put("number",String.valueOf(numberOfCommunities));
+            Database.getInstance().getTable("communities").insert(data);
+            numberOfCommunities++;
+            return "accepted";
+        } catch (Exception e) {
+            return "not accepted";
         }
     }
 
@@ -104,13 +113,53 @@ public class Controller {
     {
         HashMap<String,String> dataMap= Convertor.stringToMap(data);
         return switch (command) {
-            case "get" -> get(dataMap);
-            case "getBy" -> getBy();
-            case  "send" -> send(dataMap);
+            case "showcomment" -> showComment(dataMap);
+            case "addcomment" -> addComment(dataMap);
             case "login" -> login(dataMap);
             case "signup" -> signup(dataMap);
             case "editProfile" -> editProfile(dataMap);
+            case "createcommunity" -> createCommunity(dataMap);
+            case "showcommunities" -> showCommunities(dataMap);
+            case "createpost" -> createPost(dataMap);
+            case "showposts" -> showPosts(dataMap);
             default -> "invalid command";
         };
     }
+
+    private String showPosts(HashMap<String, String> dataMap) {
+        ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("posts").get();
+        StringBuilder output = new StringBuilder();
+        for (HashMap<String, String> stringStringHashMap : list) {
+
+            output.append(stringStringHashMap.get("user")).append(" ").append(stringStringHashMap.get("title")).append(" ").append(stringStringHashMap.get("text")).append(" ").append(stringStringHashMap.get("time")).append(" ").append(stringStringHashMap.get("number")).append("\n");
+
+        }
+        return  "accepted\n" + output;
+    }
+
+    private String createPost(HashMap<String, String> data) {
+        try {
+
+            data.put("number",String.valueOf(numberOfPost));
+            Database.getInstance().getTable("posts").insert(data);
+            numberOfPost++;
+            return "accepted";
+        } catch (Exception e) {
+            return "not accepted";
+        }
+    }
+
+    private String showCommunities(HashMap<String, String> data) {
+
+        ArrayList<HashMap<String,String>> list=Database.getInstance().getTable("communities").get();
+        StringBuilder output = new StringBuilder();
+        for (HashMap<String, String> stringStringHashMap : list) {
+
+                output.append(stringStringHashMap.get("name")).append(" ").append(stringStringHashMap.get("admin")).append(" ").append(stringStringHashMap.get("number")).append("\n");
+
+        }
+        return  "accepted\n" + output;
+    }
+
+
 }
