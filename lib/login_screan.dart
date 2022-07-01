@@ -158,7 +158,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         } else if (String.fromCharCodes(response) ==
             "The username or password is incorrect!") {
           print("not accepted");
-          _errorMessage = "The username or password is incorrect!";
+          setState(() {
+            _errorMessage = "The username or password is incorrect!";
+          });
         }
       });
     });

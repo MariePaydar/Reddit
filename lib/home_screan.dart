@@ -377,7 +377,7 @@ class _MyAppState extends State<MyAppState> {
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: "settings"),
         ],
-        selectedItemColor: const Color.fromARGB(255, 151, 9, 9),
+        selectedItemColor: backgroundWidget,
         iconSize: 18,
         currentIndex: _selectedIndex, //New
         onTap: _onItemTapped,

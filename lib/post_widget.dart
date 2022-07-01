@@ -48,10 +48,9 @@ class _MyPostWidgetState extends State<StatefulWidget> {
       ),
       Row(
         children: [
-          Icon(
-            Icons.circle,
-            size: 30,
-            color: backgroundWidget,
+          CircleAvatar(
+            backgroundImage: AssetImage('assets/images/userimage.png'),
+            radius: 20,
           ),
           RichText(
               text: TextSpan(children: <TextSpan>[

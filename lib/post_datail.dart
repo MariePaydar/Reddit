@@ -99,10 +99,9 @@ class _DetailPostState extends State<DetailPostState> {
             children: [
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    size: 60,
-                    color: background,
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/userimage.png'),
+                    radius: 20,
                   ),
                   RichText(
                       text: TextSpan(children: <TextSpan>[
@@ -331,6 +330,7 @@ class _DetailPostState extends State<DetailPostState> {
                       addCommentRequest(
                           user.userName, textcontroller.text, index.toString());
                       textcontroller.text = "";
+                      showCommentRequest(index.toString());
                     },
                   ),
                   fillColor: backgroundWidget,
@@ -367,7 +367,10 @@ class _DetailPostState extends State<DetailPostState> {
         print(String.fromCharCodes(response));
         if (String.fromCharCodes(response).startsWith("accepted")) {
           print("accepted");
-          output = String.fromCharCodes(response).substring(8);
+          setState(() {
+            output = String.fromCharCodes(response).substring(9);
+          });
+
           print(output);
         } else {
           print("not accepted");
